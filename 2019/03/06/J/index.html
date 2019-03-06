@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Spring三种常用的注入方式 | Durp&#39;s Blog</title>
+  <title>蒋帅看这里 | Durp&#39;s Blog</title>
   <meta name="keywords" content=" Java , Spring ">
-  <meta name="description" content="Spring三种常用的注入方式 | Durp&#39;s Blog">
+  <meta name="description" content="蒋帅看这里 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="蒋帅看这里">
 <meta name="keywords" content="Java,Spring">
@@ -184,9 +184,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Spring的三种注入方式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-J" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Spring三种常用的注入方式</h1>
+        <h1 class="article-title">蒋帅看这里</h1>
     
     <div class="article-meta">
         
@@ -212,7 +212,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-06 21:19:15">2019-03-06 09:48</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-06 22:11:58">2019-03-06 09:48</time>
         
     </div>
     <div class="article-meta">
@@ -234,7 +234,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器方法注入"><span class="toc-text">构造器方法注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setter方法注入"><span class="toc-text">setter方法注入</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#蒋帅看这里"><span class="toc-text">蒋帅看这里</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -249,44 +249,7 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="构造器方法注入"><a href="#构造器方法注入" class="headerlink" title="构造器方法注入"></a>构造器方法注入</h3><p>由构造方法注入通常是在Spring的配置文件中，用<bean>标签声明id和class属性，然后用若干个<constructor-arg>标签来判断使用该类的哪一个构造器。Spring在创建bean时会根据<constructor-arg>标签配置来判断哪一个构造器，如果没有符合的构造器，则会抛出异常。<br>先给出一个简单的User类(setter和getter方法就忽略了)</constructor-arg></constructor-arg></bean></p>
-<pre><code class="java">public class User {    
-    private String name;    
-    private String pwd;    
-    private int age;    
-    private User(){        
-        System.out.println(&quot;无参方法&quot;); 
-    }    
-    private User(String n,String p,int a){       
-        this.name = n;        
-        this.pwd = p;        
-        this.age = a;       
-        System.out.println(&quot;有参方法&quot;);    
-    }
-}
-</code></pre>
-<p>下面贴出Spring配置文件中bean的声明，会发现Spring能够按照给出的参数创建bean，但若是将第三个值修改成字母，则创建失败，因此说明在<constructor-arg>标签在不指定index、name、type属性时，是按照参数列表从左到右进行装填的，选择的构造函数仅仅是参数个数相同，若有两个相同参数的方法，则会根据参数类型进行判断。</constructor-arg></p>
-<pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;          
-    &lt;constructor-arg value=&quot;name&quot;&gt;&lt;/constructor-arg&gt;       
-    &lt;constructor-arg value=&quot;pwd&quot;&gt;&lt;/constructor-arg&gt;       
-    &lt;constructor-arg value=&quot;1&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre>
-<p><constructor-arg>标签有五个属性:</constructor-arg></p>
-<ul>
-<li>type：用来确定参数的类型</li>
-<li>name：用来确定参数在形参列表中的名字</li>
-<li>index：用来确定参数在形参列表中的序号</li>
-<li>value：传入值</li>
-<li>ref：传入其他bean对象<br>通过下面这个例子你会发现，<constructor-arg>标签没有根据方法形参列表的顺序来定义，而是随意定义的，但保证了根据定义能找到合适的构造方法。<pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;      
-  &lt;constructor-arg type=&quot;int&quot; value=&quot;1&quot;&gt;&lt;/constructor-arg&gt;      
-  &lt;constructor-arg name=&quot;n&quot; value=&quot;name&quot;&gt;&lt;/constructor-arg&gt;      
-  &lt;constructor-arg index=&quot;1&quot; value=&quot;pwd&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre>
-<h3 id="setter方法注入"><a href="#setter方法注入" class="headerlink" title="setter方法注入"></a>setter方法注入</h3></constructor-arg></li>
-</ul>
-
+        <h3 id="蒋帅看这里"><a href="#蒋帅看这里" class="headerlink" title="蒋帅看这里"></a>蒋帅看这里</h3>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
     </div>
