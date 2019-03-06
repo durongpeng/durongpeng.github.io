@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Durp&#39;s Blog">
 <meta property="og:description" content="构造器方法注入由构造方法注入通常是在Spring的配置文件中，用标签声明id和class属性，然后用若干个标签来判断使用该类的哪一个构造器。Spring在创建bean时会根据标签配置来判断哪一个构造器，如果没有符合的构造器，则会抛出异常。先给出一个简单的User类(setter和getter方法就忽略了) public class User {         private String nam">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-06T16:24:21.459Z">
+<meta property="og:updated_time" content="2019-03-06T16:26:34.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring三种常用的注入方式">
 <meta name="twitter:description" content="构造器方法注入由构造方法注入通常是在Spring的配置文件中，用标签声明id和class属性，然后用若干个标签来判断使用该类的哪一个构造器。Spring在创建bean时会根据标签配置来判断哪一个构造器，如果没有符合的构造器，则会抛出异常。先给出一个简单的User类(setter和getter方法就忽略了) public class User {         private String nam">
@@ -207,7 +207,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-07 00:24:21">2019-03-06 09:48</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-07 00:26:34">2019-03-06 09:48</time>
         
     </div>
     <div class="article-meta">
@@ -320,7 +320,7 @@ public UserServiceImpl(User u){
 @Qualifier(&quot;user&quot;)
 private User user;
 </code></pre>
-<h5 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h5><p>@Resource默认按照ByName自动注入，不怕有多个相同类型的bean。只要Spring中有一个bean的id和注入属性值一样，就可以注入进去。</p>
+<h5 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h5><p>@Resource默认按照ByName自动注入，不怕有多个相同类型的bean。只要Spring中有一个bean的id和注入属性值一样，就可以注入进去。但如果用@Resource的name属性指定了注入bean的名称，则要保证Spring容器中bean的id与指定的名称要一致。</p>
 <pre><code class="java">@Resource(type = top.durp.model.User.class,
 name = &quot;user1&quot;)
 private User user;
