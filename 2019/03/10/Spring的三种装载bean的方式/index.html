@@ -184,7 +184,7 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Spring的三种注入方式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Spring的三种装载bean的方式" class="article article-type-post" itemscope itemprop="blogPost">
     
         <h1 class="article-title">Spring三种常用的注入方式</h1>
     
@@ -212,7 +212,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-10 12:24:48">2019-03-06 09:48</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-10 12:28:21">2019-03-10 12:24</time>
         
     </div>
     <div class="article-meta">
@@ -234,7 +234,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器方法注入"><span class="toc-text">构造器方法注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setter方法注入"><span class="toc-text">setter方法注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于注解的注入"><span class="toc-text">基于注解的注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Resource"><span class="toc-text">@Resource</span></a></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -249,87 +249,7 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="构造器方法注入"><a href="#构造器方法注入" class="headerlink" title="构造器方法注入"></a>构造器方法注入</h3><p>由构造方法注入通常是在Spring的配置文件中，用<bean>标签声明id和class属性，然后用若干个<constructor-arg>标签来判断使用该类的哪一个构造器。Spring在创建bean时会根据<constructor-arg>标签配置来判断哪一个构造器，如果没有符合的构造器，则会抛出异常。<br>先给出一个简单的User类(setter和getter方法就忽略了)</constructor-arg></constructor-arg></bean></p>
-<pre><code class="java">public class User {    
-    private String name;    
-    private String pwd;    
-    private int age;    
-    private User(){        
-        System.out.println(&quot;无参方法&quot;); 
-    }    
-    private User(String n,String p,int a){       
-        this.name = n;        
-        this.pwd = p;        
-        this.age = a;       
-        System.out.println(&quot;有参方法&quot;);    
-    }
-}
-</code></pre>
-<p>下面贴出Spring配置文件中bean的声明，会发现Spring能够按照给出的参数创建bean，但若是将第三个值修改成字母，则创建失败，因此说明在<constructor-arg>标签在不指定index、name、type属性时，是按照参数列表从左到右进行装填的，选择的构造函数仅仅是参数个数相同，若有两个相同参数的方法，则会根据参数类型进行判断。</constructor-arg></p>
-<pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;          
-    &lt;constructor-arg value=&quot;name&quot;&gt;&lt;/constructor-arg&gt;       
-    &lt;constructor-arg value=&quot;pwd&quot;&gt;&lt;/constructor-arg&gt;       
-    &lt;constructor-arg value=&quot;1&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre>
-<p><constructor-arg>标签有五个属性:</constructor-arg></p>
-<ul>
-<li>type：用来确定参数的类型</li>
-<li>name：用来确定参数在形参列表中的名字</li>
-<li>index：用来确定参数在形参列表中的序号</li>
-<li>value：传入值</li>
-<li>ref：传入其他bean对象<br>通过下面这个例子你会发现，<constructor-arg>标签没有根据方法形参列表的顺序来定义，而是随意定义的，但保证了根据定义能找到合适的构造方法。<pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;      
-  &lt;constructor-arg type=&quot;int&quot; value=&quot;1&quot;&gt;&lt;/constructor-arg&gt;      
-  &lt;constructor-arg name=&quot;n&quot; value=&quot;name&quot;&gt;&lt;/constructor-arg&gt;      
-  &lt;constructor-arg index=&quot;1&quot; value=&quot;pwd&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre>
-<h3 id="setter方法注入"><a href="#setter方法注入" class="headerlink" title="setter方法注入"></a>setter方法注入</h3>setter方法注入很简单，用<property>标签指定属性名称和属性值，即可进行属性注入。但有一个重要的前提，那就是类中必须为属性提供setter方法，而且是public的方法，否则创建bean时会报错。 <pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;
-  &lt;property name=&quot;age&quot; value=&quot;1&quot;/&gt;
-  &lt;property name=&quot;pwd&quot; value=&quot;pwd&quot;/&gt; 
-  &lt;property name=&quot;name&quot; value=&quot;name&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-</code></pre>
-需要特别注意的是name属性的值和bean的属性名并没有直接关系，只与提供的setter方法的方法名有关。Spring会将name值的首字母转换成大写，然后再拼上”set”构成setter方法名，通过反射调用，实现注入。下面的代码也是不会报错的。<pre><code class="java">private int AGE;
-public void setAge(int a){
-  this.AGE = a;
-}
-&lt;property name=&quot;age&quot; value=&quot;1&quot;/&gt;
-</code></pre>
-</property></constructor-arg></li>
-</ul>
-<h3 id="基于注解的注入"><a href="#基于注解的注入" class="headerlink" title="基于注解的注入"></a>基于注解的注入</h3><p>@Resource和@Autowired都是做bean的注入时使用，其实@Resource并不是Spring的注解，它的包是javax.annotation.Resource，需要导入，但是Spring支持该注解的注入。<br>为了试验基于注解的注入，引入一个新类</p>
-<pre><code class="java">public class UserServiceImpl  {    
-    private User user;    
-    public User getUser() {        
-        return user;   
-    }   
-    @Autowired    
-    public void setUser(User user) {        
-        this.user = user;    
-    }
-}
-</code></pre>
-<p>修改Spring配置文件</p>
-<pre><code class="xml">&lt;bean id=&quot;userService&quot; class=&quot;top.durp.service.impl.UserServiceImpl&quot;/&gt;
-</code></pre>
-<p>@Resource和@Autowired既可以用在属性上，也可以用在setter方法上，因此如果都用在属性上，就可以省略setter方法了</p>
-<h5 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h5><p>@Autowired还可以用在构造器上,用在构造器上和用在属性上的区别是加载顺序不同。用在构造器上，构造的时候就要准备好User对象，因此先创建User的bean。用在属性上，是先创建好UserServiceImpl的的bean，再注入User的bean，因此User的bean创建时间上晚于UserServiceImpl的bean。</p>
-<pre><code class="java">@Autowired
-public UserServiceImpl(User u){
-    this.user = u;
-}
-</code></pre>
-<p>@Autowired默认是ByType来自动装填的，当一个类型有多个bean存在于Spring中时，自动装填就会抛出异常，这时候需要@Qualifier注解来指定一个id，装填此id的bean。可以通过required属性来控制是否必须装填，默认为true。</p>
-<pre><code class="java">@Autowired()
-@Qualifier(&quot;user&quot;)
-private User user;
-</code></pre>
-<h5 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h5><p>@Resource默认按照ByName自动注入，不怕有多个相同类型的bean。只要Spring中有一个bean的id和注入属性值一样，就可以注入进去。但如果用@Resource的name属性指定了注入bean的名称，则要保证Spring容器中bean的id与指定的名称要一致。</p>
-<pre><code class="java">@Resource(type = top.durp.model.User.class,
-name = &quot;user1&quot;)
-private User user;
-</code></pre>
+        <p>Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
