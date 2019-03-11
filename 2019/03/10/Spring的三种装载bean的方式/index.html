@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Durp&#39;s Blog">
 <meta property="og:description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。 public class User {         private">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-11T03:36:54.910Z">
+<meta property="og:updated_time" content="2019-03-11T03:39:02.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring的三种装载bean的方式">
 <meta name="twitter:description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。 public class User {         private">
@@ -210,7 +210,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-11 11:36:54">2019-03-10 12:33</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-11 11:39:02">2019-03-10 12:33</time>
         
     </div>
     <div class="article-meta">
@@ -311,7 +311,7 @@ public class UserServiceImpl  {
 </ul>
 <h5 id="autowire属性"><a href="#autowire属性" class="headerlink" title="autowire属性"></a>autowire属性</h5><p>autowire属性表示bean的自动装配，有六个值：</p>
 <ul>
-<li>no：默认值，不进行自动黄培</li>
+<li>no：默认值，不进行自动装配。</li>
 <li>byName：根据属性名自动装配。此选项将检查容器并根据名字查找与属性完全一致的bean，并将其与属性自动装配。</li>
 <li>byType：如果容器中村子啊一个月指定属性类型相同的bean，那么将于该属性自动装配；如果存在多个该类型的bean，则抛出异常；如果没有找到类型相匹配的bean，则什么都不会发生，可以通过dependency-check=”objects”让Spring抛出异常。</li>
 <li>constructor：与byType方式类似，不同之处在于它应用于构造器参数。如果容器中没有找到构造器参数类型一致的bean，那么抛出异常。</li>
