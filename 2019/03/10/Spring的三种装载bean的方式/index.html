@@ -6,18 +6,18 @@
   <meta name="keywords" content=" Java , Spring ">
   <meta name="description" content="Spring的三种装载bean的方式 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。">
+<meta name="description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。 public class User {         private">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring的三种装载bean的方式">
 <meta property="og:url" content="http://www.durongpeng.top/2019/03/10/Spring的三种装载bean的方式/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。">
+<meta property="og:description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。 public class User {         private">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-10T04:33:58.827Z">
+<meta property="og:updated_time" content="2019-03-11T00:16:05.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring的三种装载bean的方式">
-<meta name="twitter:description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。">
+<meta name="twitter:description" content="Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。 public class User {         private">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -210,7 +210,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-10 12:33:58">2019-03-10 12:33</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-11 08:16:05">2019-03-10 12:33</time>
         
     </div>
     <div class="article-meta">
@@ -232,7 +232,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于XML的bean定义"><span class="toc-text">基于XML的bean定义</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -247,7 +247,46 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。</p>
+        <p>Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。<br>开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。</p>
+<pre><code class="java">public class User {    
+    private String name;    
+    private String pwd;    
+    private int age;    
+    private User(){        
+        System.out.println(&quot;无参方法&quot;); 
+    }    
+    private User(String n,String p,int a){       
+        this.name = n;        
+        this.pwd = p;        
+        this.age = a;       
+        System.out.println(&quot;有参方法&quot;);    
+    }
+}
+
+public class UserServiceImpl  {    
+    private User user;    
+    public User getUser() {        
+        return user;   
+    }   
+    @Autowired    
+    public void setUser(User user) {        
+        this.user = user;    
+    }
+}
+</code></pre>
+<h3 id="基于XML的bean定义"><a href="#基于XML的bean定义" class="headerlink" title="基于XML的bean定义"></a>基于XML的bean定义</h3><p>在XML中要以<beans>元素作为根标签，使用<bean>标签来声明一个bean。id属性定义bean的id，class属性定义bean的全限定类名。如果没有明确给出id，那么Spring会给bean生成一个id，大约的格式是包名+类名+”#”+数字(该bean的第几个对象)</bean></beans></p>
+<pre><code class="xml">    &lt;beans&gt;
+    &lt;!-- 注册userService --&gt;
+    &lt;bean id=&quot;userService&quot; class=&quot;top.durp.service.impl.UserServiceImpl&quot;/&gt;
+
+    &lt;!-- 注册bean --&gt;
+    &lt;bean id=&quot;user1&quot; class=&quot;top.durp.model.User&quot;&gt;
+        &lt;property name=&quot;age&quot; value=&quot;1&quot;/&gt;
+        &lt;property name=&quot;pwd&quot; value=&quot;pwd&quot;/&gt;
+        &lt;property name=&quot;name&quot; value=&quot;name&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;/beans&gt;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
