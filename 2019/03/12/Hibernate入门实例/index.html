@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Durp&#39;s Blog">
 <meta property="og:description" content="使用Maven搭建一个Hibernate程序创建一个Maven工程，在POM文件中加入如下依赖     &amp;lt;dependencies&amp;gt;         &amp;lt;!-- 添加Hibernate依赖 --&amp;gt;         &amp;lt;dependency&amp;gt;             &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T14:00:03.020Z">
+<meta property="og:updated_time" content="2019-03-12T14:01:49.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate入门实例">
 <meta name="twitter:description" content="使用Maven搭建一个Hibernate程序创建一个Maven工程，在POM文件中加入如下依赖     &amp;lt;dependencies&amp;gt;         &amp;lt;!-- 添加Hibernate依赖 --&amp;gt;         &amp;lt;dependency&amp;gt;             &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;">
@@ -211,7 +211,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-12 22:00:03">2019-03-12 18:53</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-12 22:01:49">2019-03-12 18:53</time>
         
     </div>
     <div class="article-meta">
@@ -569,6 +569,7 @@ package top.hibernate.dao.Impl;
 public class UserDaoImpl implements UserDao {
     @Autowired
     SessionFactory sessionFactory;
+    //此处一定要是getCurrentSession获取Session对象，否则会导致事物无法提交的情况
     private Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
     }
