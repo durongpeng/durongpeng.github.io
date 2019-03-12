@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Durp&#39;s Blog">
 <meta property="og:description" content="使用Maven搭建一个Hibernate程序创建一个Maven工程，在POM文件中加入如下依赖     &amp;lt;dependencies&amp;gt;         &amp;lt;!-- 添加Hibernate依赖 --&amp;gt;         &amp;lt;dependency&amp;gt;             &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T11:46:16.854Z">
+<meta property="og:updated_time" content="2019-03-12T14:00:03.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate入门实例">
 <meta name="twitter:description" content="使用Maven搭建一个Hibernate程序创建一个Maven工程，在POM文件中加入如下依赖     &amp;lt;dependencies&amp;gt;         &amp;lt;!-- 添加Hibernate依赖 --&amp;gt;         &amp;lt;dependency&amp;gt;             &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;">
@@ -211,7 +211,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-12 19:46:16">2019-03-12 18:53</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-12 22:00:03">2019-03-12 18:53</time>
         
     </div>
     <div class="article-meta">
@@ -233,7 +233,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Maven搭建一个Hibernate程序"><span class="toc-text">使用Maven搭建一个Hibernate程序</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Maven搭建一个Hibernate程序"><span class="toc-text">使用Maven搭建一个Hibernate程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Spring整合Hibernate、Druid"><span class="toc-text">使用Spring整合Hibernate、Druid</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -355,6 +355,248 @@ public class User {
         User user = session.get(User.class,&quot;1&quot;);
         System.out.println(user);
         session.close();
+    }
+}
+</code></pre>
+<h3 id="使用Spring整合Hibernate、Druid"><a href="#使用Spring整合Hibernate、Druid" class="headerlink" title="使用Spring整合Hibernate、Druid"></a>使用Spring整合Hibernate、Druid</h3><p>POM文件</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.durp.spring&lt;/groupId&gt;
+    &lt;artifactId&gt;springLearning&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;dependencies&gt;
+        &lt;!--测试--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 添加Hibernate依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+            &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
+            &lt;version&gt;5.2.6.Final&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- Druid连接池配置 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;druid&lt;/artifactId&gt;
+            &lt;version&gt;1.1.10&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- mysql数据库的驱动包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.6&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--Spring   ORM是必须要有的。不然会找不到session工厂--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-context-support&lt;/artifactId&gt;
+            &lt;version&gt;4.3.21.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--事务--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+            &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+            &lt;version&gt;1.9.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+            &lt;artifactId&gt;com.springsource.org.aspectj.weaver&lt;/artifactId&gt;
+            &lt;version&gt;1.6.8.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/java&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.hbm.xml&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                    &lt;include&gt;**/*.properties&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<p>Spring配置文件applicationContext.xml</p>
+<pre><code class="java">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
+    &lt;context:component-scan base-package=&quot;top.hibernate.dao.Impl&quot;/&gt;
+    &lt;!-- 引入db.properties文件 --&gt;
+    &lt;context:property-placeholder location=&quot;classpath:db.properties&quot; /&gt;
+    &lt;!--2. 配置一个数据源 --&gt;
+    &lt;bean name=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;
+          init-method=&quot;init&quot; destroy-method=&quot;close&quot;&gt;
+        &lt;property name=&quot;url&quot; value=&quot;${jdbc_url}&quot;/&gt;
+        &lt;property name=&quot;username&quot; value=&quot;${jdbc_username}&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${jdbc_password}&quot;/&gt;
+        &lt;!-- 初始化连接大小 --&gt;
+        &lt;property name=&quot;initialSize&quot; value=&quot;0&quot;/&gt;
+        &lt;!-- 连接池最大使用连接数量 --&gt;
+        &lt;property name=&quot;maxActive&quot; value=&quot;20&quot;/&gt;
+        &lt;!-- 连接池最小空闲 --&gt;
+        &lt;property name=&quot;minIdle&quot; value=&quot;0&quot;/&gt;
+        &lt;!-- 获取连接最大等待时间 --&gt;
+        &lt;property name=&quot;maxWait&quot; value=&quot;60000&quot;/&gt;
+        &lt;!-- validationQuery是用来验证数据库连接的查询语句，这个查询语句必须是至少返回一条数据的SELECT语句。 --&gt;
+        &lt;property name=&quot;validationQuery&quot; value=&quot;SELECT 1&quot;/&gt;
+        &lt;property name=&quot;testOnBorrow&quot; value=&quot;false&quot;/&gt;
+        &lt;property name=&quot;testOnReturn&quot; value=&quot;false&quot;/&gt;
+        &lt;property name=&quot;testWhileIdle&quot; value=&quot;true&quot;/&gt;
+        &lt;!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 --&gt;
+        &lt;property name=&quot;timeBetweenEvictionRunsMillis&quot; value=&quot;60000&quot;/&gt;
+        &lt;!-- 配置一个连接在池中最小生存的时间，单位是毫秒 --&gt;
+        &lt;property name=&quot;minEvictableIdleTimeMillis&quot; value=&quot;25200000&quot;/&gt;
+        &lt;!-- 打开removeAbandoned功能 --&gt;
+        &lt;property name=&quot;removeAbandoned&quot; value=&quot;true&quot;/&gt;
+        &lt;!-- 1800秒，也就是30分钟 --&gt;
+        &lt;property name=&quot;removeAbandonedTimeout&quot; value=&quot;1800&quot;/&gt;
+        &lt;!-- 关闭abanded连接时输出错误日志 --&gt;
+        &lt;property name=&quot;logAbandoned&quot; value=&quot;true&quot;/&gt;
+        &lt;!-- 监控数据库 --&gt;
+        &lt;!--&lt;property name=&quot;filters&quot; value=&quot;mergeStat&quot;/&gt;--&gt;
+        &lt;!--&lt;property name=&quot;filters&quot; value=&quot;stat,log4j&quot;/&gt;--&gt;
+    &lt;/bean&gt;
+    &lt;!--创建session工厂--&gt;
+    &lt;bean id=&quot;sessionFactory&quot; class=&quot;org.springframework.orm.hibernate5.LocalSessionFactoryBean&quot;&gt;
+        &lt;!-- 注入连接池 ，是druid连接池--&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+        &lt;!-- 配置其他属性 --&gt;
+        &lt;property name=&quot;hibernateProperties&quot;&gt;
+            &lt;props&gt;
+                &lt;prop key=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQL5Dialect&lt;/prop&gt;
+                &lt;prop key=&quot;hibernate.format_sql&quot;&gt;true&lt;/prop&gt;
+                &lt;prop key=&quot;hibernate.hbm2ddl&quot;&gt;update&lt;/prop&gt;
+                &lt;prop key=&quot;hibernate.connection.autocommit&quot;&gt;false&lt;/prop&gt;
+                &lt;prop key=&quot;hibernate.show_sql&quot;&gt;true&lt;/prop&gt;
+            &lt;/props&gt;
+        &lt;/property&gt;
+        &lt;property name=&quot;mappingLocations&quot; value=&quot;classpath:entity/*.hbm.xml&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;HibernateTemplate&quot; class=&quot;org.springframework.orm.hibernate5.HibernateTemplate&quot;&gt;
+        &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!-- 配置Spring声明式事务 --&gt;
+    &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.orm.hibernate5.HibernateTransactionManager&quot;&gt;
+        &lt;property name=&quot;sessionFactory&quot; ref=&quot;sessionFactory&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+        &lt;tx:attributes&gt;
+            &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;
+            &lt;tx:method name=&quot;save*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+        &lt;/tx:attributes&gt;
+    &lt;/tx:advice&gt;
+    &lt;aop:config&gt;
+        &lt;aop:pointcut id=&quot;txPointcut&quot; expression=&quot;execution(* top.hibernate.dao.Impl.*.*(..))&quot; /&gt;
+        &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPointcut&quot;/&gt;
+    &lt;/aop:config&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>Dao和DaoImpl</p>
+<pre><code class="java">package top.hibernate.dao;
+public interface UserDao {
+    void saveUser(User u);
+    User getUser(String id);
+}
+package top.hibernate.dao.Impl;
+@Service
+public class UserDaoImpl implements UserDao {
+    @Autowired
+    SessionFactory sessionFactory;
+    private Session getCurrentSession(){
+        return sessionFactory.getCurrentSession();
+    }
+    public void saveUser(User u) {
+        Session session = getCurrentSession();
+        session.save(u);
+    }
+
+    public User getUser(String id) {
+        Session session = getCurrentSession();
+        return session.get(User.class,id);
+    }
+}
+</code></pre>
+<p>Junit测试</p>
+<pre><code class="java">@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {&quot;classpath:applicationContext.xml&quot;})
+@Rollback(false)
+public class SpringTest {
+    @Autowired
+    ApplicationContext context;
+    @Test
+    public void test(){
+        UserDao service = (UserDao) context.getBean(&quot;userDaoImpl&quot;);
+        User u = new User();
+        u.setId(&quot;2&quot;);
+        u.setName(&quot;durongpeng&quot;);
+        service.saveUser(u);
     }
 }
 </code></pre>
