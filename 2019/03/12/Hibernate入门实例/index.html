@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Spring三种常用的注入方式 | Durp&#39;s Blog</title>
-  <meta name="keywords" content=" Java , Spring ">
-  <meta name="description" content="Spring三种常用的注入方式 | Durp&#39;s Blog">
+  <title>Hibernate入门实例 | Durp&#39;s Blog</title>
+  <meta name="keywords" content=" Hibernate ">
+  <meta name="description" content="Hibernate入门实例 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="使用Maven搭建一个Hibernate程序创建一个Maven工程，在POM文件中加入如下依赖     &amp;lt;dependencies&amp;gt;         &amp;lt;!-- 添加Hibernate依赖 --&amp;gt;         &amp;lt;dependency&amp;gt;             &amp;lt;groupId&amp;gt;org.hibernate&amp;lt;/groupId&amp;gt;">
 <meta name="keywords" content="Hibernate">
@@ -193,33 +193,25 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Spring的三种注入方式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Hibernate入门实例" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Spring三种常用的注入方式</h1>
+        <h1 class="article-title">Hibernate入门实例</h1>
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-            <a href="javascript:" data-rel="Java">Java</a>
-            
-        </span>
-        
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">Java</a>
-            
-            <a href="javascript:" class="color2">Spring</a>
+            <a href="javascript:" class="color5">Hibernate</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-11 11:31:48">2019-03-06 09:48</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-12 19:46:16">2019-03-12 18:53</time>
         
     </div>
     <div class="article-meta">
@@ -241,7 +233,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器方法注入"><span class="toc-text">构造器方法注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setter方法注入"><span class="toc-text">setter方法注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于注解的注入"><span class="toc-text">基于注解的注入</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Resource"><span class="toc-text">@Resource</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Maven搭建一个Hibernate程序"><span class="toc-text">使用Maven搭建一个Hibernate程序</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -256,86 +248,115 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="构造器方法注入"><a href="#构造器方法注入" class="headerlink" title="构造器方法注入"></a>构造器方法注入</h3><p>由构造方法注入通常是在Spring的配置文件中，用<bean>标签声明id和class属性，然后用若干个<constructor-arg>标签来判断使用该类的哪一个构造器。Spring在创建bean时会根据<constructor-arg>标签配置来判断哪一个构造器，如果没有符合的构造器，则会抛出异常。<br>先给出一个简单的User类(setter和getter方法就忽略了)</constructor-arg></constructor-arg></bean></p>
-<pre><code class="java">public class User {    
-    private String name;    
-    private String pwd;    
-    private int age;    
-    private User(){        
-        System.out.println(&quot;无参方法&quot;); 
-    }    
-    private User(String n,String p,int a){       
-        this.name = n;        
-        this.pwd = p;        
-        this.age = a;       
-        System.out.println(&quot;有参方法&quot;);    
+        <h3 id="使用Maven搭建一个Hibernate程序"><a href="#使用Maven搭建一个Hibernate程序" class="headerlink" title="使用Maven搭建一个Hibernate程序"></a>使用Maven搭建一个Hibernate程序</h3><p>创建一个Maven工程，在POM文件中加入如下依赖</p>
+<pre><code class="xml">    &lt;dependencies&gt;
+        &lt;!-- 添加Hibernate依赖 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+            &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
+            &lt;version&gt;5.2.6.Final&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!-- mysql数据库的驱动包 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.6&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;!-- 指定资源路径，否则发现Maven打的包中没有hbm.xml文件 --&gt;
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/java&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.hbm.xml&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                    &lt;include&gt;**/*.properties&lt;/include&gt;
+                &lt;/includes&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+</code></pre>
+<p>创建一个实体类(省略了getter和setter方法)</p>
+<pre><code class="java">package top.hibernate.model;
+public class User {
+    private String id;
+    private String code;
+    private String name;
+    private String password;
+    private String state;
+}
+</code></pre>
+<p>在resources路径下创建hibernate的配置文件hibernate.cfg.xml</p>
+<pre><code class="xml">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+    &quot;-//Hibernate/Hibernate Configuration DTD//EN&quot;
+    &quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;&gt;
+&lt;hibernate-configuration&gt;
+  &lt;session-factory&gt;
+    &lt;property name=&quot;connection.driver_class&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+    &lt;property name=&quot;connection.url&quot;&gt;jdbc:mysql://x.x.x.x/hibernate&lt;/property&gt;
+    &lt;property name=&quot;connection.username&quot;&gt;root&lt;/property&gt;
+    &lt;property name=&quot;connection.password&quot;&gt;Onlyyoumomo&lt;/property&gt;
+
+    &lt;!-- 可以将向数据库发送的SQL语句显示出来 --&gt;
+    &lt;property name=&quot;hibernate.show_sql&quot;&gt;true&lt;/property&gt;
+    &lt;!-- 格式化SQL语句 --&gt;
+    &lt;property name=&quot;hibernate.format_sql&quot;&gt;true&lt;/property&gt;
+    &lt;!-- hibernate的方言 --&gt;
+    &lt;property name=&quot;hibernate.dialect&quot;&gt;org.hibernate.dialect.MySQLDialect&lt;/property&gt;
+      &lt;!-- 配置hibernate的映射文件所在的位置 --&gt;
+      &lt;mapping resource=&quot;top/hibernate/model/User.hbm.xml&quot; /&gt;
+  &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;
+</code></pre>
+<p>在User类的路径下创建对象的映射文件User.hbm.xml文件</p>
+<pre><code class="xml">&lt;?xml version=&#39;1.0&#39; encoding=&#39;utf-8&#39;?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+    &quot;-//Hibernate/Hibernate Configuration DTD//EN&quot;
+    &quot;http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd&quot;&gt;
+&lt;hibernate-mapping package=&quot;top.hibernate.model&quot;&gt;
+    &lt;!-- name为完整类名，若定义了package，则可以只些该包下的类名即可。table为表名，catalog为数据库名 --&gt;
+    &lt;class name=&quot;User&quot; table=&quot;sys_user&quot; catalog=&quot;hibernate&quot;&gt;
+        &lt;id name=&quot;id&quot; column=&quot;user_id&quot;/&gt;
+        &lt;property name=&quot;code&quot; column=&quot;user_code&quot;/&gt;
+        &lt;property name=&quot;name&quot; column=&quot;user_name&quot;/&gt;
+        &lt;property name=&quot;password&quot; column=&quot;user_password&quot;/&gt;
+        &lt;property name=&quot;state&quot; column=&quot;user_state&quot;/&gt;
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;
+</code></pre>
+<p>编写测试代码</p>
+<pre><code class="java">public class HibernateTest {
+    public static void main(String[] args){
+        User u = new User();
+        u.setId(&quot;1&quot;);
+        u.setName(&quot;durp&quot;);
+        //获取加载配置管理类
+        Configuration cfg = new Configuration();
+        //不给参数就默认加载hibernate.cfg.xml文件
+        cfg.configure();
+        //创建Session工厂对象
+        SessionFactory sessionFactory = cfg.buildSessionFactory();
+        //得到Session对象
+        Session session = sessionFactory.openSession();
+        //使用Session得到事物对象
+        Transaction transaction = session.getTransaction();
+        //使用Transaction开启数据库事物
+        transaction.begin();
+        //查询User
+        session.save(u);
+        transaction.commit();
+        User user = session.get(User.class,&quot;1&quot;);
+        System.out.println(user);
+        session.close();
     }
 }
-</code></pre>
-<p>下面贴出Spring配置文件中bean的声明，会发现Spring能够按照给出的参数创建bean，但若是将第三个值修改成字母，则创建失败，因此说明在<constructor-arg>标签在不指定index、name、type属性时，是按照参数列表从左到右进行装填的，选择的构造函数仅仅是参数个数相同，若有两个相同参数的方法，则会根据参数类型进行判断。</constructor-arg></p>
-<pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;          
-    &lt;constructor-arg value=&quot;name&quot;&gt;&lt;/constructor-arg&gt;       
-    &lt;constructor-arg value=&quot;pwd&quot;&gt;&lt;/constructor-arg&gt;       
-    &lt;constructor-arg value=&quot;1&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre>
-<p><constructor-arg>标签有五个属性:</constructor-arg></p>
-<ul>
-<li>type：用来确定参数的类型</li>
-<li>name：用来确定参数在形参列表中的名字</li>
-<li>index：用来确定参数在形参列表中的序号</li>
-<li>value：传入值</li>
-<li>ref：传入其他bean对象<br>通过下面这个例子你会发现，<constructor-arg>标签没有根据方法形参列表的顺序来定义，而是随意定义的，但保证了根据定义能找到合适的构造方法。<pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;      
-  &lt;constructor-arg type=&quot;int&quot; value=&quot;1&quot;&gt;&lt;/constructor-arg&gt;      
-  &lt;constructor-arg name=&quot;n&quot; value=&quot;name&quot;&gt;&lt;/constructor-arg&gt;      
-  &lt;constructor-arg index=&quot;1&quot; value=&quot;pwd&quot;&gt;&lt;/constructor-arg&gt;
-&lt;/bean&gt;
-</code></pre>
-<h3 id="setter方法注入"><a href="#setter方法注入" class="headerlink" title="setter方法注入"></a>setter方法注入</h3>setter方法注入很简单，用<property>标签指定属性名称和属性值，即可进行属性注入。但有一个重要的前提，那就是类中必须为属性提供setter方法，而且是public的方法，否则创建bean时会报错。 <pre><code class="xml">&lt;bean id=&quot;user&quot; class=&quot;top.durp.model.User&quot;&gt;
-  &lt;property name=&quot;age&quot; value=&quot;1&quot;/&gt;
-  &lt;property name=&quot;pwd&quot; value=&quot;pwd&quot;/&gt; 
-  &lt;property name=&quot;name&quot; value=&quot;name&quot;&gt;&lt;/property&gt;
-&lt;/bean&gt;
-</code></pre>
-需要特别注意的是name属性的值和bean的属性名并没有直接关系，只与提供的setter方法的方法名有关。Spring会将name值的首字母转换成大写，然后再拼上”set”构成setter方法名，通过反射调用，实现注入。下面的代码也是不会报错的。<pre><code class="java">private int AGE;
-public void setAge(int a){
-  this.AGE = a;
-}
-&lt;property name=&quot;age&quot; value=&quot;1&quot;/&gt;
-</code></pre>
-</property></constructor-arg></li>
-</ul>
-<h3 id="基于注解的注入"><a href="#基于注解的注入" class="headerlink" title="基于注解的注入"></a>基于注解的注入</h3><p>@Resource和@Autowired都是做bean的注入时使用，其实@Resource并不是Spring的注解，它的包是javax.annotation.Resource，需要导入，但是Spring支持该注解的注入。<br>为了试验基于注解的注入，引入一个新类</p>
-<pre><code class="java">public class UserServiceImpl  {    
-    private User user;    
-    public User getUser() {        
-        return user;   
-    }   
-    @Autowired    
-    public void setUser(User user) {        
-        this.user = user;    
-    }
-}
-</code></pre>
-<p>修改Spring配置文件</p>
-<pre><code class="xml">&lt;bean id=&quot;userService&quot; class=&quot;top.durp.service.impl.UserServiceImpl&quot;/&gt;
-</code></pre>
-<p>@Resource和@Autowired既可以用在属性上，也可以用在setter方法上，因此如果都用在属性上，就可以省略setter方法了</p>
-<h5 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h5><p>@Autowired还可以用在构造器上,用在构造器上和用在属性上的区别是加载顺序不同。用在构造器上，构造的时候就要准备好User对象，因此先创建User的bean。用在属性上，是先创建好UserServiceImpl的的bean，再注入User的bean，因此User的bean创建时间上晚于UserServiceImpl的bean。</p>
-<pre><code class="java">@Autowired
-public UserServiceImpl(User u){
-    this.user = u;
-}
-</code></pre>
-<p>@Autowired默认是ByType来自动装填的，当一个类型有多个bean存在于Spring中时，自动装填就会抛出异常，这时候需要@Qualifier注解来指定一个id，装填此id的bean。可以通过required属性来控制是否必须装填，默认为true。</p>
-<pre><code class="java">@Autowired()
-@Qualifier(&quot;user&quot;)
-private User user;
-</code></pre>
-<h5 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h5><p>@Resource默认按照ByName自动注入，不怕有多个相同类型的bean。只要Spring中有一个bean的id和注入属性值一样，就可以注入进去。但如果用@Resource的name属性指定了注入bean的名称，则要保证Spring容器中bean的id与指定的名称要一致。</p>
-<pre><code class="java">@Resource(type = top.durp.model.User.class,
-name = &quot;user1&quot;)
-private User user;
 </code></pre>
 
       
