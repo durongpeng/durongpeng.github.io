@@ -6,19 +6,19 @@
   <meta name="keywords" content=" Hibernate ">
   <meta name="description" content="Hibernate的总结 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。">
+<meta name="description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
 <meta name="keywords" content="Hibernate">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hibernate的总结">
 <meta property="og:url" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。">
+<meta property="og:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/操作图.png">
-<meta property="og:updated_time" content="2019-03-13T01:09:09.570Z">
+<meta property="og:updated_time" content="2019-03-13T02:01:50.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate的总结">
-<meta name="twitter:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。">
+<meta name="twitter:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
 <meta name="twitter:image" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/操作图.png">
 
 
@@ -151,15 +151,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">Hibernate</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">Java</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">Spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Hibernate</a>
     </li>
     
     <div class="clearfix"></div>
@@ -218,7 +218,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-13 09:09:09">2019-03-13 09:02</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-13 10:01:50">2019-03-13 09:02</time>
         
     </div>
     <div class="article-meta">
@@ -240,7 +240,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate的三种状态"><span class="toc-text">Hibernate的三种状态</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate的三种状态"><span class="toc-text">Hibernate的三种状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get和load的区别"><span class="toc-text">get和load的区别</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -255,7 +255,34 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Hibernate的三种状态"><a href="#Hibernate的三种状态" class="headerlink" title="Hibernate的三种状态"></a>Hibernate的三种状态</h3><p>1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中。<br>2.persistent(持久化状态)：数据提交至数据库中且Session中存在。<br>3.detached(离线/游离状态)：数据库中有，但是Session中不存在。<br><img src="/2019/03/13/Hibernate的总结/操作图.png"></p>
+        <h3 id="Hibernate的三种状态"><a href="#Hibernate的三种状态" class="headerlink" title="Hibernate的三种状态"></a>Hibernate的三种状态</h3><p>1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。<br>2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。<br>3.detached(离线/游离状态)：数据库中有，但是Session中不存在。<br>当使用save方法时，数据被Session所管理，数据库中也存在该条数据，但是由于未提交，别的session是看不到的，但确实是存在于数据库中。<br>如果一个对象以及是持久化状态了，那么此时对该对象进行各种修改，或者调用多次update、save方法时，hibernate都不会发送sql语句，只有当事物提交的时候，此时hibernate才会拿当前这个对象与之前保存在session中的持久化对象进行比较，如果不相同就发送一条update的sql语句，否则就不会发送update语句<br><img src="/2019/03/13/Hibernate的总结/操作图.png"></p>
+<pre><code class="java">    //获取加载配置管理类
+    Configuration cfg = new Configuration();
+    //不给参数就默认加载hibernate.cfg.xml文件
+    cfg.configure();
+    //创建Session工厂对象
+    SessionFactory sessionFactory = cfg.buildSessionFactory();
+    //得到Session对象
+    Session session = sessionFactory.getCurrentSession();
+    //使用Session得到事物对象
+    Transaction transaction = session.getTransaction();
+    //使用Transaction开启数据库事物
+    transaction.begin();
+    //User对象此时为瞬时状态
+    User user = new User();
+    user.setId(&quot;1&quot;);
+    //执行了save()方法之后，数据被Session所管理，数据库中有该记录，但是未提交
+    session.save(user);
+    user.setId(&quot;10&quot;);
+    //执行insert和update语句，最终提交到数据库中的userID为10
+    transaction.commit();
+</code></pre>
+<h3 id="get和load的区别"><a href="#get和load的区别" class="headerlink" title="get和load的区别"></a>get和load的区别</h3><p>get():若数据库无此数据，则返回null.<br>load():懒加载模式，若数据库无此数据，则会报错ObjectNotfountException异常.<br>所以，load加载数据一定要保证其数据存在。</p>
+<pre><code class="java">    //User user = session.get(User.class,&quot;10&quot;);
+    User user = session.load(User.class,&quot;10&quot;);
+    System.out.println(&quot;输出&quot;);
+    System.out.println(user);
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
@@ -297,7 +324,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Hibernate','#Java','#Spring',],
+            'data': ['#Java','#Spring','#Hibernate',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
