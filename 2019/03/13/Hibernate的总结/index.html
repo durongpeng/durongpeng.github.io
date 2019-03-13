@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Durp&#39;s Blog</title>
-  <meta name="keywords" content>
-  <meta name="description" content="Durp&#39;s Blog">
+  <title>Hibernate的总结 | Durp&#39;s Blog</title>
+  <meta name="keywords" content=" Hibernate ">
+  <meta name="description" content="Hibernate的总结 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。">
 <meta name="keywords" content="Hibernate">
@@ -51,7 +51,7 @@
   <input class="theme_preload_comment" value="false">
 </div>
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg">
@@ -200,10 +200,47 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Hibernate的总结" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于Blog"><span class="toc-text">关于Blog</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">Hibernate的总结</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">Hibernate</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-03-13 09:09:09">2019-03-13 09:02</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate的三种状态"><span class="toc-text">Hibernate的三种状态</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -216,14 +253,22 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><p>这是一个Java咸鱼的Blog，算上实习也两年了吧，感觉需要做出些改变，所以搭了这个博客自己总结点东西。</p>
-<h2 id="关于Blog"><a href="#关于Blog" class="headerlink" title="关于Blog"></a>关于Blog</h2><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/">Hexo</a> 生成，部署在 <a href="https://pages.github.com/">GitHub Pages</a>，主题是下载杨玉杰的[3-hexo]主题(<a href="https://github.com/yelog/hexo-theme-3-hexo">https://github.com/yelog/hexo-theme-3-hexo</a>) 已经在github上开源</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Hibernate的三种状态"><a href="#Hibernate的三种状态" class="headerlink" title="Hibernate的三种状态"></a>Hibernate的三种状态</h3><p>1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中。<br>2.persistent(持久化状态)：数据提交至数据库中且Session中存在。<br>3.detached(离线/游离状态)：数据库中有，但是Session中不存在。<br><img src="/2019/03/13/Hibernate的总结/操作图.png"></p>
 
-        </article>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+    
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2019 Durp</p>
