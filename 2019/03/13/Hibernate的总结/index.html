@@ -15,7 +15,7 @@
 <meta property="og:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/操作图.png">
-<meta property="og:updated_time" content="2019-03-13T02:01:50.602Z">
+<meta property="og:updated_time" content="2019-03-13T03:02:22.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hibernate的总结">
 <meta name="twitter:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
@@ -151,15 +151,15 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Hibernate</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">Java</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">Spring</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">Hibernate</a>
     </li>
     
     <div class="clearfix"></div>
@@ -218,7 +218,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-13 10:01:50">2019-03-13 09:02</time>
+        创建时间:<time class="date" title="更新时间: 2019-03-13 11:02:22">2019-03-13 09:02</time>
         
     </div>
     <div class="article-meta">
@@ -240,7 +240,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate的三种状态"><span class="toc-text">Hibernate的三种状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get和load的区别"><span class="toc-text">get和load的区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate的三种状态"><span class="toc-text">Hibernate的三种状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get和load的区别"><span class="toc-text">get和load的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flush和commit"><span class="toc-text">flush和commit</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -255,7 +255,7 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Hibernate的三种状态"><a href="#Hibernate的三种状态" class="headerlink" title="Hibernate的三种状态"></a>Hibernate的三种状态</h3><p>1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。<br>2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。<br>3.detached(离线/游离状态)：数据库中有，但是Session中不存在。<br>当使用save方法时，数据被Session所管理，数据库中也存在该条数据，但是由于未提交，别的session是看不到的，但确实是存在于数据库中。<br>如果一个对象以及是持久化状态了，那么此时对该对象进行各种修改，或者调用多次update、save方法时，hibernate都不会发送sql语句，只有当事物提交的时候，此时hibernate才会拿当前这个对象与之前保存在session中的持久化对象进行比较，如果不相同就发送一条update的sql语句，否则就不会发送update语句<br><img src="/2019/03/13/Hibernate的总结/操作图.png"></p>
+        <h3 id="Hibernate的三种状态"><a href="#Hibernate的三种状态" class="headerlink" title="Hibernate的三种状态"></a>Hibernate的三种状态</h3><p>1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。<br>2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。<br>3.detached(离线/游离状态)：数据库中有，但是Session中不存在。<br><img src="/2019/03/13/Hibernate的总结/操作图.png"><br>当使用save方法时，数据被Session所管理，数据库中也存在该条数据，但是由于未提交，别的session是看不到的，但确实是存在于数据库中。<br>在提交事务时，此时hibernate对象就会拿当前这个user对象和保存在session缓存中的user对象进行比较，如果两个对象相同，则不会发送update语句，否则，如果两个对象不同，则会发出update语句。</p>
 <pre><code class="java">    //获取加载配置管理类
     Configuration cfg = new Configuration();
     //不给参数就默认加载hibernate.cfg.xml文件
@@ -271,11 +271,70 @@
     //User对象此时为瞬时状态
     User user = new User();
     user.setId(&quot;1&quot;);
+    user.setName(&quot;ddd&quot;);
     //执行了save()方法之后，数据被Session所管理，数据库中有该记录，但是未提交
     session.save(user);
-    user.setId(&quot;10&quot;);
-    //执行insert和update语句，最终提交到数据库中的userID为10
+    user.setName(&quot;aaa&quot;);
+    user.setName(&quot;ccc&quot;);
+    //执行insert和update语句，最终提交到数据库中的user名字为ccc
     transaction.commit();
+</code></pre>
+<p>如果一个对象已经是持久化状态了，那么此时对该对象进行各种修改，或者调用多次update、save方法时，hibernate都不会发送sql语句，<br>只有当事物提交的时候，此时hibernate才会拿当前这个对象与之前保存在session中的持久化对象进行比较，如果不相同就发送一条update的sql语句，否则就不会发送update语句。<br>当我们从数据库load或get出对象时，此时user是持久化的对象，在session缓存中存在该对象，此时我们在对user进行修改后，然后调用session.clear()方法，这个时候就会将session的缓存对象清空，那么session中就没有了user这个对象，<br>这个时候在提交事务的时候，发现已经session中已经没有该对象了，所以就不会进行任何操作</p>
+<pre><code class="java">    session = HibernateUtil.openSession();
+    session.beginTransaction();
+    //此时u是Persistent
+    User u = (User)session.load(User.class, 4);
+    u.setUsername(&quot;123&quot;);
+    //清空Session
+    session.clear();
+    //不会执行语句
+    session.getTransaction().commit();
+</code></pre>
+<p>对于离线对象，如果要使其变成持久化对象的话，我们不能使用save方法，而应该使用update方法</p>
+<pre><code class="java">    session = HibernateUtil.openSession();
+    session.beginTransaction();
+    //此时u是一个离线对象，没有被session托管
+    User u = new User();
+    u.setId(4);
+    u.setPassword(&quot;hahahaha&quot;);
+    //当执行save的时候总是会添加一条数据，此时id就会根据Hibernate所定义的规则来生成
+    session.save(u);
+    session.getTransaction().commit();
+</code></pre>
+<p>如果试图修改一个持久化对象的ID的值的话，就会抛出异常，这点要特别注意</p>
+<pre><code class="java">    session = HibernateUtil.openSession();
+    session.beginTransaction();
+    User u = new User();
+    u.setId(5);
+    //完成update之后也会变成持久化状态
+    session.update(u);
+    u.setPassword(&quot;lisi&quot;);
+    u.setUsername(&quot;lisi&quot;);
+    u.setId(333);
+    //会抛出异常
+    session.getTransaction().commit();
+</code></pre>
+<p>如果Sesion.delete()方法删除了某条数据，此时 该条数据会成为瞬时对象，因为数据库此时已经不存在该对象了，对该对象做的后续更新操作都将无效，commit时只会执行一条delete语句</p>
+<pre><code class="java">    User user = session.load(User.class,&quot;8&quot;);
+    System.out.println(&quot;输出&quot;);
+    System.out.println(user);
+    session.delete(user);
+    user.setName(&quot;12312312&quot;);
+    transaction.commit();
+    session.close();
+</code></pre>
+<p>一个session中不能存在对一个持久化对象的双重copy。我们的u1已经是持久化的对象了，保存在session缓存中，u2通过调用saveOrUpdate方法后也变成了一个持久化的对象，<br>此时也会保存在session缓存中，这个时候session缓存中就存在了一个持久化对象有两个引用拷贝了，这个时候hibernate就会报错。org.hibernate.NonUniqueObjectException</p>
+<pre><code class="java">    session = HibernateUtil.openSession();
+    session.beginTransaction();
+    //u1已经是持久化状态
+    User u1 = (User)session.load(User.class, 3);
+    System.out.println(u1.getUsername());
+    //u2是离线状态
+    User u2 = new User();
+    u2.setId(3);
+    u2.setPassword(&quot;123456789&quot;);
+    //此时u2将会变成持久化状态，在session的缓存中就存在了两份同样的对象,在session中不能存在两份拷贝，否则会抛出异常
+    session.saveOrUpdate(u2);
 </code></pre>
 <h3 id="get和load的区别"><a href="#get和load的区别" class="headerlink" title="get和load的区别"></a>get和load的区别</h3><p>get():若数据库无此数据，则返回null.<br>load():懒加载模式，若数据库无此数据，则会报错ObjectNotfountException异常.<br>所以，load加载数据一定要保证其数据存在。</p>
 <pre><code class="java">    //User user = session.get(User.class,&quot;10&quot;);
@@ -283,6 +342,7 @@
     System.out.println(&quot;输出&quot;);
     System.out.println(user);
 </code></pre>
+<h3 id="flush和commit"><a href="#flush和commit" class="headerlink" title="flush和commit"></a>flush和commit</h3><p>1、flush()方法进行清理缓存的操作,执行一系列的SQL语句,但不会提交事务;commit()方法会先调用flush()方法,然后提交事务. 提交事务意味着对数据库所做的更新会永久保持下来   所谓清理,是指Hibernate 按照持久化象的状态来同步更新数据库<br>2、Flush()后只是将Hibernate缓存中的数据提交到数据库,如果这时数据库处在一个事物当中,则数据库将这些SQL语句缓存起来,当Hibernate进行commit时,会告诉数据库,你可以真正提交了,这时数据才会永久保存下来,也就是被持久化了.<br>3、commit针对事物的，flush针对缓存的， 数据同步到数据库中后只要没有commit还是可以rollback的。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
@@ -324,7 +384,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Java','#Spring','#Hibernate',],
+            'data': ['#Hibernate','#Java','#Spring',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
