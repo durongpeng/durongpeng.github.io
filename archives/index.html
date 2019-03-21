@@ -6,20 +6,18 @@
   <meta name="keywords" content>
   <meta name="description" content="Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
-<meta name="keywords" content="Hibernate">
+<meta name="description" content="读取本地properties配置文件使用@Value注解注入乱码问题设置 File Encodings的Transparent native-to-ascii conversion为true，具体步骤如下：依次点击File -&amp;gt; Settings -&amp;gt; Editor -&amp;gt; File Encodings将Properties Files (*.properties)下的Defaul">
+<meta name="keywords" content="SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hibernate的总结">
-<meta property="og:url" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/index.html">
+<meta property="og:title" content="SpringBoot乱码问题">
+<meta property="og:url" content="http://www.durongpeng.top/2019/03/21/SpringBoot乱码问题/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
+<meta property="og:description" content="读取本地properties配置文件使用@Value注解注入乱码问题设置 File Encodings的Transparent native-to-ascii conversion为true，具体步骤如下：依次点击File -&amp;gt; Settings -&amp;gt; Editor -&amp;gt; File Encodings将Properties Files (*.properties)下的Defaul">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/操作图.png">
-<meta property="og:updated_time" content="2019-03-13T03:02:22.005Z">
+<meta property="og:updated_time" content="2019-03-21T14:25:10.101Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hibernate的总结">
-<meta name="twitter:description" content="Hibernate的三种状态1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。3.detached(离线/游离状态)：数据库中有，但是Session中不存在。当使用save方法时，数据被Session所管理，数据">
-<meta name="twitter:image" content="http://www.durongpeng.top/2019/03/13/Hibernate的总结/操作图.png">
+<meta name="twitter:title" content="SpringBoot乱码问题">
+<meta name="twitter:description" content="读取本地properties配置文件使用@Value注解注入乱码问题设置 File Encodings的Transparent native-to-ascii conversion为true，具体步骤如下：依次点击File -&amp;gt; Settings -&amp;gt; Editor -&amp;gt; File Encodings将Properties Files (*.properties)下的Defaul">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -117,7 +115,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="4">
+<input type="hidden" id="yelog_site_posts_number" value="5">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -162,11 +160,20 @@
         <a href="javascript:" class="color2">Spring</a>
     </li>
     
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">SpringBoot</a>
+    </li>
+    
     <div class="clearfix"></div>
 </div>
 
     
     <nav id="title-list-nav">
+        
+        <a class href="/2019/03/21/SpringBoot乱码问题/" data-tag="SpringBoot" data-author>
+            <span class="post-title" title="SpringBoot乱码问题">SpringBoot乱码问题</span>
+            <span class="post-date" title="2019-03-21 21:23:28">2019/03/21</span>
+        </a>
         
         <a class href="/2019/03/13/Hibernate的总结/" data-tag="Hibernate" data-author>
             <span class="post-title" title="Hibernate的总结">Hibernate的总结</span>
@@ -252,7 +259,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Hibernate','#Java','#Spring',],
+            'data': ['#Hibernate','#Java','#Spring','#SpringBoot',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
