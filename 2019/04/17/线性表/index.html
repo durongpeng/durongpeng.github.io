@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/单链表删除.png">
 <meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/空循环链表.png">
 <meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/非空循环链表.png">
-<meta property="og:updated_time" content="2019-04-21T05:51:28.400Z">
+<meta property="og:updated_time" content="2019-04-22T15:51:42.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性表">
 <meta name="twitter:description" content="推导大O阶方法1.用常数1取代运行时间中的所有加法常数。2.在修改后的运行次数函数中，只保留最高项。3.如果最高项存在且不是1，则去除与这个项相乘的常数。 线性表：零个或多个数据元素的有限序列。线性表的顺序存储结构优点：1.无须为表示表中元素之间的逻辑关系而增加额外的存储空间。2.可以快速地存取表中任一位置的元素。 线性表的顺序存储结构缺点：1.插入和删除操作需要移动大量的元素2.当线性表长度变化">
@@ -243,7 +243,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-04-21 13:51:28">2019-04-17 22:38</time>
+        创建时间:<time class="date" title="更新时间: 2019-04-22 23:51:42">2019-04-17 22:38</time>
         
     </div>
     <div class="article-meta">
@@ -265,7 +265,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#推导大O阶方法"><span class="toc-text">推导大O阶方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线性表：零个或多个数据元素的有限序列。"><span class="toc-text">线性表：零个或多个数据元素的有限序列。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线性表的顺序存储结构优点："><span class="toc-text">线性表的顺序存储结构优点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线性表的顺序存储结构缺点："><span class="toc-text">线性表的顺序存储结构缺点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线性表的几个注意点："><span class="toc-text">线性表的几个注意点：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线性表的顺序存储结构"><span class="toc-text">线性表的顺序存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#存取元素"><span class="toc-text">存取元素</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#插入元素"><span class="toc-text">插入元素</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#删除元素"><span class="toc-text">删除元素</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线性表的链式存储结构"><span class="toc-text">线性表的链式存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#存取元素-1"><span class="toc-text">存取元素</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#插入元素-1"><span class="toc-text">插入元素</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#插入元素-2"><span class="toc-text">插入元素</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#推导大O阶方法"><span class="toc-text">推导大O阶方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线性表：零个或多个数据元素的有限序列。"><span class="toc-text">线性表：零个或多个数据元素的有限序列。</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表的顺序存储结构优点："><span class="toc-text">线性表的顺序存储结构优点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表的顺序存储结构缺点："><span class="toc-text">线性表的顺序存储结构缺点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表的几个注意点："><span class="toc-text">线性表的几个注意点：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表的顺序存储结构"><span class="toc-text">线性表的顺序存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存取元素"><span class="toc-text">存取元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入元素"><span class="toc-text">插入元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除元素"><span class="toc-text">删除元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性表的链式存储结构"><span class="toc-text">线性表的链式存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#存取元素-1"><span class="toc-text">存取元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入元素-1"><span class="toc-text">插入元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除元素-1"><span class="toc-text">删除元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环链表"><span class="toc-text">循环链表</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -280,22 +280,22 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="推导大O阶方法"><a href="#推导大O阶方法" class="headerlink" title="推导大O阶方法"></a>推导大O阶方法</h4><p>1.用常数1取代运行时间中的所有加法常数。<br>2.在修改后的运行次数函数中，只保留最高项。<br>3.如果最高项存在且不是1，则去除与这个项相乘的常数。</p>
-<h4 id="线性表：零个或多个数据元素的有限序列。"><a href="#线性表：零个或多个数据元素的有限序列。" class="headerlink" title="线性表：零个或多个数据元素的有限序列。"></a>线性表：零个或多个数据元素的有限序列。</h4><h5 id="线性表的顺序存储结构优点："><a href="#线性表的顺序存储结构优点：" class="headerlink" title="线性表的顺序存储结构优点："></a>线性表的顺序存储结构优点：</h5><p>1.无须为表示表中元素之间的逻辑关系而增加额外的存储空间。<br>2.可以快速地存取表中任一位置的元素。</p>
-<h5 id="线性表的顺序存储结构缺点："><a href="#线性表的顺序存储结构缺点：" class="headerlink" title="线性表的顺序存储结构缺点："></a>线性表的顺序存储结构缺点：</h5><p>1.插入和删除操作需要移动大量的元素<br>2.当线性表长度变化较大时，难以确定存储空间的容量。<br>3.如果初始化开辟空间过大会造成存储空间的”碎片”，浪费空间。</p>
-<h5 id="线性表的几个注意点："><a href="#线性表的几个注意点：" class="headerlink" title="线性表的几个注意点："></a>线性表的几个注意点：</h5><p>1.是一个长度有限的序列。<br>2.元素之间是有序的，第一个元素无前驱，最后一个元素无后继，其他每个元素都只有一个前驱和后继。<br>3.序列中的元素都必须是相同的数据类型。</p>
-<h5 id="线性表的顺序存储结构"><a href="#线性表的顺序存储结构" class="headerlink" title="线性表的顺序存储结构"></a>线性表的顺序存储结构</h5><p>线性表的顺序存储结构指的是用一段地址连续的存储单元依次存储线性表的数据元素。</p>
-<h6 id="存取元素"><a href="#存取元素" class="headerlink" title="存取元素"></a>存取元素</h6><p>对于顺序存储结构的线性表来说，获取元素就是根据元素下表获取，因此时间复杂度为O[1]。如果是存的话，存在表的末尾，时间复杂度还是O[1]。</p>
-<h6 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h6><img src="/2019/04/17/线性表/顺序存储插入图.png">
+        <h1 id="推导大O阶方法"><a href="#推导大O阶方法" class="headerlink" title="推导大O阶方法"></a>推导大O阶方法</h1><p>1.用常数1取代运行时间中的所有加法常数。<br>2.在修改后的运行次数函数中，只保留最高项。<br>3.如果最高项存在且不是1，则去除与这个项相乘的常数。</p>
+<h1 id="线性表：零个或多个数据元素的有限序列。"><a href="#线性表：零个或多个数据元素的有限序列。" class="headerlink" title="线性表：零个或多个数据元素的有限序列。"></a>线性表：零个或多个数据元素的有限序列。</h1><h2 id="线性表的顺序存储结构优点："><a href="#线性表的顺序存储结构优点：" class="headerlink" title="线性表的顺序存储结构优点："></a>线性表的顺序存储结构优点：</h2><p>1.无须为表示表中元素之间的逻辑关系而增加额外的存储空间。<br>2.可以快速地存取表中任一位置的元素。</p>
+<h2 id="线性表的顺序存储结构缺点："><a href="#线性表的顺序存储结构缺点：" class="headerlink" title="线性表的顺序存储结构缺点："></a>线性表的顺序存储结构缺点：</h2><p>1.插入和删除操作需要移动大量的元素<br>2.当线性表长度变化较大时，难以确定存储空间的容量。<br>3.如果初始化开辟空间过大会造成存储空间的”碎片”，浪费空间。</p>
+<h2 id="线性表的几个注意点："><a href="#线性表的几个注意点：" class="headerlink" title="线性表的几个注意点："></a>线性表的几个注意点：</h2><p>1.是一个长度有限的序列。<br>2.元素之间是有序的，第一个元素无前驱，最后一个元素无后继，其他每个元素都只有一个前驱和后继。<br>3.序列中的元素都必须是相同的数据类型。</p>
+<h2 id="线性表的顺序存储结构"><a href="#线性表的顺序存储结构" class="headerlink" title="线性表的顺序存储结构"></a>线性表的顺序存储结构</h2><p>线性表的顺序存储结构指的是用一段地址连续的存储单元依次存储线性表的数据元素。</p>
+<h3 id="存取元素"><a href="#存取元素" class="headerlink" title="存取元素"></a>存取元素</h3><p>对于顺序存储结构的线性表来说，获取元素就是根据元素下表获取，因此时间复杂度为O[1]。如果是存的话，存在表的末尾，时间复杂度还是O[1]。</p>
+<h3 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h3><img src="/2019/04/17/线性表/顺序存储插入图.png">
 <p>插入时最好的情况是如果元素要插入到最后一个位置，那么时间复杂度为O[1]。最坏的情况是，要插入到第一个位置，意味着所有的元素都要向后位移，因此时间复杂度为O[n]。根据大O阶推导方法，时间复杂度还是O[n]。</p>
-<h6 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h6><img src="/2019/04/17/线性表/顺序存储删除图.png">
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><img src="/2019/04/17/线性表/顺序存储删除图.png">
 <p>删除操作同插入操作。</p>
-<h5 id="线性表的链式存储结构"><a href="#线性表的链式存储结构" class="headerlink" title="线性表的链式存储结构"></a>线性表的链式存储结构</h5><p>线性表的链式存储结构的特点是用一组任意的存储单元存储线性表的数据元素，这组存储单元可以是连续的，也可以是不连续的。<br>除了存储数据元素本身的信息之外，还需要存储一个指示其直接后继的信息(直接后继元素的存储的地址)。我们把存储元素信息的域称为数据域，把储存直接后继位置的域称为指针域。<br><img src="/2019/04/17/线性表/链式存储结构.png"><br>链表中第一个节点的存储位置叫做头指针，最后一个节点指针为”空”(NULL或”^”)<br><img src="/2019/04/17/线性表/头指针.png"><br>通常为了更加方便地对链表进行操作，会在单链表的第一个节点前设置一个头节点。头节点的数据域可以不存取任何信息，头节点的指针域存储指向第一个节点的指针。</p>
-<h6 id="存取元素-1"><a href="#存取元素-1" class="headerlink" title="存取元素"></a>存取元素</h6><p>由于链式存储的内存不连续，因此没法计算某个元素的存放位置，只能从第一个元素开始依次遍历找到想要的元素。最好的情况就是取第一个元素，最差的情况就是要取最后一个元素。因此链式存储结构的线性表存取时间复杂度是O[n]。</p>
-<h6 id="插入元素-1"><a href="#插入元素-1" class="headerlink" title="插入元素"></a>插入元素</h6><img src="/2019/04/17/线性表/单链表插入.png">
+<h2 id="线性表的链式存储结构"><a href="#线性表的链式存储结构" class="headerlink" title="线性表的链式存储结构"></a>线性表的链式存储结构</h2><p>线性表的链式存储结构的特点是用一组任意的存储单元存储线性表的数据元素，这组存储单元可以是连续的，也可以是不连续的。<br>除了存储数据元素本身的信息之外，还需要存储一个指示其直接后继的信息(直接后继元素的存储的地址)。我们把存储元素信息的域称为数据域，把储存直接后继位置的域称为指针域。<br><img src="/2019/04/17/线性表/链式存储结构.png"><br>链表中第一个节点的存储位置叫做头指针，最后一个节点指针为”空”(NULL或”^”)<br><img src="/2019/04/17/线性表/头指针.png"><br>通常为了更加方便地对链表进行操作，会在单链表的第一个节点前设置一个头节点。头节点的数据域可以不存取任何信息，头节点的指针域存储指向第一个节点的指针。</p>
+<h3 id="存取元素-1"><a href="#存取元素-1" class="headerlink" title="存取元素"></a>存取元素</h3><p>由于链式存储的内存不连续，因此没法计算某个元素的存放位置，只能从第一个元素开始依次遍历找到想要的元素。最好的情况就是取第一个元素，最差的情况就是要取最后一个元素。因此链式存储结构的线性表存取时间复杂度是O[n]。</p>
+<h3 id="插入元素-1"><a href="#插入元素-1" class="headerlink" title="插入元素"></a>插入元素</h3><img src="/2019/04/17/线性表/单链表插入.png">
 <p>单链表的插入不需要依次的向后移动其他元素，但因为找到插入位置需要从第一个元素开始依次推导，因此时间复杂度也是O[n]。<br>单链表数据结构在插入和删除的操作上相比顺序存储结构并没有太大的优势，但如果一次插入多个元素，对线性表频繁的操作，链式存储结构的优势就会得到体现。</p>
-<h6 id="插入元素-2"><a href="#插入元素-2" class="headerlink" title="插入元素"></a>插入元素</h6><img src="/2019/04/17/线性表/单链表删除.png">
-<h5 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h5><p>将单链表中终端节点的指针端由空指针改为指向头节点，就使整个单链表形成一个环，这种头尾相接的单链表称为单循环链表，简称循环链表。<br>循环链表解决了如何从一个某一个节点触发能访问到链表中全部节点的问题。为了使空链表和非控链表处理一致，我们通常设置一个头结点。但循环链表也可以不设置头结点，头结点并不是必须要有的。<br><img src="/2019/04/17/线性表/空循环链表.png"><br><img src="/2019/04/17/线性表/非空循环链表.png"></p>
+<h3 id="删除元素-1"><a href="#删除元素-1" class="headerlink" title="删除元素"></a>删除元素</h3><img src="/2019/04/17/线性表/单链表删除.png">
+<h2 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h2><p>将单链表中终端节点的指针端由空指针改为指向头节点，就使整个单链表形成一个环，这种头尾相接的单链表称为单循环链表，简称循环链表。<br>循环链表解决了如何从一个某一个节点触发能访问到链表中全部节点的问题。为了使空链表和非控链表处理一致，我们通常设置一个头结点。但循环链表也可以不设置头结点，头结点并不是必须要有的。<br><img src="/2019/04/17/线性表/空循环链表.png"><br><img src="/2019/04/17/线性表/非空循环链表.png"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
