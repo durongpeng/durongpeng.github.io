@@ -6,27 +6,22 @@
   <meta name="keywords" content=" 数据结构 ">
   <meta name="description" content="线性表 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="推导大O阶方法1.用常数1取代运行时间中的所有加法常数。2.在修改后的运行次数函数中，只保留最高项。3.如果最高项存在且不是1，则去除与这个项相乘的常数。 线性表：零个或多个数据元素的有限序列。线性表的顺序存储结构优点：1.无须为表示表中元素之间的逻辑关系而增加额外的存储空间。2.可以快速地存取表中任一位置的元素。 线性表的顺序存储结构缺点：1.插入和删除操作需要移动大量的元素2.当线性表长度变化">
+<meta name="description" content="栈栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。 栈的顺序存储结构栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。 栈的结构定义typedef int ItemType    typedef">
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性表">
-<meta property="og:url" content="http://www.durongpeng.top/2019/04/17/线性表/index.html">
+<meta property="og:title" content="栈与队列">
+<meta property="og:url" content="http://www.durongpeng.top/2019/04/19/栈与队列/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="推导大O阶方法1.用常数1取代运行时间中的所有加法常数。2.在修改后的运行次数函数中，只保留最高项。3.如果最高项存在且不是1，则去除与这个项相乘的常数。 线性表：零个或多个数据元素的有限序列。线性表的顺序存储结构优点：1.无须为表示表中元素之间的逻辑关系而增加额外的存储空间。2.可以快速地存取表中任一位置的元素。 线性表的顺序存储结构缺点：1.插入和删除操作需要移动大量的元素2.当线性表长度变化">
+<meta property="og:description" content="栈栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。 栈的顺序存储结构栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。 栈的结构定义typedef int ItemType    typedef">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/顺序存储插入图.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/顺序存储删除图.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/链式存储结构.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/头指针.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/单链表插入.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/单链表删除.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/空循环链表.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/17/线性表/非空循环链表.png">
-<meta property="og:updated_time" content="2019-04-22T15:51:42.355Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/栈结构的定义.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/两栈共享空间.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/链栈.png">
+<meta property="og:updated_time" content="2019-04-24T16:12:41.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线性表">
-<meta name="twitter:description" content="推导大O阶方法1.用常数1取代运行时间中的所有加法常数。2.在修改后的运行次数函数中，只保留最高项。3.如果最高项存在且不是1，则去除与这个项相乘的常数。 线性表：零个或多个数据元素的有限序列。线性表的顺序存储结构优点：1.无须为表示表中元素之间的逻辑关系而增加额外的存储空间。2.可以快速地存取表中任一位置的元素。 线性表的顺序存储结构缺点：1.插入和删除操作需要移动大量的元素2.当线性表长度变化">
-<meta name="twitter:image" content="http://www.durongpeng.top/2019/04/17/线性表/顺序存储插入图.png">
+<meta name="twitter:title" content="栈与队列">
+<meta name="twitter:description" content="栈栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。 栈的顺序存储结构栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。 栈的结构定义typedef int ItemType    typedef">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/栈结构的定义.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -124,7 +119,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_posts_number" value="7">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -182,6 +177,11 @@
 
     
     <nav id="title-list-nav">
+        
+        <a class href="/2019/04/19/栈与队列/" data-tag="数据结构" data-author>
+            <span class="post-title" title="栈与队列">栈与队列</span>
+            <span class="post-date" title="2019-04-19 22:19:44">2019/04/19</span>
+        </a>
         
         <a class href="/2019/04/17/线性表/" data-tag="数据结构" data-author>
             <span class="post-title" title="线性表">线性表</span>
