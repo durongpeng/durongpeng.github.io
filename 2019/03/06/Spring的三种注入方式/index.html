@@ -6,27 +6,23 @@
   <meta name="keywords" content=" Java , Spring ">
   <meta name="description" content="Spring三种常用的注入方式 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="栈栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。 栈的顺序存储结构栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。 栈的结构定义typedef int ItemType    typedef">
+<meta name="description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="栈与队列">
-<meta property="og:url" content="http://www.durongpeng.top/2019/04/19/栈与队列/index.html">
+<meta property="og:title" content="串">
+<meta property="og:url" content="http://www.durongpeng.top/2019/04/27/串/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="栈栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。 栈的顺序存储结构栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。 栈的结构定义typedef int ItemType    typedef">
+<meta property="og:description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/栈结构的定义.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/两栈共享空间.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/链栈.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/队列插入.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/队列取出.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/定义指针表示队列头尾.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/越界.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/循环队列.png">
-<meta property="og:updated_time" content="2019-04-25T15:43:15.234Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法示意图.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法示意图.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法对比图.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/KMP算法比较图.png">
+<meta property="og:updated_time" content="2019-05-06T16:30:57.058Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="栈与队列">
-<meta name="twitter:description" content="栈栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。 栈的顺序存储结构栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。 栈的结构定义typedef int ItemType    typedef">
-<meta name="twitter:image" content="http://www.durongpeng.top/2019/04/19/栈与队列/栈结构的定义.png">
+<meta name="twitter:title" content="串">
+<meta name="twitter:description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法示意图.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -124,7 +120,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_posts_number" value="8">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -158,11 +154,11 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">Hibernate</a>
+        <a href="javascript:" class="color1">SpringBoot</a>
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">SpringBoot</a>
+        <a href="javascript:" class="color5">Hibernate</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -182,6 +178,11 @@
 
     
     <nav id="title-list-nav">
+        
+        <a class href="/2019/04/27/串/" data-tag="数据结构" data-author>
+            <span class="post-title" title="串">串</span>
+            <span class="post-date" title="2019-04-27 22:23:10">2019/04/27</span>
+        </a>
         
         <a class href="/2019/04/19/栈与队列/" data-tag="数据结构" data-author>
             <span class="post-title" title="栈与队列">栈与队列</span>
@@ -415,7 +416,7 @@ private User user;
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Hibernate','#SpringBoot','#Java','#Spring','#数据结构',],
+            'data': ['#SpringBoot','#Hibernate','#Java','#Spring','#数据结构',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

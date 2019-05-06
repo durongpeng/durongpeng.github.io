@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Hibernate的总结 | Durp&#39;s Blog</title>
-  <meta name="keywords" content=" Hibernate ">
-  <meta name="description" content="Hibernate的总结 | Durp&#39;s Blog">
+  <title>串 | Durp&#39;s Blog</title>
+  <meta name="keywords" content=" 数据结构 ">
+  <meta name="description" content="串 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
 <meta name="keywords" content="数据结构">
@@ -231,9 +231,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Hibernate的总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-串" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Hibernate的总结</h1>
+        <h1 class="article-title">串</h1>
     
     <div class="article-meta">
         
@@ -242,14 +242,14 @@
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">Hibernate</a>
+            <a href="javascript:" class="color5">数据结构</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-13 11:02:22">2019-03-13 09:02</time>
+        创建时间:<time class="date" title="更新时间: 2019-05-07 00:30:57">2019-04-27 22:23</time>
         
     </div>
     <div class="article-meta">
@@ -271,7 +271,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hibernate的三种状态"><span class="toc-text">Hibernate的三种状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get和load的区别"><span class="toc-text">get和load的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flush和commit"><span class="toc-text">flush和commit</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#串"><span class="toc-text">串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#串的比较"><span class="toc-text">串的比较</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ASCII和Unicode"><span class="toc-text">ASCII和Unicode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较字符串的步骤"><span class="toc-text">比较字符串的步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#串的存储结构"><span class="toc-text">串的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#串的顺序存储结构"><span class="toc-text">串的顺序存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#串的链式存储结构"><span class="toc-text">串的链式存储结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#朴素的模式匹配算法"><span class="toc-text">朴素的模式匹配算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#朴素模式匹配算法的时间复杂度"><span class="toc-text">朴素模式匹配算法的时间复杂度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP模式匹配算法"><span class="toc-text">KMP模式匹配算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP模式匹配算法原理"><span class="toc-text">KMP模式匹配算法原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#next数组值推导"><span class="toc-text">next数组值推导</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#T-”abcabx”"><span class="toc-text">T=”abcabx”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP模式匹配算法实现"><span class="toc-text">KMP模式匹配算法实现</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -286,94 +286,89 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Hibernate的三种状态"><a href="#Hibernate的三种状态" class="headerlink" title="Hibernate的三种状态"></a>Hibernate的三种状态</h3><p>1.transient(瞬时状态)：刚new出来的对象，还没有保存到数据库中，不与任何session关联。<br>2.persistent(持久化状态)：数据提交至数据库中且Session中存在。也就是说只要session中有，就是持久化状态了。<br>3.detached(离线/游离状态)：数据库中有，但是Session中不存在。<br><img src="/2019/03/13/Hibernate的总结/操作图.png"><br>当使用save方法时，数据被Session所管理，数据库中也存在该条数据，但是由于未提交，别的session是看不到的，但确实是存在于数据库中。<br>在提交事务时，此时hibernate对象就会拿当前这个user对象和保存在session缓存中的user对象进行比较，如果两个对象相同，则不会发送update语句，否则，如果两个对象不同，则会发出update语句。</p>
-<pre><code class="java">    //获取加载配置管理类
-    Configuration cfg = new Configuration();
-    //不给参数就默认加载hibernate.cfg.xml文件
-    cfg.configure();
-    //创建Session工厂对象
-    SessionFactory sessionFactory = cfg.buildSessionFactory();
-    //得到Session对象
-    Session session = sessionFactory.getCurrentSession();
-    //使用Session得到事物对象
-    Transaction transaction = session.getTransaction();
-    //使用Transaction开启数据库事物
-    transaction.begin();
-    //User对象此时为瞬时状态
-    User user = new User();
-    user.setId(&quot;1&quot;);
-    user.setName(&quot;ddd&quot;);
-    //执行了save()方法之后，数据被Session所管理，数据库中有该记录，但是未提交
-    session.save(user);
-    user.setName(&quot;aaa&quot;);
-    user.setName(&quot;ccc&quot;);
-    //执行insert和update语句，最终提交到数据库中的user名字为ccc
-    transaction.commit();
-</code></pre>
-<p>如果一个对象已经是持久化状态了，那么此时对该对象进行各种修改，或者调用多次update、save方法时，hibernate都不会发送sql语句，<br>只有当事物提交的时候，此时hibernate才会拿当前这个对象与之前保存在session中的持久化对象进行比较，如果不相同就发送一条update的sql语句，否则就不会发送update语句。<br>当我们从数据库load或get出对象时，此时user是持久化的对象，在session缓存中存在该对象，此时我们在对user进行修改后，然后调用session.clear()方法，这个时候就会将session的缓存对象清空，那么session中就没有了user这个对象，<br>这个时候在提交事务的时候，发现已经session中已经没有该对象了，所以就不会进行任何操作</p>
-<pre><code class="java">    session = HibernateUtil.openSession();
-    session.beginTransaction();
-    //此时u是Persistent
-    User u = (User)session.load(User.class, 4);
-    u.setUsername(&quot;123&quot;);
-    //清空Session
-    session.clear();
-    //不会执行语句
-    session.getTransaction().commit();
-</code></pre>
-<p>对于离线对象，如果要使其变成持久化对象的话，我们不能使用save方法，而应该使用update方法</p>
-<pre><code class="java">    session = HibernateUtil.openSession();
-    session.beginTransaction();
-    //此时u是一个离线对象，没有被session托管
-    User u = new User();
-    u.setId(4);
-    u.setPassword(&quot;hahahaha&quot;);
-    //当执行save的时候总是会添加一条数据，此时id就会根据Hibernate所定义的规则来生成
-    session.save(u);
-    session.getTransaction().commit();
-</code></pre>
-<p>如果试图修改一个持久化对象的ID的值的话，就会抛出异常，这点要特别注意</p>
-<pre><code class="java">    session = HibernateUtil.openSession();
-    session.beginTransaction();
-    User u = new User();
-    u.setId(5);
-    //完成update之后也会变成持久化状态
-    session.update(u);
-    u.setPassword(&quot;lisi&quot;);
-    u.setUsername(&quot;lisi&quot;);
-    u.setId(333);
-    //会抛出异常
-    session.getTransaction().commit();
-</code></pre>
-<p>如果Sesion.delete()方法删除了某条数据，此时 该条数据会成为瞬时对象，因为数据库此时已经不存在该对象了，对该对象做的后续更新操作都将无效，commit时只会执行一条delete语句</p>
-<pre><code class="java">    User user = session.load(User.class,&quot;8&quot;);
-    System.out.println(&quot;输出&quot;);
-    System.out.println(user);
-    session.delete(user);
-    user.setName(&quot;12312312&quot;);
-    transaction.commit();
-    session.close();
-</code></pre>
-<p>一个session中不能存在对一个持久化对象的双重copy。我们的u1已经是持久化的对象了，保存在session缓存中，u2通过调用saveOrUpdate方法后也变成了一个持久化的对象，<br>此时也会保存在session缓存中，这个时候session缓存中就存在了一个持久化对象有两个引用拷贝了，这个时候hibernate就会报错。org.hibernate.NonUniqueObjectException</p>
-<pre><code class="java">    session = HibernateUtil.openSession();
-    session.beginTransaction();
-    //u1已经是持久化状态
-    User u1 = (User)session.load(User.class, 3);
-    System.out.println(u1.getUsername());
-    //u2是离线状态
-    User u2 = new User();
-    u2.setId(3);
-    u2.setPassword(&quot;123456789&quot;);
-    //此时u2将会变成持久化状态，在session的缓存中就存在了两份同样的对象,在session中不能存在两份拷贝，否则会抛出异常
-    session.saveOrUpdate(u2);
-</code></pre>
-<h3 id="get和load的区别"><a href="#get和load的区别" class="headerlink" title="get和load的区别"></a>get和load的区别</h3><p>get():若数据库无此数据，则返回null.<br>load():懒加载模式，若数据库无此数据，则会报错ObjectNotfountException异常.<br>所以，load加载数据一定要保证其数据存在。</p>
-<pre><code class="java">    //User user = session.get(User.class,&quot;10&quot;);
-    User user = session.load(User.class,&quot;10&quot;);
-    System.out.println(&quot;输出&quot;);
-    System.out.println(user);
-</code></pre>
-<h3 id="flush和commit"><a href="#flush和commit" class="headerlink" title="flush和commit"></a>flush和commit</h3><p>1、flush()方法进行清理缓存的操作,执行一系列的SQL语句,但不会提交事务;commit()方法会先调用flush()方法,然后提交事务. 提交事务意味着对数据库所做的更新会永久保持下来   所谓清理,是指Hibernate 按照持久化象的状态来同步更新数据库<br>2、Flush()后只是将Hibernate缓存中的数据提交到数据库,如果这时数据库处在一个事物当中,则数据库将这些SQL语句缓存起来,当Hibernate进行commit时,会告诉数据库,你可以真正提交了,这时数据才会永久保存下来,也就是被持久化了.<br>3、commit针对事物的，flush针对缓存的， 数据同步到数据库中后只要没有commit还是可以rollback的。</p>
+        <h1 id="串"><a href="#串" class="headerlink" title="串"></a>串</h1><p>由零个或多个字符组成的有限序列，又名叫字符串。</p>
+<h2 id="串的比较"><a href="#串的比较" class="headerlink" title="串的比较"></a>串的比较</h2><p>两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。</p>
+<h3 id="ASCII和Unicode"><a href="#ASCII和Unicode" class="headerlink" title="ASCII和Unicode"></a>ASCII和Unicode</h3><p>ASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符号。为了表示实际上成百上千种语言的符号，就有了Unicode编码。<br>Unicode编码比较常用的是由16位二进制数表示一个字符，大约是6.5万多个字符。为了和ASCII码兼容，Unicode的前256个字符与ASCII编码完全相同。</p>
+<h3 id="比较字符串的步骤"><a href="#比较字符串的步骤" class="headerlink" title="比较字符串的步骤"></a>比较字符串的步骤</h3><p>假设给定两字符串s=”a1a2a3······an”,t=”b1b2b3······bn”</p>
+<ol>
+<li>先比较两串长度大小，长度大的串&gt;长度小的串</li>
+<li>如果两串的长度相等，从头循环比较两字符串的每一位字符，比较标准就是Unicode编码了，直到比较出在某一处，s的字符对应的Unicode值不等于t的字符，返回比较结果。<h2 id="串的存储结构"><a href="#串的存储结构" class="headerlink" title="串的存储结构"></a>串的存储结构</h2><h3 id="串的顺序存储结构"><a href="#串的顺序存储结构" class="headerlink" title="串的顺序存储结构"></a>串的顺序存储结构</h3>串的顺序存储结构是用一组地址连续的存储单元来存储串中的字符序列的。按照预定义的大小，为每个定义的串变量分配一个固定长度的存储区。一般是用定长数组来定义。<br>一般会将串的实际长度存放在数组0下标处或最后一个下标处，也有串的后面跟”\0”表示串的结束。串的实际长度并不记录，而是通过遍历来计算得到。<h3 id="串的链式存储结构"><a href="#串的链式存储结构" class="headerlink" title="串的链式存储结构"></a>串的链式存储结构</h3>串的链式存储与线性表是相似的，但由于串中的每个数据元素都是一个字符，如果一个节点对应一个字符就太浪费空间了。因此一个节点可以存放多个字符，最后一个节点未被占满时，用”#”或其他非串值字符补全。<br>一个节点存放多少个字符合适就很重要，这会影响串处理的效率，需要根据实际情况做出选择。<h2 id="朴素的模式匹配算法"><a href="#朴素的模式匹配算法" class="headerlink" title="朴素的模式匹配算法"></a>朴素的模式匹配算法</h2>对主串S的每一个字符作为子串开头，与要匹配的字符串T进行匹配。对主串S做大循环，每个字符开头做子串T长度的小循环，直到匹配成功或全部遍历完成为止。<pre><code>/* 返回子串T在主串S中第pos个字符之后的位置。若不存在则返回0 */
+/* T非空，1≤pos≤strLength(S) */
+int Index(String S,String T,int pos) 
+{
+ int i = pos ;        //主串中的下标
+ int j = 1 ;          //子串中的下标
+ while ( i ≤ S[ 0 ] &amp;&amp; j &lt;= T[ 0 ] ) {  // i小于S串长度&amp;&amp;j小于T串长度
+     if ( S[ i ] == T[ j ] ) {     // 两字符相等则继续向下比较
+         ++i ;
+         ++j ;
+     } else {                  // 两字符不等，指针后退重新比较
+         i = i - j +2 ;      // i退回到上次匹配首位的下一位
+         j = 1；            // 子串下标回到首位
+     }
+ }
+     //当j增长到大于T串长度，说明已经在S主串中匹配到T子串，返回S主串处的索引值
+     if ( j &gt; T [0] ) {
+         return i - T [0]; 
+     } 
+     else return 0;
+}
+</code></pre><h3 id="朴素模式匹配算法的时间复杂度"><a href="#朴素模式匹配算法的时间复杂度" class="headerlink" title="朴素模式匹配算法的时间复杂度"></a>朴素模式匹配算法的时间复杂度</h3>设主串S，长度n;子串T，长度m。<br>最好的情况就是主串第一位就和子串第一位匹配，并且后面的也都匹配，时间复杂度为O[1]。(书上写的是O[1],个人理解为O[m])<br>再差一点的情况就是,在主串和子串的比较中，对比子串的第一位时就能发现不匹配，而不是对比一段之后才会发现不匹配。这种情况只需要对比子串的开头，而不需要对比子串后面部分的元素，因此时间复杂度是O[n+m]。(最好情况:第一位就开始匹配，时间复杂度O[m],每一次都不匹配，时间复杂度O[n]，平均计算(m+n)/2)<br>最差的情况就是，主串和子串的每次对比，都是对比到子串的最后一个元素时才发现不匹配，这种情况的时间复杂度为O[(n-m+1)*m]<h2 id="KMP模式匹配算法"><a href="#KMP模式匹配算法" class="headerlink" title="KMP模式匹配算法"></a>KMP模式匹配算法</h2><h3 id="KMP模式匹配算法原理"><a href="#KMP模式匹配算法原理" class="headerlink" title="KMP模式匹配算法原理"></a>KMP模式匹配算法原理</h3>假设在朴素的模式匹配算法，匹配主串S=”abcdefgab”和子串T=”abcdex”，前五个字母完全相同，直到第六个字母”f”和”x”开始不相同，朴素算法示的意图如下<img src="/2019/04/27/串/朴素算法示意图.png">
+对于要匹配的子串T来说，”abcdex”首字母”a”与后面的串”bcdex”中任意一个字符都不相等。也就是说，既然”a”不与自己后面的子串中任意一个字符相等，那么上图①来说，前五位字符分别相等，意味着子串T的首字符”a”不可能与S串的第2到5位的字符相等。在上图中②③④⑤步的判断都是多余的。<br>理解KMP算法的关键在于你能确定T串中”a”与后面的字符均不相等(这是前提，至于如何判断后面再讨论)。<img src="/2019/04/27/串/朴素算法示意图.png">
+<img src="/2019/04/27/串/朴素算法对比图.png">
+可以推出上面朴素算法中的②③④⑤都可以去掉，只保留①⑥即可。<br>或许有人觉得要满足这个前提限制性太大，那么再来看一下如果去掉这个限制会怎么样。假设有主串S=”abcababca”和子串T=”abcabx”。对于初次判断，两串前五个字符相等，第6个字符开始不等，如步骤①。根据①的比较,T的首字符”a”与T的第二位字符”b”、第三位字符”c”均不相等，所以不需要做判断，因此步骤②③是多余的。<img src="/2019/04/27/串/KMP算法比较图.png">
+因为T的首位”a”与T的第四位”a”相等，第二位”b”与第五位”b”相等。而在①时，第四位的”a’与第五位的”b”已经与主串S上的四五位比较过是相等的，因此可以断定T串的四五位与S串的四五位也是相等的(T[4]=S[4]&amp;T[1]=T[4]→T[1]=S[4])。所以④⑤步也是多余的。<br>对比这两个例子发现，我们发现在①时，主串索引下标i的值为6，②③④⑤四步的i值分别是2、3、4、5，到了⑥，i值又变回了6。即我们在朴素模式匹配算法中，主串的i值是不断地回溯来完成的。KMP算法就是为了让没必要的回溯不发生。既然i不回溯（不会变小），我们就要考虑j值的变化了。对比上面两图，我们发现，j的变化与T串的首字符和自身后面字符是否相等有关，而与主串无关，即j值的变化关键取决于T串的结构中是否有重复的问题。<br>如一图中，T=“abcdex”，当中没有任何重复字符，所以j由6变为1，二图中，T=“abcabx”，前缀“ab”与最后“x”前的“ab”相等，因此j就由6变成了3。因此可以得出规律，j值的多少取决于当前字符之间的串的前后缀的相似度。我们把T串各位置的j值的变化定义为一个数组next，那么next的长度就是T串的长度，则有如下函数定义：
+<h3 id="next数组值推导"><a href="#next数组值推导" class="headerlink" title="next数组值推导"></a>next数组值推导</h3><h5 id="T-”abcabx”"><a href="#T-”abcabx”" class="headerlink" title="T=”abcabx”"></a>T=”abcabx”</h5></li>
+</ol>
+<ul>
+<li>j = 1 时, next[1] = 0</li>
+<li>j = 2 时, j 由 1 到 j-1 只有字符”a”，属于其他情况 next[2] = 1</li>
+<li>j = 3 时, j 由 1 到 j-1 串是”ab”，”a”和”b”不相等，属于其他情况 nextt[3] = 1</li>
+<li>j = 4 时, j 由 1 到 j-1 串是”abc”，三个字符各不相等，属于其他情况 nextt[4] = 1</li>
+<li>j = 5 时, j 由 1 到 j-1 串是”abca”，前缀字符”a”和后缀字符”a”相等，通过上面的公式算出k值为2，因此next[5] = 2</li>
+<li>j = 6 时, j 由 1 到 j-1 串是”abcab”，前缀串”ab”和后缀串”ab”相等，因此next[6] = 3<br>根据经验得出，如果前后缀一个字符相等，k值为2，两个字符相等，k值为3，n个字符相等，k值为n+1。<h3 id="KMP模式匹配算法实现"><a href="#KMP模式匹配算法实现" class="headerlink" title="KMP模式匹配算法实现"></a>KMP模式匹配算法实现</h3><pre><code>/* 通过计算返回子串T的next数组 */
+void get_Next(String T, int *next){
+ int i,j;
+ i = 1;  //next数组和T串元素索引，从1开始
+ j = 0;  
+ next[ 1 ] = 0;        // j = 1 时 next[ j ] = 0
+ while(i &lt; T[ 0 ]){
+     if( j == 0 | | T[ i ] == T[ j ] ){
+         ++i;
+         ++j;
+         next[ i ] = j;
+     } else {
+         j = next[ j ];   // 字符不相同，j 值回溯
+     }
+}
+/* 返回子串T在主串S中第pos个字符之后的位置。若不存在，则函数返回值为0. */
+index index_KMP(String S, String T, int pos){
+ /* 主串当前位置下标值，若pos不为1则从pos位置开始匹配 */
+ int i = pos;
+ /* 用于子串T中当前位置下标值 */
+ int j = 1;
+ /* 定义next数组 */
+ int next[ 255 ];
+ / * 对T子串分析得到其next数组 */
+ get_next( T,next );
+ /* i小于主串S长度&amp;j小于子串T长度时循环 */
+ while ( i &lt;= S[ 0 ] &amp; &amp; j&lt;=T[ 0 ] ){
+     /* 两字母相等时则继续，相较于朴素模式匹配算法多了j==0的判断 */
+     if ( j == 0 | | S[ i ] == T[ j ] ){
+         ++i;
+         ++j;
+     } else {                         // 指针后退重新开始匹配
+         j = next[ j ];              // j 退到合适的位置，i值不变
+     }
+ }
+ if ( j &gt; T[ 0 ] ) {
+     return i - T[ 0 ]
+ } else {
+     return 0;
+ } 
+}
+</code></pre></li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
