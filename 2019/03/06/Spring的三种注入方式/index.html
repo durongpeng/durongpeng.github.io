@@ -6,23 +6,55 @@
   <meta name="keywords" content=" Java , Spring ">
   <meta name="description" content="Spring三种常用的注入方式 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
-<meta name="keywords" content="数据结构">
+<meta name="description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
+<meta name="keywords" content="数据结构,大话数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="串">
-<meta property="og:url" content="http://www.durongpeng.top/2019/04/27/串/index.html">
+<meta property="og:title" content="树">
+<meta property="og:url" content="http://www.durongpeng.top/2019/05/07/树/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
+<meta property="og:description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法示意图.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法示意图.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法对比图.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/04/27/串/KMP算法比较图.png">
-<meta property="og:updated_time" content="2019-05-06T16:30:57.058Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/树的度.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/树的层次.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法例子.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法改进.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法一.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法一例子.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法二.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法二例子.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子链表的孩子结点.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/表头数组的表头结点.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/父母孩子表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法结点.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法变形.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/满二叉树.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树性质五.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构3.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉链表1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉链表2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/中序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/后序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/层序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的建立.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树3.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树4.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树5.png">
+<meta property="og:updated_time" content="2019-05-20T14:17:03.873Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="串">
-<meta name="twitter:description" content="串由零个或多个字符组成的有限序列，又名叫字符串。 串的比较两个数字比较大小大家都会，但是两个字符串比较是啥意思？汉字还分大小？这就要先普及一下ASCII和Unicode了。 ASCII和UnicodeASCII编码是美国人发明的，由7位二进制数表示一个字符，总共可以表示128个字符。后来发现字符种类太多表示不过来了，就把ASCII扩至8个二进制位，能表示256个字符。但这仅仅是够美国人表示自己的符">
-<meta name="twitter:image" content="http://www.durongpeng.top/2019/04/27/串/朴素算法示意图.png">
+<meta name="twitter:title" content="树">
+<meta name="twitter:description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/05/07/树/树的度.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -120,7 +152,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="8">
+<input type="hidden" id="yelog_site_posts_number" value="9">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -154,14 +186,6 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">SpringBoot</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">Hibernate</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">Java</a>
     </li>
     
@@ -170,7 +194,19 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Hibernate</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">SpringBoot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">数据结构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">大话数据结构</a>
     </li>
     
     <div class="clearfix"></div>
@@ -179,17 +215,22 @@
     
     <nav id="title-list-nav">
         
-        <a class href="/2019/04/27/串/" data-tag="数据结构" data-author>
+        <a class href="/2019/05/07/树/" data-tag="数据结构,大话数据结构" data-author>
+            <span class="post-title" title="树">树</span>
+            <span class="post-date" title="2019-05-07 23:19:09">2019/05/07</span>
+        </a>
+        
+        <a class href="/2019/04/27/串/" data-tag="数据结构,大话数据结构" data-author>
             <span class="post-title" title="串">串</span>
             <span class="post-date" title="2019-04-27 22:23:10">2019/04/27</span>
         </a>
         
-        <a class href="/2019/04/19/栈与队列/" data-tag="数据结构" data-author>
+        <a class href="/2019/04/19/栈与队列/" data-tag="数据结构,大话数据结构" data-author>
             <span class="post-title" title="栈与队列">栈与队列</span>
             <span class="post-date" title="2019-04-19 22:19:44">2019/04/19</span>
         </a>
         
-        <a class href="/2019/04/17/线性表/" data-tag="数据结构" data-author>
+        <a class href="/2019/04/17/线性表/" data-tag="数据结构,大话数据结构" data-author>
             <span class="post-title" title="线性表">线性表</span>
             <span class="post-date" title="2019-04-17 22:38:20">2019/04/17</span>
         </a>
@@ -416,7 +457,7 @@ private User user;
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#SpringBoot','#Hibernate','#Java','#Spring','#数据结构',],
+            'data': ['#Java','#Spring','#Hibernate','#SpringBoot','#数据结构','#大话数据结构',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

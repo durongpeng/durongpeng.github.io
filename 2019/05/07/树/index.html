@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <title>树 | Durp&#39;s Blog</title>
+  <meta name="keywords" content=" 数据结构 , 大话数据结构 ">
+  <meta name="description" content="树 | Durp&#39;s Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
+<meta name="keywords" content="数据结构,大话数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树">
+<meta property="og:url" content="http://www.durongpeng.top/2019/05/07/树/index.html">
+<meta property="og:site_name" content="Durp&#39;s Blog">
+<meta property="og:description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/树的度.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/树的层次.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法例子.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法改进.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法一.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法一例子.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法二.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法二例子.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子链表的孩子结点.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/表头数组的表头结点.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/父母孩子表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法结点.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法变形.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/满二叉树.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树性质五.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构3.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉链表1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉链表2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/中序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/后序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/层序遍历.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的建立.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树3.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树4.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树5.png">
+<meta property="og:updated_time" content="2019-05-20T14:17:03.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树">
+<meta name="twitter:description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/05/07/树/树的度.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="stylesheet" href="/css/hl_theme/atom-light.css">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js"></script>
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+</div>
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg">
+</a>
+<div class="author">
+    <span>Durp</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+        <a title="github" href="https://github.com/durongpeng/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"/>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+<ul>
+    <li class="all active">全部文章</li>
+    
+    <li data-rel="Java"> Java </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="9">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off" id="local-search-input">
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none">
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">Spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Hibernate</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">SpringBoot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">数据结构</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color2">大话数据结构</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a class href="/2019/05/07/树/" data-tag="数据结构,大话数据结构" data-author>
+            <span class="post-title" title="树">树</span>
+            <span class="post-date" title="2019-05-07 23:19:09">2019/05/07</span>
+        </a>
+        
+        <a class href="/2019/04/27/串/" data-tag="数据结构,大话数据结构" data-author>
+            <span class="post-title" title="串">串</span>
+            <span class="post-date" title="2019-04-27 22:23:10">2019/04/27</span>
+        </a>
+        
+        <a class href="/2019/04/19/栈与队列/" data-tag="数据结构,大话数据结构" data-author>
+            <span class="post-title" title="栈与队列">栈与队列</span>
+            <span class="post-date" title="2019-04-19 22:19:44">2019/04/19</span>
+        </a>
+        
+        <a class href="/2019/04/17/线性表/" data-tag="数据结构,大话数据结构" data-author>
+            <span class="post-title" title="线性表">线性表</span>
+            <span class="post-date" title="2019-04-17 22:38:20">2019/04/17</span>
+        </a>
+        
+        <a class href="/2019/03/21/SpringBoot乱码问题/" data-tag="SpringBoot" data-author>
+            <span class="post-title" title="SpringBoot乱码问题">SpringBoot乱码问题</span>
+            <span class="post-date" title="2019-03-21 21:23:28">2019/03/21</span>
+        </a>
+        
+        <a class href="/2019/03/13/Hibernate的总结/" data-tag="Hibernate" data-author>
+            <span class="post-title" title="Hibernate的总结">Hibernate的总结</span>
+            <span class="post-date" title="2019-03-13 09:02:07">2019/03/13</span>
+        </a>
+        
+        <a class href="/2019/03/12/Hibernate入门实例/" data-tag="Hibernate" data-author>
+            <span class="post-title" title="Hibernate入门实例">Hibernate入门实例</span>
+            <span class="post-date" title="2019-03-12 18:53:30">2019/03/12</span>
+        </a>
+        
+        <a class="Java " href="/2019/03/10/Spring的三种装载bean的方式/" data-tag="Java,Spring" data-author>
+            <span class="post-title" title="Spring的三种装载bean的方式">Spring的三种装载bean的方式</span>
+            <span class="post-date" title="2019-03-10 12:33:16">2019/03/10</span>
+        </a>
+        
+        <a class="Java " href="/2019/03/06/Spring的三种注入方式/" data-tag="Java,Spring" data-author>
+            <span class="post-title" title="Spring三种常用的注入方式">Spring三种常用的注入方式</span>
+            <span class="post-date" title="2019-03-06 09:48:00">2019/03/06</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-树" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">树</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color5">数据结构</a>
+            
+            <a href="javascript:" class="color2">大话数据结构</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-05-20 22:17:03">2019-05-07 23:19</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#树的定义"><span class="toc-text">树的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#结点的分类"><span class="toc-text">结点的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结点间关系"><span class="toc-text">结点间关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树的其他相关概念"><span class="toc-text">树的其他相关概念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#树的抽象数据类型"><span class="toc-text">树的抽象数据类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#树的存储结构"><span class="toc-text">树的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#双亲表示法"><span class="toc-text">双亲表示法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#孩子表示法"><span class="toc-text">孩子表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方案一"><span class="toc-text">方案一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方案二"><span class="toc-text">方案二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#孩子表示法-1"><span class="toc-text">孩子表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#孩子兄弟表示法"><span class="toc-text">孩子兄弟表示法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉树"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的定义"><span class="toc-text">二叉树的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的特点"><span class="toc-text">二叉树的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊二叉树"><span class="toc-text">特殊二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#斜树"><span class="toc-text">斜树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#满-完美-二叉树（Perfect-Binary-Tree）"><span class="toc-text">满(完美)二叉树（Perfect Binary Tree）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完全二叉树（Complete-Binary-Tree）"><span class="toc-text">完全二叉树（Complete Binary Tree）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完满二叉树（Full-Binary-Tree）"><span class="toc-text">完满二叉树（Full Binary Tree）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树性质"><span class="toc-text">二叉树性质</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树性质1"><span class="toc-text">二叉树性质1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树性质2"><span class="toc-text">二叉树性质2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树性质3"><span class="toc-text">二叉树性质3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树性质4"><span class="toc-text">二叉树性质4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树性质5"><span class="toc-text">二叉树性质5</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉树的存储结构"><span class="toc-text">二叉树的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的顺序存储结构"><span class="toc-text">二叉树的顺序存储结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉链表"><span class="toc-text">二叉链表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遍历二叉树"><span class="toc-text">遍历二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树遍历原理"><span class="toc-text">二叉树遍历原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树遍历方法"><span class="toc-text">二叉树遍历方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#前序遍历规则"><span class="toc-text">前序遍历规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#前序遍历算法"><span class="toc-text">前序遍历算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#中序遍历规则"><span class="toc-text">中序遍历规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#中序遍历算法"><span class="toc-text">中序遍历算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后序遍历"><span class="toc-text">后序遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#后序遍历规则"><span class="toc-text">后序遍历规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#后序遍历算法"><span class="toc-text">后序遍历算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层序遍历"><span class="toc-text">层序遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树遍历性质"><span class="toc-text">二叉树遍历性质</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉树的建立"><span class="toc-text">二叉树的建立</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#线索二叉树"><span class="toc-text">线索二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#线索二叉树原理"><span class="toc-text">线索二叉树原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线索二叉树结构实现"><span class="toc-text">线索二叉树结构实现</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h1><p>树是n(n&gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：<br>(1) 有且仅有一个特定的称为根(Root)的结点<br>(2) 当n&gt;1时，其余结点可分为m(m&gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。<br>对于树的定义强调两点：</p>
+<ul>
+<li>n &gt; 0 时根结点是唯一的，不可能存在多个根结点。</li>
+<li>m &gt; 0 时子树的个数没有限制，但它们一定是互不相交的。<h2 id="结点的分类"><a href="#结点的分类" class="headerlink" title="结点的分类"></a>结点的分类</h2>树的结点包含一个数据元素及若干个指向其子树的分支。结点拥有的子树个数称为结点的度(Degree)。度为0的结点称为叶节点(Leaf)或终端节点；度不为0的结点称为非终端结点。除根结点之外，分支结点也称为内部结点。树的度是树内各结点的度的最大值。<img src="/2019/05/07/树/树的度.png">
+<h2 id="结点间关系"><a href="#结点间关系" class="headerlink" title="结点间关系"></a>结点间关系</h2>结点的子树的根称为该结点的孩子(Child)，该结点称为孩子的双亲(Parent)。同一个双亲的孩子之间互称兄弟(Sibling)。结点的祖先是从根到该结点所经分支上的所有结点。例如：对于上图中的H来说，D、B、A都是它的祖先。以某结点为根的子树中的任一结点都成为该结点的子孙。例如：对于上图中的B来说D、G、H、I都是它的子孙。<h2 id="树的其他相关概念"><a href="#树的其他相关概念" class="headerlink" title="树的其他相关概念"></a>树的其他相关概念</h2>结点的层次(Level)从根开始定义起，根为第一层，根的孩子为第二层。双亲结点在同一层的结点互为堂兄弟。树中结点的最大层次称为树的深度(Depth)或高度。<img src="/2019/05/07/树/树的层次.png">
+如果将树中各结点的各子树看成从左到右是有次序的，不能互换的，则称该树为有序树，否则称为无序树。<br>森林(Forest)是m(m≥0)棵互不相交的树的集合。对于树中的每个结点而言，其子树的集合即为森林。<h1 id="树的抽象数据类型"><a href="#树的抽象数据类型" class="headerlink" title="树的抽象数据类型"></a>树的抽象数据类型</h1><pre><code>ADT 树（Tree）
+Data
+  树由一个根结点和若干个棵子树构成。树中结点具有相同数据类型及层次关系。
+Operation
+  InitTree（* T）：构造空树T。
+  DestroyTree（* T）：销毁树T。
+  CreateTree（* T，definition）：按definition中给出树的定义来构造树。
+  ClearTree（* T）：若树T存在，则将树T清空为空树。
+  TreeEmpty（T）：若T为空返回true，否则返回false。
+  TreeDepth（T）：返回T的深度。
+  Root（T）：返回T的根结点。
+  Value（T，cure_e）：cure_e是树T中的一个结点，返回此结点的值。
+  Assign（T，cure_e，value）：给树T的结点cure_e赋值为value。
+  Parent（T，cure_e）：若cure_e是树T的非根结点，则返回它的双亲，否则返回空。
+  LeftChild（T，cure_e）：若cure_e是树的非叶节点，则返回最左的孩子，否则返回空。
+  RightSibling（T，cure_e）：若cure_e有右兄弟，则返回它的右兄弟，否则返回空。
+  InsertChild（* T，* p，i，c）：其中p指向树T的某个节点，i为所指结点p的度加上1，非空树c与T不相交，操作结果为插入c为树T中p指向结点的第i棵子树。
+  DeleteChild（* T，* p，i）：其中p指向树T的某个节点，i为所指结点p的度，操作结果为删除树T中p指向结点的第i棵子树。
+</code></pre><h1 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h1><h2 id="双亲表示法"><a href="#双亲表示法" class="headerlink" title="双亲表示法"></a>双亲表示法</h2>除了根结点之外，其余每个结点都一定有双亲。假设用一组连续空间存储树的结点，同时在每个结点中，附设一个指示器指示其双亲结点在数组中的位置。每个结点除了知道自己是谁以外，还知道它的双亲在哪里。<img src="/2019/05/07/树/双亲表示法.png">
+data是数据域，存储结点的数据信息。parent是指针域，存储该结点双亲在数组中的下标。<pre><code>/* 树的双亲表示法结构定义 */
+#define MAX_TREE_SIZE 100
+typedef int TElemtype           //树结点的数据类型，暂定int
+/* 结点结构 */
+typedef struct PTNode
+{
+TElemType data；         //结点数据
+int parent；                //双亲位置
+} PTNode
+typedef struct 
+{
+PTNode nodes[ MAX_TREE_SIZE ];      //结点数组
+int r,n;                                        // 根的位置和结点数
+} PTree
+</code></pre>由于树的根节点是没有双亲的，所以约定根结点的指针域为-1。<img src="/2019/05/07/树/双亲表示法例子.png">
+这样的存储结构很容易根据parent指针来找到它的双亲结点，时间复杂度为O[1]。但缺点在于没法直接找到一个节点的孩子，要遍历整个结构才能知道一个结点有多少个孩子。<br>我们可以对上面的结构进行改进，增加一个结点最左边孩子的域，如果该结点没有孩子，那么该域的值为-1。<img src="/2019/05/07/树/双亲表示法改进.png">
+对于只有0个或1个孩子的结点来说，该改进后的结构是满足了，但若是有多于1个孩子，或根据一个结点拿该结点的兄弟等等需求都满足不了。也可以像之前那样增加域来记录这些数据，但谁又能提前知道一个结点有多少个孩子多少个兄弟呢，没法提前分配空间。<h2 id="孩子表示法"><a href="#孩子表示法" class="headerlink" title="孩子表示法"></a>孩子表示法</h2>由于树中每个结点可能有多棵子树，可以考虑用多重链表，即每个结点有多个指针域，其中每个指针指向一颗子树的根结点，这种方法叫做多重链表表示法。<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3>指针域的个数就等于树的度。树的度是树各个结点度的最大值。<img src="/2019/05/07/树/孩子表示法一.png">
+data是数据域，剩下的child都是存放该结点的孩子。<img src="/2019/05/07/树/孩子表示法一例子.png">
+这种方法对于树中各个结点的度相差很大时，显然是浪费空间的，因为很多指针域都是空着的。对此升级，将指针域按需分配，因此有了方案二。<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3>每个结点指针个数等于该结点的度，我们专门开辟一个degree域来存储结点指针域的个数。<img src="/2019/05/07/树/孩子表示法二.png">
+data是数据域，degree为度域，剩下的child都是存放该结点的孩子。<img src="/2019/05/07/树/孩子表示法二例子.png">
+这种方法克服了浪费空间的缺点，对空间利用率提高了，但是由于各个结点的链表是不相同的结构，加上要维护结点的度的数值degree，在运算上会带来时间上的损耗。<br>我们想要求得一个避免空指针域浪费，又能使得结点结构相同。方法一和方法二我们都是为了要遍历整棵树，把每个结点放到一个顺序存储结构的数组中是合理的，但是每个结点有多少孩子是不确定的，所以我们再对每个节点的孩子建立一个单链表体现它们的关系。<h3 id="孩子表示法-1"><a href="#孩子表示法-1" class="headerlink" title="孩子表示法"></a>孩子表示法</h3>把每个节点的孩子结点排列起来，以单链表作存储结构，则n个节点有n个孩子链表。如果是叶子结点则此单链表为空。然后n个头指针又组成一个线性表，采用顺序存储结构，存放进一个一维数组中。<img src="/2019/05/07/树/孩子表示法.png">
+为此新增两种结点结构：<br>一种是孩子链表的孩子结点<img src="/2019/05/07/树/孩子链表的孩子结点.png">
+child是数据域，用来存储某个结点在表头数组中的下标。next是指针域，用来存储指向某结点的下一个孩子结点的指针。<br>另一种是表头数组的表头结点<img src="/2019/05/07/树/表头数组的表头结点.png">
+data是数据域，存储某个结点的数据信息。firstchild是头指针域，存储该结点的孩子链表的头指针。<pre><code>/ * 树的孩子表示法结构定义 */
+#define MAX_TREE_SIZE 100
+typedef struct CTNode // 孩子结点
+{
+  int child;
+  struct CTNode *next;
+} *ChildPtr
+typedef struct      // 表头结构
+{
+  TElemtype data；
+  ChildPtr firstchild；
+} CTBox
+typedef struct      // 树结构
+{
+  CTBox nodes[ MAX_TREE_SIZE ];  //结点数组
+  intr,n;        // 根的位置和结点数
+} CTree
+</code></pre>这样的结构对于我们要查找某个结点的某个孩子，某个结点的兄弟，只需要查找这个结点的孩子单链表即可。对于遍历整棵树也很方便，对头结点的数组进行循环即可。但还有一个问题，这种结构没法直接查出一个结点的双亲是谁，必须要遍历整棵树才行，因此将双亲表示法和孩子表示法结合在一起，就满足了所有的需求。这种表示法就是孩子双亲表示法。<img src="/2019/05/07/树/父母孩子表示法.png">
+</li>
+</ul>
+<h3 id="孩子兄弟表示法"><a href="#孩子兄弟表示法" class="headerlink" title="孩子兄弟表示法"></a>孩子兄弟表示法</h3><p>之前我们分别从双亲和孩子的角度来研究树的存储结构，如果我们从树结点的兄弟的角度又会如何呢？我们观察发现，任意一棵树，它的结点的第一个孩子如果存在就是唯一的，它的右兄弟如果存在也是唯一的。因此我们设置两个指针，分别指向该结点的第一个孩子和此节点的右兄弟。<br><img src="/2019/05/07/树/孩子兄弟表示法结点.png"><br>其中data是数据域，firstchild为指针域，存储该结点的第一个孩子的存储地址，rightsib是指针域，其该结点的右兄弟的存储地址。</p>
+<pre><code>/* 树的孩子兄弟表示法结构定义 */
+typedef struct CSNode
+{
+    TElemtype data;
+    struct CSNode *firstchild,*rightsib;
+} CSNode,*CSTree;
+</code></pre><img src="/2019/05/07/树/孩子兄弟表示法.png">
+<p>这种表示法给查找某个结点的孩子带来方便，只需要通过firstchild找到此节点的长子，然后通过长子结点的rightsib找到它的二弟，接着一直找下去，直到某一个结点的rightsib为null，查出的所有结点就是该结点的所有孩子。但是现在的结构没法直接根据一个结点找到它的双亲，我们可以增加一个parent指针来解决快速查找双亲的问题。<br>其实这个表示法最大的好处是把一棵复杂的树变成了一棵二叉树，由上图变为了如下的样子：<br><img src="/2019/05/07/树/孩子兄弟表示法变形.png"></p>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h2><p>二叉树（Binary Tree）是n（n≥0）个结点的有限集合，该集合或者为空集（称为空二叉树），或者由一个根结点和两棵互不相交的、分别称为根结点的左子树和右子树的二叉树组成。</p>
+<h2 id="二叉树的特点"><a href="#二叉树的特点" class="headerlink" title="二叉树的特点"></a>二叉树的特点</h2><ul>
+<li>每个结点最多有两棵子树，所以二叉树中不存在度大于2的结点。注意不是只有两棵子树，而是最多有两棵。没有子树或是只有一棵子树也是可以的。</li>
+<li>左子树和右子树是有顺序的，次序不能任意颠倒。</li>
+<li>即使树中某个结点只有一棵子树，也要区分它是左子树还是右子树。<h2 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h2><h3 id="斜树"><a href="#斜树" class="headerlink" title="斜树"></a>斜树</h3>所有的结点都只存在左子结点的二叉树叫左斜树。所有的结点都只存在右结点的二叉树叫右斜树。两者统称为斜树。<br>其实线性表结构就可以理解为是树的一种极其特殊的表现形式。<h3 id="满-完美-二叉树（Perfect-Binary-Tree）"><a href="#满-完美-二叉树（Perfect-Binary-Tree）" class="headerlink" title="满(完美)二叉树（Perfect Binary Tree）"></a>满(完美)二叉树（Perfect Binary Tree）</h3>在一棵二叉树中，如果所有分支结点都存在左子树和右子树，并且所有叶子结点都在同一层上，这样的二叉树称为满二叉树。（一个深度为k(&gt;=-1)且有$2^{i-1}$个结点的二叉树。）<img src="/2019/05/07/树/满二叉树.png">
+满二叉树的特点：</li>
+<li>叶子只能出现在最下一层。出现在其它层就不可能达成平衡。</li>
+<li>非叶子结点的度一定是2。</li>
+<li>在同样深度的二叉树中，满二叉树的结点个数最多，叶子数最多。<h3 id="完全二叉树（Complete-Binary-Tree）"><a href="#完全二叉树（Complete-Binary-Tree）" class="headerlink" title="完全二叉树（Complete Binary Tree）"></a>完全二叉树（Complete Binary Tree）</h3>对一棵具有n个结点的二叉树按层序编号，如果编号为i（1 ≤ i ≤ n）的结点与同样深度的满二叉树中编号为i的结点在二叉树中位置完全相同，则这棵二叉树称为完全二叉树。<br>完全二叉树从根结点到倒数第二层满足完美二叉树，最后一层可以不完全填充，其叶子结点都靠左对齐。<br>满二叉树一定是一棵完全二叉树，完全二叉树不一定是满二叉树。</li>
+</ul>
+<p>完全二叉树特点：</p>
+<ul>
+<li>叶子结点只能出现在最下两层。</li>
+<li>最下层的叶子结点一定集中在左部连续位置。</li>
+<li>倒数二层，若有叶子结点，一定都在右部连续位置。</li>
+<li>如果结点度为1，则该结点只有左孩子，即不存在只有右子树的情况。</li>
+<li>同样结点数的二叉树，完全二叉树的深度最小。<h3 id="完满二叉树（Full-Binary-Tree）"><a href="#完满二叉树（Full-Binary-Tree）" class="headerlink" title="完满二叉树（Full Binary Tree）"></a>完满二叉树（Full Binary Tree）</h3>所有非叶子结点的度都是2。（只要你有孩子，你就必然是有两个孩子。）<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3>
+完美二叉树一定是完全二叉树，完全二叉树不一定是完美二叉树。<br>完美二叉树一定是完满二叉树，完满二叉树不一定是完美二叉树。<br>完全二叉树可能是完满二叉树，完满二叉树也可能是完全二叉树。<h2 id="二叉树性质"><a href="#二叉树性质" class="headerlink" title="二叉树性质"></a>二叉树性质</h2><h3 id="二叉树性质1"><a href="#二叉树性质1" class="headerlink" title="二叉树性质1"></a>二叉树性质1</h3>性质1：在二叉树的第i层上至多有$2^{i-1}$个结点(i≥1)。<h3 id="二叉树性质2"><a href="#二叉树性质2" class="headerlink" title="二叉树性质2"></a>二叉树性质2</h3>性质2：深度为k的二叉树至多有$2^k-1$个结点(k≥1)。<h3 id="二叉树性质3"><a href="#二叉树性质3" class="headerlink" title="二叉树性质3"></a>二叉树性质3</h3>性质3：对任何一棵二叉树T，如果其终端结点(叶子结点)数为$n_0$，度为2的结点数为$n_2$，则$n_0=n_2+1$。<h3 id="二叉树性质4"><a href="#二叉树性质4" class="headerlink" title="二叉树性质4"></a>二叉树性质4</h3>性质4：具有n个结点的完全二叉树的深度为($long_2$n)+1<h3 id="二叉树性质5"><a href="#二叉树性质5" class="headerlink" title="二叉树性质5"></a>二叉树性质5</h3>性质5：如果对一棵有n个结点的完全二叉树（其深度为($long_2$n)+1）的结点按层序编号（从1层到第($long_2$n)+1层，每层从左到右），对任一结点i（1≤ i ≤ n）有：</li>
+<li>如果 i = 1，则结点i是二叉树的根，无双亲；如果 i &gt; 1，则其双亲是结点 i % 2。（书中是”/“，但是能看出是求模的意思）。</li>
+<li>如果 2i &gt; n，则结点 i 无左孩子（结点 i 为叶子结点）；否则其做孩子是结点2i。</li>
+<li>如果 2i+1 &gt; n，则结点 i 无右孩子；否则其有孩子是结点 2i+1。<img src="/2019/05/07/树/二叉树性质五.png">
+<h1 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h1><h2 id="二叉树的顺序存储结构"><a href="#二叉树的顺序存储结构" class="headerlink" title="二叉树的顺序存储结构"></a>二叉树的顺序存储结构</h2>前面已经谈到了树的存储结构，并且谈到顺序存储对树这种一对多的关系结构实现起来是非常困难的。但是二叉树是一种特殊的树，由于它的特殊性，使得用顺序存储结构也可以实现。<br>二叉树的顺序存储结构就是用一维数组存储二叉树中的结点，并且结点的存储位置，也就是数组的下标要能体现结点之间的逻辑关系。<br>完全二叉树的顺序存储结构图<img src="/2019/05/07/树/二叉树的顺序存储结构1.png">
+<img src="/2019/05/07/树/二叉树的顺序存储结构2.png">
+由于完全二叉树的严格定义，层序编号能反应出结点之间的逻辑关系，所以用顺序结构可以表现出二叉树的结构，但对于一般的二叉树，把不存在的结点设置为”^”。<img src="/2019/05/07/树/二叉树的顺序存储结构3.png">
+考虑一种极端情况，一棵深度为k的右斜树，它只有k个结点，却要为其分配$2^k-1$个存储单元空间，着显然是对存储空间的浪费。<h2 id="二叉链表"><a href="#二叉链表" class="headerlink" title="二叉链表"></a>二叉链表</h2>既然顺序存储适用性不强，就该考虑链式存储结构。二叉树每个结点最多有两个孩子，所以为它设计一个数据域和两个指针域，我们称这样的链表为二叉链表。<img src="/2019/05/07/树/二叉链表1.png">
+其中data是数据域，lchild和rchild都是指针域，分别存放指向左孩子和右孩子的指针。<pre><code>/* 二叉树的二叉链表结点结构定义 */
+typedef struct BiTNode
+{
+  TElemType data；
+  struct BiTNode *lchild,*rchild;
+} BiTNode,*BiTree;
+</code></pre><img src="/2019/05/07/树/二叉链表2.png">
+<h1 id="遍历二叉树"><a href="#遍历二叉树" class="headerlink" title="遍历二叉树"></a>遍历二叉树</h1><h2 id="二叉树遍历原理"><a href="#二叉树遍历原理" class="headerlink" title="二叉树遍历原理"></a>二叉树遍历原理</h2>二叉树的遍历（traversing binary tree）是指从根结点出发，按照某种次序依次访问二叉树中所有结点，使得每个结点被访问一次且仅被访问一次。<br>二叉树的循环不同于线性结构，树的结点之间不存在唯一的前驱和后继关系，在访问一个结点后，下一个访问的结点面临着不同的选择。<h2 id="二叉树遍历方法"><a href="#二叉树遍历方法" class="headerlink" title="二叉树遍历方法"></a>二叉树遍历方法</h2><h3 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h3><h4 id="前序遍历规则"><a href="#前序遍历规则" class="headerlink" title="前序遍历规则"></a>前序遍历规则</h4>若二叉树为空，则空操作返回，否则先返回根结点，然后前序遍历左子树，再前序遍历右子树。如下图，遍历的顺序是：ABDGHCEIF。<img src="/2019/05/07/树/前序遍历.png">
+<h4 id="前序遍历算法"><a href="#前序遍历算法" class="headerlink" title="前序遍历算法"></a>前序遍历算法</h4>二叉树的定义是用递归的方式，所以实现遍历算法也可以采用递归，而且极其简洁明了。<pre><code>/* 二叉树的前序遍历递归算法 */
+void PreOrderTraverse（BiTree T）
+{
+  if（T == null） return；
+  // 显示结点数据
+  printf（&quot;%c&quot;,T-&gt;data）;
+  // 先序遍历左子树
+  PreOrderTraverse（T-&gt;lchild）;
+  // 先序遍历右子树
+  PreOrderTraverse（T-&gt;rchild）;
+}
+</code></pre>假设存在一棵二叉树T如下图，该树已经用二叉链表结构存储在内存中。<img src="/2019/05/07/树/前序遍历算法.png">
+当调用PreOrderTraverse（T）函数时，我们看看程序是如何运行的：<br>1.调用PreOrderTraverse（T），T的根结点不为null，所以执行printf打印字母A<br>2.调用PreOrderTraverse（T -&gt; lchild），访问了A结点的左孩子，不为null，执行printf显示字母B<br>3.递归调用PreOrderTraverse（T -&gt; lchild），访问了B结点的左孩子，执行printf显示字母D<br>4.递归调用PreOrderTraverse（T -&gt; lchild），访问了D结点的左孩子，执行printf显示字母H<br>5.递归调用PreOrderTraverse（T -&gt; lchild），访问了H结点的左孩子，此时因为H结点无左孩子，所以T==null，返回此函数，此时递归调用PreOrderTraverse（T -&gt; rchild）访问了H节点的右孩子，printf显示字母K<br>6.再次递归调用PreOrderTraverse（T -&gt; lchild），访问结点K的左孩子，结点K没有左孩子，返回，调用PreOrderTraverse（T -&gt; rchild），访问结点的右孩子，右孩子也是null，返回。函数执行完毕，返回上一级递归函数(打印H结点时的函数)，也执行完毕，返回打印结点D时的函数，调用PreOrderTraverse（T -&gt; rchild）访问结点D的右孩子，右孩子不存在，返回到B结点，调用PreOrderTraverse（T -&gt; rchild）找到结点E，打印了字母E。<br>7.由于结点E没有左右孩子，返回到打印结点B时的函数，该函数执行完毕返回到最初的PreOrderTraverse（T）函数，调用PreOrderTraverse（T -&gt; rchild）范文结点A的右孩子，打印字母C<br>8.之后的递归调用与前几步一样推导，依次打印F、I、G、J<br>综上，前序遍历这棵二叉树的结点顺序是：ABDHKECFIGJ。<h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><h4 id="中序遍历规则"><a href="#中序遍历规则" class="headerlink" title="中序遍历规则"></a>中序遍历规则</h4>若树为空，则空操作返回，否则从根节点开始（注意并不是先访问根节点），中序遍历根节点的左子树，然后是访问根节点，最后中序遍历右子树。如下图，遍历的顺序为：CDHBAEICF。<img src="/2019/05/07/树/中序遍历.png">
+<h4 id="中序遍历算法"><a href="#中序遍历算法" class="headerlink" title="中序遍历算法"></a>中序遍历算法</h4><pre><code>/* 二叉树的中序遍历递归算法 */
+void InOrderTraverse（BiTree T）
+{
+  if （T == null） return；
+  // 中序遍历左子树
+  InOrderTraverse（T -&gt; lchild）；
+  // 显示结点数据
+  printf（&quot;%c&quot;，T -&gt; data）；
+  // 中序遍历右子树
+  InOrderTraverse（T -&gt; rchild）；
+}
+</code></pre>假设存在一棵二叉树T如下图，该树已经用二叉链表结构存储在内存中。<img src="/2019/05/07/树/前序遍历算法.png">
+当调用InOrderTraverse（T）函数时，我们看看程序是如何运行的：<br>1.调用InOrderTraverse（T），T的根结点不为null，于是调用InOrderTraverse（T -&gt; lchild）访问结点B。当前结点不为null，继续调用InOrderTraverse（T -&gt; lchild）访问结点D，当前结点不为null，继续调用InOrderTraverse（T -&gt; lchild）访问到结点H。当前结点不为null，继续调InOrderTraverse（T -&gt; lchild）发现H没有左孩子，于是打印H结点信息。<br>2.InOrderTraverse（T -&gt; rchild）访问H的右孩子K，因为K没有左孩子，因此打印K结点信息。<br>3.因为K没有右孩子，因此返回到H层函数，结点H函数执行完毕，返回结点D层函数，打印结点D信息。<br>4.结点D无右孩子，函数执行完毕，返回结点B层函数。打印字母B。<br>5.结点B层函数调用InOrderTraverse（T -&gt; rchild）访问结点B的右孩子结点E，因为结点E没有左孩子，输出结点E信息。<br>6.因为结点E没有右孩子，返回结点B层函数，结点B层函数结束，返回到根结点A，输出结点A信息。<br>7.结点A层函数调用InOrderTraverse（T -&gt; rchild）访问结点A的右孩子C，再调用InOrderTraverse（T -&gt; lchild）递归访问结点C的左孩子F，再调用InOrderTraverse（T -&gt; lchild）访问结点F的左孩子I。后面的步骤与之前相同。打印I之后再分别打印F、C、G、J。<br>综上，中序遍历这可二叉树的结点顺序是：HKDBEAIFCGJ。<h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><h4 id="后序遍历规则"><a href="#后序遍历规则" class="headerlink" title="后序遍历规则"></a>后序遍历规则</h4>若树为空，则空操作返回，否则从左到右先叶子后结点的方式遍历访问左右子树，最后是访问根节点。如下图，遍历的顺序为：GHDBIEFCA。<img src="/2019/05/07/树/后序遍历.png">
+<h4 id="后序遍历算法"><a href="#后序遍历算法" class="headerlink" title="后序遍历算法"></a>后序遍历算法</h4><pre><code>/* 二叉树的后序遍历递归算法 */
+void PostOrderTraverse（BiTree T）
+{
+  if（T == null） return；
+  // 后序遍历左子树
+  PostOrderTraverse（T -&gt; lchild）；
+  // 后序遍历右子树
+  PostOrderTraverse（T -&gt; rchild）；
+  // 输出结点信息
+  printf（&quot;%c&quot;，T -&gt; data）；
+}
+</code></pre>假设存在一棵二叉树T如下图，该树已经用二叉链表结构存储在内存中。<img src="/2019/05/07/树/前序遍历算法.png">
+当调用PostOrderTraverse（T）函数时，最终后序结点的遍历顺序是：KHDEBIFJGCA。<h3 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h3>规则是：若树为空，则空操作返回，否则从树的第一层，也就是根节点开始访问，从上而下逐层遍历，在同一层中，按从左到右的顺序对结点逐个访问。如下图，遍历的顺序为：AVCDEFGHI。<img src="/2019/05/07/树/层序遍历.png">
+<h2 id="二叉树遍历性质"><a href="#二叉树遍历性质" class="headerlink" title="二叉树遍历性质"></a>二叉树遍历性质</h2></li>
+<li>已知前序遍历和中序遍历，可以唯一确定一棵二叉树。</li>
+<li>已知后序遍历和中序遍历，可以唯一确定一棵二叉树。</li>
+<li>已知前序遍历和后序遍历，不能唯一确定一棵二叉树。<h1 id="二叉树的建立"><a href="#二叉树的建立" class="headerlink" title="二叉树的建立"></a>二叉树的建立</h1>我们要在内存中建立一个普通二叉树，为了能让每个结点确认是否有左右孩子，我们对它进行了扩展，将二叉树中每个结点的空指针引出一个虚拟结点，其值为一个特定值，比如”#”。我们成这种处理后的二叉树为原二叉树的扩展二叉树。扩展二叉树就可以做到一个遍历序列确定一棵二叉树了。<img src="/2019/05/07/树/二叉树的建立.png">
+扩展二叉树前序遍历序列：AB#D##C##<pre><code>/* 按前序输入二叉树中结点的值，#表示空树，构造二叉树T */
+void CreateBiTree（BiTree *T）
+{
+  TElemType ch;
+  scanf(&quot;%c&quot;,&amp;ch);
+  if(ch == &quot;#&quot;) {
+      *T == null;
+  } else {
+      *T = (BiTree) malloc(sizeof(BiTNode));
+      if(!*T) exit (OVERFLOW);
+      // 生成根节点
+      (*T) -&gt; data = ch;
+      // 构造左子树
+      CreateBiTree(&amp;(*T)-&gt;lchild);
+      // 构造右子树
+      CreateBiTree(&amp;(*T)-&gt;rchild);
+  }
+}
+</code></pre><h1 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h1><h2 id="线索二叉树原理"><a href="#线索二叉树原理" class="headerlink" title="线索二叉树原理"></a>线索二叉树原理</h2><img src="/2019/05/07/树/线索二叉树1.png">
+前面创建的二叉树，我们发现指针域并不是充分利用了，有很多的”^”，也就是空指针的存在。另一方面，在对上图做中序遍历时，得到了HDIBJEAFCG这样的字符序列，遍历过后我们可以清楚的知道任意一个结点的前驱和后继，比如我们可以知道I的前驱是D后继是B，可是这是建立在已经便利过的基础之上的。在二叉链表上，我们只能知道每个结点指向其左右孩子结点的地址，二不知道某个结点的前驱是谁，后继是谁。要想知道一个结点的前驱和后继就必须遍历一次，这非常不方便，所以我们考虑在创建二叉树时就记住这些结点的前驱和后继。<br>我们把指向前驱和后继的指针成为线索，加上线索的二叉链表成为线索链表，相应的二叉树就成为线索二叉树（Threaded Binary Tree）。<img src="/2019/05/07/树/线索二叉树2.png">
+把上图这棵二叉树中序遍历后，将所有的空指针域中的rchild改为指向它的后继结点。浴室我们可以通过指针知道H的后继是D(图中①)，I的后继时B(图中②)，J的后继是E(图中③)，E的后继是A(图中④)，F的后继是C(图中⑤)，G的后继是NULL(图中⑥)。此时又6个空指针域被利用了。<img src="/2019/05/07/树/线索二叉树3.png">
+如上图，将所有空指针域的lchild改为指向当前结点的前驱，因此，I的前驱是null(图中①)，I的前驱是D(图中②)，J的前驱是B(图中③)，F的前驱是A(图中④)，G的前驱是C(图中⑤)。一共五个空指针域被利用，正好和上面的后继加起来是11个。<br>用空箭头实线表示指向前驱，虚线黑箭头指向后继，就更容易看出，其实线索二叉树等于是把一颗二叉树转变成了一个双向链表，这样对我们的插入删除结点、查找某个结点都带来了方便。所以我们对二叉树以某种次序遍历使其变为线索二叉树的过程称作线索化。<img src="/2019/05/07/树/线索二叉树4.png">
+但这样做会带来一个问题，之前我们知道一个结点的lchild或rchild为”^”代表没有左孩子或右孩子，但现在每个结点的lchild或rchild都有值，没法区分lchild或rchild到底指向的是左右孩子还是前驱后继。为此我们要设置两个标志域ltag和rtag，只存放0或1数字的布尔型变量，其占用空间要小于像lchild和rchild的指针变量。结点结构如下：<img src="/2019/05/07/树/线索二叉树5.png">
+改造后的二叉链表图如下：
+<h2 id="线索二叉树结构实现"><a href="#线索二叉树结构实现" class="headerlink" title="线索二叉树结构实现"></a>线索二叉树结构实现</h2><pre><code>/* 线索二叉树索存储结构定义 */
+// Link==0 表示指向左右孩子指针
+// Thread==1 表示指向前驱或后继的线索
+typedef enum {Link，Thread} PointerTag;
+// 线索二叉树存储结点结构
+typedef struct BiThrNode
+{
+  TElemType data;
+  struct BiThrNode *lchild,*rchild;
+  PointerTag Ltag;
+  PointerTag Rtag;
+} BiThrNode,*BiThrTree;
+</code></pre>线索化的实质就是将二叉链表中的空指针改为指向前驱或后继的线索。由于前驱和后继的线索只有在遍历该二叉树的时候才能得到，所以线索化的过程就是在遍历的过程中修改空指针的过程。<br>中序遍历线索化的递归函数代码如下：<pre><code>/* 全局变量，始终指向刚刚访问过的结点 */
+BiThrTree pre;
+/* 中序遍历进行中序线索化 */
+void InThreading(BiThrTree p)
+{
+  if(p){
+      // 递归左子树线索化
+      InThreading(p);
+      // 没有左孩子
+      if (!p-&gt;lchild){
+          // 前驱线索
+          p-&gt;Ltag = Thread;
+          // 左孩子指向前驱
+          p-&gt;lchild=pre;
+      }
+      // 前驱没有右孩子
+      if (!pre-&gt;rchild){
+          // 后继线索
+          pre-&gt;Rtag = Thread;
+          // 前驱右孩子指向后继(当前结点P)
+          pre-&gt;rchild=p;
+      }
+      // 保持pre指向p的前驱
+      pre=p;
+      // 递归右子树线索化
+      InThreading(p-&gt;rchild);
+  }
+}
+</code></pre></li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+    
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2019 Durp</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="//cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+
+<script src="/js/script.js"></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#Java','#Spring','#Hibernate','#SpringBoot','#数据结构','#大话数据结构',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1;
+            var $numbering = $('<ul/>').addClass('pre-numbering').attr("unselectable","on");
+            $(this).addClass('has-numbering')
+                    .parent()
+                    .append($numbering);
+            for(i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 2px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 2px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /*引用块样式*/
+    
+    .post .pjax article blockquote {
+        padding: 10px 20px;
+        background-color: white;
+        border: none;
+        border-left: 4px solid #42b983;
+        border-right: 4px solid #42b983;
+        border-radius: 10px;
+    }
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
+        background: url("http://pic.netbian.com/tupian/9185.html");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+</style>
+
+
+
+
+
+
+</html>
