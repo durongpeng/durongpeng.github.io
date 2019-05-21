@@ -6,55 +6,31 @@
   <meta name="keywords" content>
   <meta name="description" content="Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
-<meta name="keywords" content="数据结构,大话数据结构">
+<meta name="description" content="本文参考https://blog.csdn.net/fatherican/article/details/44966891https://www.cnblogs.com/libingql/p/3505063.html 类第一行：类名第二行：特性(字段或属性)第三行：操作(方法或行为)注意：1.若类名称为斜体字，则此类为抽象类2.操作和特性前有符号，”+”代表public，”-“代表private，">
+<meta name="keywords" content="UML">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树">
-<meta property="og:url" content="http://www.durongpeng.top/2019/05/07/树/index.html">
+<meta property="og:title" content="UML类图">
+<meta property="og:url" content="http://www.durongpeng.top/2019/05/21/UML类图/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
-<meta property="og:description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
+<meta property="og:description" content="本文参考https://blog.csdn.net/fatherican/article/details/44966891https://www.cnblogs.com/libingql/p/3505063.html 类第一行：类名第二行：特性(字段或属性)第三行：操作(方法或行为)注意：1.若类名称为斜体字，则此类为抽象类2.操作和特性前有符号，”+”代表public，”-“代表private，">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/树的度.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/树的层次.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法例子.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/双亲表示法改进.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法一.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法一例子.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法二.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法二例子.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子表示法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子链表的孩子结点.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/表头数组的表头结点.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/父母孩子表示法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法结点.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/孩子兄弟表示法变形.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/满二叉树.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树性质五.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构1.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构2.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的顺序存储结构3.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉链表1.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉链表2.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/中序遍历.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/后序遍历.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/前序遍历算法.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/层序遍历.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/二叉树的建立.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树1.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树2.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树3.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树4.png">
-<meta property="og:image" content="http://www.durongpeng.top/2019/05/07/树/线索二叉树5.png">
-<meta property="og:updated_time" content="2019-05-20T14:17:03.873Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/类.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/接口.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/接口2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/依赖关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/泛化关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/单向关联关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/双向关联关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/自关联关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/重复性关联关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/聚合关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/组合关系.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/21/UML类图/实现关系.png">
+<meta property="og:updated_time" content="2019-05-21T14:03:06.014Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树">
-<meta name="twitter:description" content="树的定义树是n(n&amp;gt;=0)个结点的有限集。当n=0时称为空树。在任意一颗非空树中：(1) 有且仅有一个特定的称为根(Root)的结点(2) 当n&amp;gt;1时，其余结点可分为m(m&amp;gt;0)个互不相交的有限集T1、T2······Tm，其中每一个集合本身又是一棵树，并且称为根的子树(SubTree)。对于树的定义强调两点：  n &amp;gt; 0 时根结点是唯一的，不可能存在多个根结点。 m &amp;">
-<meta name="twitter:image" content="http://www.durongpeng.top/2019/05/07/树/树的度.png">
+<meta name="twitter:title" content="UML类图">
+<meta name="twitter:description" content="本文参考https://blog.csdn.net/fatherican/article/details/44966891https://www.cnblogs.com/libingql/p/3505063.html 类第一行：类名第二行：特性(字段或属性)第三行：操作(方法或行为)注意：1.若类名称为斜体字，则此类为抽象类2.操作和特性前有符号，”+”代表public，”-“代表private，">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/05/21/UML类图/类.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -152,7 +128,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="9">
+<input type="hidden" id="yelog_site_posts_number" value="10">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -186,6 +162,14 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Hibernate</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">SpringBoot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">Java</a>
     </li>
     
@@ -194,11 +178,7 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">Hibernate</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">SpringBoot</a>
+        <a href="javascript:" class="color4">UML</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -214,6 +194,11 @@
 
     
     <nav id="title-list-nav">
+        
+        <a class href="/2019/05/21/UML类图/" data-tag="UML" data-author>
+            <span class="post-title" title="UML类图">UML类图</span>
+            <span class="post-date" title="2019-05-21 21:52:06">2019/05/21</span>
+        </a>
         
         <a class href="/2019/05/07/树/" data-tag="数据结构,大话数据结构" data-author>
             <span class="post-title" title="树">树</span>
@@ -324,7 +309,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Java','#Spring','#Hibernate','#SpringBoot','#数据结构','#大话数据结构',],
+            'data': ['#Hibernate','#SpringBoot','#Java','#Spring','#UML','#数据结构','#大话数据结构',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
