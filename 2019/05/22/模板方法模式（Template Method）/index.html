@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Spring的三种装载bean的方式 | Durp&#39;s Blog</title>
-  <meta name="keywords" content=" Java , Spring ">
-  <meta name="description" content="Spring的三种装载bean的方式 | Durp&#39;s Blog">
+  <title>模板方法模式（Template Method） | Durp&#39;s Blog</title>
+  <meta name="keywords" content=" 设计模式 ">
+  <meta name="description" content="模板方法模式（Template Method） | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="模板方法模式定义定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法模式可以不改变一个算法的结构即可重定义该算法的某些特定步骤。组成模板的方法被定义在父类中，由于这些方法是抽象的，所以只查看父类的代码是无法知道这些方法最终会进行何种具体处理的，唯一能知道的就是父类是如何调用这些方法的。实现上述抽象方法的是子类，不同的子类对同一个抽象方法的有不同的实现，父类模板方法被调用时也会产生不同的结">
 <meta name="keywords" content="设计模式">
@@ -265,33 +265,25 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Spring的三种装载bean的方式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-模板方法模式（Template Method）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Spring的三种装载bean的方式</h1>
+        <h1 class="article-title">模板方法模式（Template Method）</h1>
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-            <a href="javascript:" data-rel="Java">Java</a>
-            
-        </span>
-        
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">Java</a>
-            
-            <a href="javascript:" class="color2">Spring</a>
+            <a href="javascript:" class="color5">设计模式</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-03-11 11:39:02">2019-03-10 12:33</time>
+        创建时间:<time class="date" title="更新时间: 2019-05-22 23:06:37">2019-05-22 22:46</time>
         
     </div>
     <div class="article-meta">
@@ -313,7 +305,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基于XML的bean定义"><span class="toc-text">基于XML的bean定义</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#id和name属性"><span class="toc-text">id和name属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#class属性"><span class="toc-text">class属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#factory-bean和factory-method"><span class="toc-text">factory-bean和factory-method</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#init-method和destory-method属性"><span class="toc-text">init-method和destory-method属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#scope属性"><span class="toc-text">scope属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#autowire属性"><span class="toc-text">autowire属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#depends-on"><span class="toc-text">depends-on</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#基于注解的bean定义"><span class="toc-text">基于注解的bean定义</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#开启组件扫描"><span class="toc-text">开启组件扫描</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于Java代码装配bean"><span class="toc-text">基于Java代码装配bean</span></a></li>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#模板方法模式定义"><span class="toc-text">模板方法模式定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模板方法模式的实现"><span class="toc-text">模板方法模式的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AbstractClass（抽象类）"><span class="toc-text">AbstractClass（抽象类）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteClass（具体类）"><span class="toc-text">ConcreteClass（具体类）</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -328,115 +320,10 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Spring容器负责创建应用程序中的bean并通过DI来协调这些对象之间的关系。Spring提供了三种方式来让开发人员告诉Spring要创建哪些bean，并且如何将其装配到一起。<br>开始之前先定义两个类来进行测试：一个简单的User类(setter和getter方法就忽略了)，一个注入User的UserServiceImpl类。</p>
-<pre><code class="java">public class User {    
-    private String name;    
-    private String pwd;    
-    private int age;    
-    private User(){        
-        System.out.println(&quot;无参方法&quot;); 
-    }    
-    private User(String n,String p,int a){       
-        this.name = n;        
-        this.pwd = p;        
-        this.age = a;       
-        System.out.println(&quot;有参方法&quot;);    
-    }
-}
-
-public class UserServiceImpl  {    
-    private User user;    
-    public User getUser() {        
-        return user;   
-    }   
-    @Autowired    
-    public void setUser(User user) {        
-        this.user = user;    
-    }
-}
-</code></pre>
-<h3 id="基于XML的bean定义"><a href="#基于XML的bean定义" class="headerlink" title="基于XML的bean定义"></a>基于XML的bean定义</h3><p>在XML中要以<beans>元素作为根标签，使用<bean>标签来声明一个bean。id属性定义bean的id，class属性定义bean的全限定类名。如果没有明确给出id，那么Spring会给bean生成一个id，大约的格式是包名+类名+”#”+数字(该bean的第几个对象)</bean></beans></p>
-<pre><code class="xml">    &lt;!-- 注册userService --&gt;
-    &lt;bean id=&quot;userService&quot; class=&quot;top.durp.service.impl.UserServiceImpl&quot;/&gt;
-
-    &lt;!-- 注册bean --&gt;
-    &lt;bean id=&quot;user1&quot; class=&quot;top.durp.model.User&quot;&gt;
-        &lt;property name=&quot;age&quot; value=&quot;1&quot;/&gt;
-        &lt;property name=&quot;pwd&quot; value=&quot;pwd&quot;/&gt;
-        &lt;property name=&quot;name&quot; value=&quot;name&quot;&gt;&lt;/property&gt;
-    &lt;/bean&gt;
-</code></pre>
-<p><bean>标签下有九个属性：</bean></p>
-<h5 id="id和name属性"><a href="#id和name属性" class="headerlink" title="id和name属性"></a>id和name属性</h5><p>id是bean的唯一标签，name是bean的名字。两者可以一致，两者都不能与其他bean的重复。若bean的name和另一个bean的id相同，在创建bean时会报错。通常使用id属性，name属性基本不用。<br>name属性可以指定多个名字，名字之间可以用逗号、分号或者空格分开。</p>
-<pre><code class="xml">&lt;bean id=&quot;user2&quot; name = &quot;user2;user4&quot; class=&quot;top.durp.model.User&quot;&gt;
-</code></pre>
-<h5 id="class属性"><a href="#class属性" class="headerlink" title="class属性"></a>class属性</h5><p>bean的全限定类名，指向classpath下类定义所在位置。</p>
-<h5 id="factory-bean和factory-method"><a href="#factory-bean和factory-method" class="headerlink" title="factory-bean和factory-method"></a>factory-bean和factory-method</h5><p>通过factory-bean属性我们可以调用一个指定bean来作为工厂bean。<br>通过factory-method属性我们可以调用一个指定的静态工厂方法来创建bean的实例。</p>
-<pre><code class="java">public class UserFactory {    
-    public static User createUser(){        
-        return  new User();    
-    }
-}
-</code></pre>
-<pre><code class="xml">&lt;bean id=&quot;userFactory&quot;  class=&quot;top.durp.test.UserFactory&quot; factory-method=&quot;createUser&quot;/&gt;
-#factory-bean和factory-method搭配使用
-&lt;bean id=&quot;user5&quot;   factory-bean=&quot;userFactory&quot; factory-method=&quot;createUser&quot; /&gt;
-</code></pre>
-<h5 id="init-method和destory-method属性"><a href="#init-method和destory-method属性" class="headerlink" title="init-method和destory-method属性"></a>init-method和destory-method属性</h5><p>init-method属性是bean的初始方法，在创建好bean后调用该方法。<br>destory-method属性是bean的销毁方法，在销毁bean之前调用该方法，一般在该方法中释放资源。</p>
-<h5 id="scope属性"><a href="#scope属性" class="headerlink" title="scope属性"></a>scope属性</h5><p>scope属性有四个值：</p>
-<ul>
-<li>singleton：表示整个IOC容器共享一个bean，每次通过getBean()获取的bean都是同一个。</li>
-<li>prototype：每次对该bean请求(将其注入另一个bean或通过getBean()方法获取)时都会创建一个新的bean实例。</li>
-<li>request：每次HTTP请求将会生成各自的bean实例。</li>
-<li>session：每次会话请求对应一个bean实例。</li>
-</ul>
-<h5 id="autowire属性"><a href="#autowire属性" class="headerlink" title="autowire属性"></a>autowire属性</h5><p>autowire属性表示bean的自动装配，有六个值：</p>
-<ul>
-<li>no：默认值，不进行自动装配。</li>
-<li>byName：根据属性名自动装配。此选项将检查容器并根据名字查找与属性完全一致的bean，并将其与属性自动装配。</li>
-<li>byType：如果容器中村子啊一个月指定属性类型相同的bean，那么将于该属性自动装配；如果存在多个该类型的bean，则抛出异常；如果没有找到类型相匹配的bean，则什么都不会发生，可以通过dependency-check=”objects”让Spring抛出异常。</li>
-<li>constructor：与byType方式类似，不同之处在于它应用于构造器参数。如果容器中没有找到构造器参数类型一致的bean，那么抛出异常。</li>
-<li>autodetect：通过bean类的内省机制(introspection)来决定是使用constructor还是byType方式进行自动装配。如果发现默认的构造器，那么将使用byType方式，否则使用constructor。</li>
-<li><p>default：由上级标签的default-autowire属性确定。</p>
-<h5 id="depends-on"><a href="#depends-on" class="headerlink" title="depends-on"></a>depends-on</h5><p>表示一个Bean的实例化依靠另一个Bean先实例化</p>
-</li>
-</ul>
-<h3 id="基于注解的bean定义"><a href="#基于注解的bean定义" class="headerlink" title="基于注解的bean定义"></a>基于注解的bean定义</h3><p>Spring提供了四个注解，这四个注解与XML中定义bean的<bean>标签效果一致，将组件交给Spring进行管理。</bean></p>
-<ul>
-<li>@Component：当对组件的层次难以定位的时候使用这个注解。</li>
-<li>@Controller：表示控制层组件。</li>
-<li>@Service：表示业务逻辑层的组件。</li>
-<li>@Repository：表示数据访问层的组件。<h5 id="开启组件扫描"><a href="#开启组件扫描" class="headerlink" title="开启组件扫描"></a>开启组件扫描</h5>使用注解需要注意在XML配置文件中开启注解扫描或者使用@ComponentScan注解开启组件扫描。</li>
-<li>XML中开启组件扫描<pre><code class="xml">&lt;context:component-scan base-package=&quot;top.durp.model&quot;&gt;
-</code></pre>
-</li>
-<li>@ComponentScan开启组件扫描<pre><code class="java">//如果不指定组件名字，则默认是类名的小写
-@Component(&quot;user&quot;)
-@ComponentScan(basePackages = {&quot;top.durp.model&quot;,&quot;top.durp.service&quot;})
-public class User {   
-  private String name;    
-  private String pwd;    
-  private int AGE;    
-  public User(){        
-  System.out.println(&quot;无参方法&quot;);    
-}    
-</code></pre>
-@ComponentScan不设置任何属性，它会以类所在的包作为基础包来扫描组件，如果想设置多个基础包，可以使用basePackages属性。</li>
-</ul>
-<h3 id="基于Java代码装配bean"><a href="#基于Java代码装配bean" class="headerlink" title="基于Java代码装配bean"></a>基于Java代码装配bean</h3><p>在大多数场景下，使用@Autowired和@Component来自动装配bean是更为推荐的方式，但有些情况此方案是行不通的，例如需要将第三方类库中的组件装配到你的应用中，在这种情况下是无法再jar中的类上加注解的，因此就无法使用自动化装配的方案。<br>在进行显式配置时，使用JavaConfig是更好的方案，它更强大、类型安全并且对重构友好。因为它就是Java代码，就像应用程序中的其他Java代码一样。同时，JavaConfig又与其他Java代码有所区别，JavaConfig是配置代码，这意味着它不应该包含业务逻辑，也不应该被加入到业务逻辑中去。尽管不是必须的，将JavaConfig放在单独的包中，与其他业务逻辑程序分离开，能更清晰的提现其在程序中的配置作用。</p>
-<pre><code class="java">@Configuration
-@ComponentScan(basePackages = {&quot;top.durp.model&quot;,&quot;top.durp.service&quot;})
-public class JavaConfig {
-    @Bean(name = &quot;user1&quot;)
-    public User getUser(){    
-        return new User();
-    }
-    @Beanpublic UserService getUserServiceImpl(){    
-        return new UserServiceImpl();
-    }
-}
-</code></pre>
-<p>@Bean注解会告诉Spring这个方法将会返回一个对象，该对象要注册为Spring应用上下文中的bean。方法体中包含了最终产生bean实例的逻辑。默认情况下bean的id与带有@Bean注解的方法名是一样的。</p>
+        <h1 id="模板方法模式定义"><a href="#模板方法模式定义" class="headerlink" title="模板方法模式定义"></a>模板方法模式定义</h1><p>定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法模式可以不改变一个算法的结构即可重定义该算法的某些特定步骤。<br>组成模板的方法被定义在父类中，由于这些方法是抽象的，所以只查看父类的代码是无法知道这些方法最终会进行何种具体处理的，唯一能知道的就是父类是如何调用这些方法的。<br>实现上述抽象方法的是子类，不同的子类对同一个抽象方法的有不同的实现，父类模板方法被调用时也会产生不同的结果。但是不论子类中如何实现抽象方法，处理的流程都会按照父类中所定义的那样进行。</p>
+<h1 id="模板方法模式的实现"><a href="#模板方法模式的实现" class="headerlink" title="模板方法模式的实现"></a>模板方法模式的实现</h1><img src="/2019/05/22/模板方法模式（Template%20Method）/模板方法模式的实现.png">
+<h2 id="AbstractClass（抽象类）"><a href="#AbstractClass（抽象类）" class="headerlink" title="AbstractClass（抽象类）"></a>AbstractClass（抽象类）</h2><p>AbstractClass角色不近负责实现模板方法，还负责声明在模板方法中所使用到的抽象方法。这些抽象方法由子类ConcreteClass角色负责实现。</p>
+<h2 id="ConcreteClass（具体类）"><a href="#ConcreteClass（具体类）" class="headerlink" title="ConcreteClass（具体类）"></a>ConcreteClass（具体类）</h2><p>该角色负责具体实现AbstractClass角色中定义的抽象方法。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>

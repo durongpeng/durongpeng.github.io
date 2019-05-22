@@ -2,19 +2,24 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>工厂方法模式（factory Method） | Durp&#39;s Blog</title>
+  <title>工厂方法模式（Factory Method） | Durp&#39;s Blog</title>
   <meta name="keywords" content=" 设计模式 ">
-  <meta name="description" content="工厂方法模式（factory Method） | Durp&#39;s Blog">
+  <meta name="description" content="工厂方法模式（Factory Method） | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="模板方法模式定义定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法模式可以不改变一个算法的结构即可重定义该算法的某些特定步骤。组成模板的方法被定义在父类中，由于这些方法是抽象的，所以只查看父类的代码是无法知道这些方法最终会进行何种具体处理的，唯一能知道的就是父类是如何调用这些方法的。实现上述抽象方法的是子类，不同的子类对同一个抽象方法的有不同的实现，父类模板方法被调用时也会产生不同的结">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="工厂方法模式（factory Method）">
-<meta property="og:url" content="http://www.durongpeng.top/2019/05/22/工厂方法模式（Factory Method）/index.html">
+<meta property="og:title" content="模板方法模式（Template Method）">
+<meta property="og:url" content="http://www.durongpeng.top/2019/05/22/模板方法模式（Template Method）/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
+<meta property="og:description" content="模板方法模式定义定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法模式可以不改变一个算法的结构即可重定义该算法的某些特定步骤。组成模板的方法被定义在父类中，由于这些方法是抽象的，所以只查看父类的代码是无法知道这些方法最终会进行何种具体处理的，唯一能知道的就是父类是如何调用这些方法的。实现上述抽象方法的是子类，不同的子类对同一个抽象方法的有不同的实现，父类模板方法被调用时也会产生不同的结">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-22T14:50:14.575Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/22/模板方法模式（Template%20Method）/模板方法模式的实现.png">
+<meta property="og:updated_time" content="2019-05-22T15:06:37.093Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="工厂方法模式（factory Method）">
+<meta name="twitter:title" content="模板方法模式（Template Method）">
+<meta name="twitter:description" content="模板方法模式定义定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。模板方法模式可以不改变一个算法的结构即可重定义该算法的某些特定步骤。组成模板的方法被定义在父类中，由于这些方法是抽象的，所以只查看父类的代码是无法知道这些方法最终会进行何种具体处理的，唯一能知道的就是父类是如何调用这些方法的。实现上述抽象方法的是子类，不同的子类对同一个抽象方法的有不同的实现，父类模板方法被调用时也会产生不同的结">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/05/22/模板方法模式（Template%20Method）/模板方法模式的实现.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -112,7 +117,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="12">
+<input type="hidden" id="yelog_site_posts_number" value="13">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -183,8 +188,13 @@
     
     <nav id="title-list-nav">
         
+        <a class href="/2019/05/22/模板方法模式（Template Method）/" data-tag="设计模式" data-author>
+            <span class="post-title" title="模板方法模式（Template Method）">模板方法模式（Template Method）</span>
+            <span class="post-date" title="2019-05-22 22:46:43">2019/05/22</span>
+        </a>
+        
         <a class href="/2019/05/22/工厂方法模式（Factory Method）/" data-tag="设计模式" data-author>
-            <span class="post-title" title="工厂方法模式（factory Method）">工厂方法模式（factory Method）</span>
+            <span class="post-title" title="工厂方法模式（Factory Method）">工厂方法模式（Factory Method）</span>
             <span class="post-date" title="2019-05-22 22:46:43">2019/05/22</span>
         </a>
         
@@ -257,7 +267,7 @@
     <div class="pjax">
         <article id="post-工厂方法模式（Factory Method）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">工厂方法模式（factory Method）</h1>
+        <h1 class="article-title">工厂方法模式（Factory Method）</h1>
     
     <div class="article-meta">
         
@@ -273,7 +283,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-05-22 22:50:14">2019-05-22 22:46</time>
+        创建时间:<time class="date" title="更新时间: 2019-05-22 23:02:41">2019-05-22 22:46</time>
         
     </div>
     <div class="article-meta">
@@ -295,7 +305,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式定义"><span class="toc-text">工厂方法模式定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式的例子"><span class="toc-text">工厂方法模式的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product类"><span class="toc-text">Product类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Factory类"><span class="toc-text">Factory类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDCard类"><span class="toc-text">IDCard类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDCardFactory类"><span class="toc-text">IDCardFactory类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main调用"><span class="toc-text">Main调用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式的实现"><span class="toc-text">工厂方法模式的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product（产品）"><span class="toc-text">Product（产品）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Creator（创建者）"><span class="toc-text">Creator（创建者）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteProduct（具体的产品）"><span class="toc-text">ConcreteProduct（具体的产品）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteCreator（具体的创建者）"><span class="toc-text">ConcreteCreator（具体的创建者）</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -310,7 +320,63 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="工厂方法模式定义"><a href="#工厂方法模式定义" class="headerlink" title="工厂方法模式定义"></a>工厂方法模式定义</h1><p>定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</p>
+<h1 id="工厂方法模式的例子"><a href="#工厂方法模式的例子" class="headerlink" title="工厂方法模式的例子"></a>工厂方法模式的例子</h1><p>场景：使用工厂方法模式创建卡片工厂制作卡片。<br><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法例子1.png"><br><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法例子2.png"></p>
+<h2 id="Product类"><a href="#Product类" class="headerlink" title="Product类"></a>Product类</h2><p>用来表示工厂生产的产品，是一个抽象类。</p>
+<pre><code class="java">public abstract class Product{
+    public abstract void use();
+}
+</code></pre>
+<h2 id="Factory类"><a href="#Factory类" class="headerlink" title="Factory类"></a>Factory类</h2><p>工厂类中使用了模板模式，该类还声明了用于”生产商品”的createProduct()抽象方法和用于”注册产品”的registerProduct抽象方法。两个抽象方法交给Factory的子类负责实现。<br>抽象方法具体的实现内容根据工厂方法模式适用的场景不同而不同，只要是工厂方法模式，在生成实例时就一定会用到模板模式。</p>
+<pre><code class="java">public abstract class Factory{
+    public final Product create(String owner){
+        Product p = createProduct(owner);
+    }
+    public abstract Product createProduct(String owner);
+    public abstract void registerProduct(Product product);
+}
+</code></pre>
+<h2 id="IDCard类"><a href="#IDCard类" class="headerlink" title="IDCard类"></a>IDCard类</h2><pre><code class="java">public class IDCard extends Product{
+    private String owner;
+    public IDCard(String owner){
+        this.owner = owner;
+    }
+    // 实现Product抽象方法
+    public void use(){
+        System.out.println(&quot;use......&quot;);
+    }
+    public String getOwner(){
+        return owner;
+    }
+}
+</code></pre>
+<h2 id="IDCardFactory类"><a href="#IDCardFactory类" class="headerlink" title="IDCardFactory类"></a>IDCardFactory类</h2><pre><code class="java">public class IDCardFactory extends Factory{
+    private list owners = new ArrayList();
+    // 实现Factory的抽象方法
+    public Product createProduct(String owner){
+        return new IDCard(owner);
+    }
+    // 实现Factory的抽象方法
+    public void registerProduct(Product product){
+        owners.add(((IDCard) prodcut).getOwner());
+    }
+    public List getOwners(){
+        return owners;
+    }
+}
+</code></pre>
+<h2 id="Main调用"><a href="#Main调用" class="headerlink" title="Main调用"></a>Main调用</h2><pre><code class="java">public static void main(String[] args){
+    Factory factory = new IDCardFactory();
+    Product card1 = factory.crete(&quot;小明&quot;);
+    Product card2 = factory.crete(&quot;小红&quot;);
+}
+</code></pre>
+<h1 id="工厂方法模式的实现"><a href="#工厂方法模式的实现" class="headerlink" title="工厂方法模式的实现"></a>工厂方法模式的实现</h1><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法实现.png">
+<h2 id="Product（产品）"><a href="#Product（产品）" class="headerlink" title="Product（产品）"></a>Product（产品）</h2><p>Product角色属于框架一方，是一个抽象类。它定义了在工厂方法模式中生成的那些实例所持有的接口(API)，但具体的实现由子类ConcreteProduct角色决定。</p>
+<h2 id="Creator（创建者）"><a href="#Creator（创建者）" class="headerlink" title="Creator（创建者）"></a>Creator（创建者）</h2><p>Creator角色属于框架一方，它负责生成Product角色的抽象类，但具体的实现逻辑由其子类ConcreteCreator类来实现。<br>Creator角色对于其子类ConcreteCreator如何生成Product是一无所知的，它只需要调用factoryMethod来生成Product即可。</p>
+<h2 id="ConcreteProduct（具体的产品）"><a href="#ConcreteProduct（具体的产品）" class="headerlink" title="ConcreteProduct（具体的产品）"></a>ConcreteProduct（具体的产品）</h2><p>ConcreteProduct角色属于具体加工的一方，它决定了具体的产品。</p>
+<h2 id="ConcreteCreator（具体的创建者）"><a href="#ConcreteCreator（具体的创建者）" class="headerlink" title="ConcreteCreator（具体的创建者）"></a>ConcreteCreator（具体的创建者）</h2><p>ConcreteCreator橘色属于具体加工的一方，它负责生成具体的产品。</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
     </div>
