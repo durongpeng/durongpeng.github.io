@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>工厂方法模式（Factory Method） | Durp&#39;s Blog</title>
+  <title>组合模式（Builder） | Durp&#39;s Blog</title>
   <meta name="keywords" content=" 设计模式 ">
-  <meta name="description" content="工厂方法模式（Factory Method） | Durp&#39;s Blog">
+  <meta name="description" content="组合模式（Builder） | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="组合模式定义将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。 组合模式例子场景：用组合模式编写”文档”程序。 Builder类Builder类声明了编写文档的方法的抽象类。 public abstract class Builder{     public abstract void makeTitle(String t);     pub">
 <meta name="keywords" content="设计模式">
@@ -296,9 +296,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-工厂方法模式（Factory Method）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-组合模式（Builder）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">工厂方法模式（Factory Method）</h1>
+        <h1 class="article-title">组合模式（Builder）</h1>
     
     <div class="article-meta">
         
@@ -314,7 +314,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-05-22 23:02:41">2019-05-22 22:46</time>
+        创建时间:<time class="date" title="更新时间: 2019-05-23 21:53:19">2019-05-23 21:46</time>
         
     </div>
     <div class="article-meta">
@@ -336,7 +336,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式定义"><span class="toc-text">工厂方法模式定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式的例子"><span class="toc-text">工厂方法模式的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product类"><span class="toc-text">Product类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Factory类"><span class="toc-text">Factory类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDCard类"><span class="toc-text">IDCard类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDCardFactory类"><span class="toc-text">IDCardFactory类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main调用"><span class="toc-text">Main调用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式的实现"><span class="toc-text">工厂方法模式的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product（产品）"><span class="toc-text">Product（产品）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Creator（创建者）"><span class="toc-text">Creator（创建者）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteProduct（具体的产品）"><span class="toc-text">ConcreteProduct（具体的产品）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteCreator（具体的创建者）"><span class="toc-text">ConcreteCreator（具体的创建者）</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#组合模式定义"><span class="toc-text">组合模式定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组合模式例子"><span class="toc-text">组合模式例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Builder类"><span class="toc-text">Builder类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Director类"><span class="toc-text">Director类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TextBuilder和HTMLBuilder"><span class="toc-text">TextBuilder和HTMLBuilder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main方法"><span class="toc-text">Main方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#组合模式的实现"><span class="toc-text">组合模式的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Builder（建造者）"><span class="toc-text">Builder（建造者）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteBuilder（具体的建造者）"><span class="toc-text">ConcreteBuilder（具体的建造者）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Director（监工）"><span class="toc-text">Director（监工）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Client（使用者）"><span class="toc-text">Client（使用者）</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -351,62 +351,38 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="工厂方法模式定义"><a href="#工厂方法模式定义" class="headerlink" title="工厂方法模式定义"></a>工厂方法模式定义</h1><p>定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</p>
-<h1 id="工厂方法模式的例子"><a href="#工厂方法模式的例子" class="headerlink" title="工厂方法模式的例子"></a>工厂方法模式的例子</h1><p>场景：使用工厂方法模式创建卡片工厂制作卡片。<br><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法例子1.png"><br><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法例子2.png"></p>
-<h2 id="Product类"><a href="#Product类" class="headerlink" title="Product类"></a>Product类</h2><p>用来表示工厂生产的产品，是一个抽象类。</p>
-<pre><code class="java">public abstract class Product{
-    public abstract void use();
+        <h1 id="组合模式定义"><a href="#组合模式定义" class="headerlink" title="组合模式定义"></a>组合模式定义</h1><p>将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。</p>
+<h1 id="组合模式例子"><a href="#组合模式例子" class="headerlink" title="组合模式例子"></a>组合模式例子</h1><p>场景：用组合模式编写”文档”程序。<br><img src="/2019/05/23/组合模式（Builder）/组合模式例子1.png"><br><img src="/2019/05/23/组合模式（Builder）/组合模式例子2.png"></p>
+<h2 id="Builder类"><a href="#Builder类" class="headerlink" title="Builder类"></a>Builder类</h2><p>Builder类声明了编写文档的方法的抽象类。</p>
+<pre><code class="java">public abstract class Builder{
+    public abstract void makeTitle(String t);
+    public abstract void makeString(String s);
+    public abstract void makeItems(String[] items);
+    public abstract void close();
 }
 </code></pre>
-<h2 id="Factory类"><a href="#Factory类" class="headerlink" title="Factory类"></a>Factory类</h2><p>工厂类中使用了模板模式，该类还声明了用于”生产商品”的createProduct()抽象方法和用于”注册产品”的registerProduct抽象方法。两个抽象方法交给Factory的子类负责实现。<br>抽象方法具体的实现内容根据工厂方法模式适用的场景不同而不同，只要是工厂方法模式，在生成实例时就一定会用到模板模式。</p>
-<pre><code class="java">public abstract class Factory{
-    public final Product create(String owner){
-        Product p = createProduct(owner);
+<h2 id="Director类"><a href="#Director类" class="headerlink" title="Director类"></a>Director类</h2><p>Director类构造函数的参数是Builder类型的。</p>
+<pre><code class="java">public class Director{
+    private Builder builder;
+    public Director(Builder b){
+        this.builder = b;
     }
-    public abstract Product createProduct(String owner);
-    public abstract void registerProduct(Product product);
-}
-</code></pre>
-<h2 id="IDCard类"><a href="#IDCard类" class="headerlink" title="IDCard类"></a>IDCard类</h2><pre><code class="java">public class IDCard extends Product{
-    private String owner;
-    public IDCard(String owner){
-        this.owner = owner;
-    }
-    // 实现Product抽象方法
-    public void use(){
-        System.out.println(&quot;use......&quot;);
-    }
-    public String getOwner(){
-        return owner;
+    public void construct(){
+        builder.makeTitle(&quot;Hello&quot;);
+        builder.makeString(&quot;name&quot;);
+        bulider.makeItems(new String[]{&quot;早上好&quot;,&quot;晚上好&quot;});
+        builder.close();
     }
 }
 </code></pre>
-<h2 id="IDCardFactory类"><a href="#IDCardFactory类" class="headerlink" title="IDCardFactory类"></a>IDCardFactory类</h2><pre><code class="java">public class IDCardFactory extends Factory{
-    private list owners = new ArrayList();
-    // 实现Factory的抽象方法
-    public Product createProduct(String owner){
-        return new IDCard(owner);
-    }
-    // 实现Factory的抽象方法
-    public void registerProduct(Product product){
-        owners.add(((IDCard) prodcut).getOwner());
-    }
-    public List getOwners(){
-        return owners;
-    }
-}
-</code></pre>
-<h2 id="Main调用"><a href="#Main调用" class="headerlink" title="Main调用"></a>Main调用</h2><pre><code class="java">public static void main(String[] args){
-    Factory factory = new IDCardFactory();
-    Product card1 = factory.crete(&quot;小明&quot;);
-    Product card2 = factory.crete(&quot;小红&quot;);
-}
-</code></pre>
-<h1 id="工厂方法模式的实现"><a href="#工厂方法模式的实现" class="headerlink" title="工厂方法模式的实现"></a>工厂方法模式的实现</h1><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法实现.png">
-<h2 id="Product（产品）"><a href="#Product（产品）" class="headerlink" title="Product（产品）"></a>Product（产品）</h2><p>Product角色属于框架一方，是一个抽象类。它定义了在工厂方法模式中生成的那些实例所持有的接口(API)，但具体的实现由子类ConcreteProduct角色决定。</p>
-<h2 id="Creator（创建者）"><a href="#Creator（创建者）" class="headerlink" title="Creator（创建者）"></a>Creator（创建者）</h2><p>Creator角色属于框架一方，它负责生成Product角色的抽象类，但具体的实现逻辑由其子类ConcreteCreator类来实现。<br>Creator角色对于其子类ConcreteCreator如何生成Product是一无所知的，它只需要调用factoryMethod来生成Product即可。</p>
-<h2 id="ConcreteProduct（具体的产品）"><a href="#ConcreteProduct（具体的产品）" class="headerlink" title="ConcreteProduct（具体的产品）"></a>ConcreteProduct（具体的产品）</h2><p>ConcreteProduct角色属于具体加工的一方，它决定了具体的产品。</p>
-<h2 id="ConcreteCreator（具体的创建者）"><a href="#ConcreteCreator（具体的创建者）" class="headerlink" title="ConcreteCreator（具体的创建者）"></a>ConcreteCreator（具体的创建者）</h2><p>ConcreteCreator橘色属于具体加工的一方，它负责生成具体的产品。</p>
+<h2 id="TextBuilder和HTMLBuilder"><a href="#TextBuilder和HTMLBuilder" class="headerlink" title="TextBuilder和HTMLBuilder"></a>TextBuilder和HTMLBuilder</h2><img src="/2019/05/23/组合模式（Builder）/TextBuilder.png">
+<img src="/2019/05/23/组合模式（Builder）/HTMLBuilder.png">
+<h2 id="Main方法"><a href="#Main方法" class="headerlink" title="Main方法"></a>Main方法</h2><img src="/2019/05/23/组合模式（Builder）/main.png">
+<h1 id="组合模式的实现"><a href="#组合模式的实现" class="headerlink" title="组合模式的实现"></a>组合模式的实现</h1><img src="/2019/05/23/组合模式（Builder）/组合模式的实现.png">
+<h2 id="Builder（建造者）"><a href="#Builder（建造者）" class="headerlink" title="Builder（建造者）"></a>Builder（建造者）</h2><p>Builder角色负责定义用于生成实例的接口(API)。Builder角色中准备了用于生成实例的方法。</p>
+<h2 id="ConcreteBuilder（具体的建造者）"><a href="#ConcreteBuilder（具体的建造者）" class="headerlink" title="ConcreteBuilder（具体的建造者）"></a>ConcreteBuilder（具体的建造者）</h2><p>ConcreteBuilder角色是负责实现Builder角色的接口的类。这里定义了在生成实例时实际被调用的方法。此外，在ConcreteBuilder角色中还定义了最终生成结果的方法。</p>
+<h2 id="Director（监工）"><a href="#Director（监工）" class="headerlink" title="Director（监工）"></a>Director（监工）</h2><p>Director角色负责使用Builder角色的接口(API)来生成实例。它并不依赖于Builder接口的实现类。为了确保不论ConcreteBuilder角色是如何被定义的，Director角色都能正常工作，它只调用再Builder角色中被定义的方法。</p>
+<h2 id="Client（使用者）"><a href="#Client（使用者）" class="headerlink" title="Client（使用者）"></a>Client（使用者）</h2><p><img src="en-resource://database/1583:1" alt="f2d9f5e3cb3a28f2f6319330bfce43ae.png"></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>

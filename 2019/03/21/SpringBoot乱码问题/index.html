@@ -6,14 +6,26 @@
   <meta name="keywords" content=" SpringBoot ">
   <meta name="description" content="SpringBoot乱码问题 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="组合模式定义将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。 组合模式例子场景：用组合模式编写”文档”程序。 Builder类Builder类声明了编写文档的方法的抽象类。 public abstract class Builder{     public abstract void makeTitle(String t);     pub">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="策略模式（Strategy）">
-<meta property="og:url" content="http://www.durongpeng.top/2019/05/22/策略模式（Strategy）/index.html">
+<meta property="og:title" content="组合模式（Builder）">
+<meta property="og:url" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/index.html">
 <meta property="og:site_name" content="Durp&#39;s Blog">
+<meta property="og:description" content="组合模式定义将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。 组合模式例子场景：用组合模式编写”文档”程序。 Builder类Builder类声明了编写文档的方法的抽象类。 public abstract class Builder{     public abstract void makeTitle(String t);     pub">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-22T15:14:37.737Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/组合模式例子1.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/组合模式例子2.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/TextBuilder.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/HTMLBuilder.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/main.png">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/组合模式的实现.png">
+<meta property="og:image" content="en-resource://database/1583:1">
+<meta property="og:updated_time" content="2019-05-23T13:53:19.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="策略模式（Strategy）">
+<meta name="twitter:title" content="组合模式（Builder）">
+<meta name="twitter:description" content="组合模式定义将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。 组合模式例子场景：用组合模式编写”文档”程序。 Builder类Builder类声明了编写文档的方法的抽象类。 public abstract class Builder{     public abstract void makeTitle(String t);     pub">
+<meta name="twitter:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/组合模式例子1.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -111,7 +123,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="15">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -145,19 +157,19 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">SpringBoot</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a href="javascript:" class="color5">Hibernate</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color5">Java</a>
     </li>
     
     <li class="article-tag-list-item">
         <a href="javascript:" class="color2">Spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">SpringBoot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color5">Hibernate</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -182,6 +194,21 @@
     
     <nav id="title-list-nav">
         
+        <a class href="/2019/05/23/组合模式（Builder）/" data-tag="设计模式" data-author>
+            <span class="post-title" title="组合模式（Builder）">组合模式（Builder）</span>
+            <span class="post-date" title="2019-05-23 21:46:58">2019/05/23</span>
+        </a>
+        
+        <a class href="/2019/05/23/原型模式（Prototype）/" data-tag="设计模式" data-author>
+            <span class="post-title" title="原型模式（Prototype）">原型模式（Prototype）</span>
+            <span class="post-date" title="2019-05-23 21:39:13">2019/05/23</span>
+        </a>
+        
+        <a class href="/2019/05/23/单例模式（Singleton）/" data-tag="设计模式" data-author>
+            <span class="post-title" title="单例模式（Singleton）">单例模式（Singleton）</span>
+            <span class="post-date" title="2019-05-23 21:33:44">2019/05/23</span>
+        </a>
+        
         <a class href="/2019/05/22/策略模式（Strategy）/" data-tag data-author>
             <span class="post-title" title="策略模式（Strategy）">策略模式（Strategy）</span>
             <span class="post-date" title="2019-05-22 23:14:37">2019/05/22</span>
@@ -192,13 +219,13 @@
             <span class="post-date" title="2019-05-22 23:09:43">2019/05/22</span>
         </a>
         
-        <a class href="/2019/05/22/工厂方法模式（Factory Method）/" data-tag="设计模式" data-author>
-            <span class="post-title" title="工厂方法模式（Factory Method）">工厂方法模式（Factory Method）</span>
+        <a class href="/2019/05/22/模板方法模式（Template Method）/" data-tag="设计模式" data-author>
+            <span class="post-title" title="模板方法模式（Template Method）">模板方法模式（Template Method）</span>
             <span class="post-date" title="2019-05-22 22:46:43">2019/05/22</span>
         </a>
         
-        <a class href="/2019/05/22/模板方法模式（Template Method）/" data-tag="设计模式" data-author>
-            <span class="post-title" title="模板方法模式（Template Method）">模板方法模式（Template Method）</span>
+        <a class href="/2019/05/22/工厂方法模式（Factory Method）/" data-tag="设计模式" data-author>
+            <span class="post-title" title="工厂方法模式（Factory Method）">工厂方法模式（Factory Method）</span>
             <span class="post-date" title="2019-05-22 22:46:43">2019/05/22</span>
         </a>
         
@@ -431,7 +458,7 @@ public class HelloController {
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#SpringBoot','#Hibernate','#Java','#Spring','#UML','#设计模式','#数据结构','#大话数据结构',],
+            'data': ['#Java','#Spring','#SpringBoot','#Hibernate','#UML','#设计模式','#数据结构','#大话数据结构',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');

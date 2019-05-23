@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>工厂方法模式（Factory Method） | Durp&#39;s Blog</title>
+  <title>原型模式（Prototype） | Durp&#39;s Blog</title>
   <meta name="keywords" content=" 设计模式 ">
-  <meta name="description" content="工厂方法模式（Factory Method） | Durp&#39;s Blog">
+  <meta name="description" content="原型模式（Prototype） | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="组合模式定义将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。 组合模式例子场景：用组合模式编写”文档”程序。 Builder类Builder类声明了编写文档的方法的抽象类。 public abstract class Builder{     public abstract void makeTitle(String t);     pub">
 <meta name="keywords" content="设计模式">
@@ -296,9 +296,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-工厂方法模式（Factory Method）" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-原型模式（Prototype）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">工厂方法模式（Factory Method）</h1>
+        <h1 class="article-title">原型模式（Prototype）</h1>
     
     <div class="article-meta">
         
@@ -314,7 +314,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-05-22 23:02:41">2019-05-22 22:46</time>
+        创建时间:<time class="date" title="更新时间: 2019-05-23 21:47:42">2019-05-23 21:39</time>
         
     </div>
     <div class="article-meta">
@@ -336,7 +336,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式定义"><span class="toc-text">工厂方法模式定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式的例子"><span class="toc-text">工厂方法模式的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product类"><span class="toc-text">Product类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Factory类"><span class="toc-text">Factory类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDCard类"><span class="toc-text">IDCard类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDCardFactory类"><span class="toc-text">IDCardFactory类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main调用"><span class="toc-text">Main调用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工厂方法模式的实现"><span class="toc-text">工厂方法模式的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product（产品）"><span class="toc-text">Product（产品）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Creator（创建者）"><span class="toc-text">Creator（创建者）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteProduct（具体的产品）"><span class="toc-text">ConcreteProduct（具体的产品）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcreteCreator（具体的创建者）"><span class="toc-text">ConcreteCreator（具体的创建者）</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#原型模式定义"><span class="toc-text">原型模式定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用原型模式的情况"><span class="toc-text">使用原型模式的情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原型模式例子"><span class="toc-text">原型模式例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Product接口"><span class="toc-text">Product接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manager类"><span class="toc-text">Manager类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MessageBox类和UnderLinePen类"><span class="toc-text">MessageBox类和UnderLinePen类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main方法"><span class="toc-text">Main方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原型模式实现"><span class="toc-text">原型模式实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prototype（原型）"><span class="toc-text">Prototype（原型）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcretePrototype（具体的原型）"><span class="toc-text">ConcretePrototype（具体的原型）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Client（使用者）"><span class="toc-text">Client（使用者）</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -351,62 +351,46 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="工厂方法模式定义"><a href="#工厂方法模式定义" class="headerlink" title="工厂方法模式定义"></a>工厂方法模式定义</h1><p>定义一个用于创建对象的接口，让子类决定实例化哪一个类。工厂方法使一个类的实例化延迟到其子类。</p>
-<h1 id="工厂方法模式的例子"><a href="#工厂方法模式的例子" class="headerlink" title="工厂方法模式的例子"></a>工厂方法模式的例子</h1><p>场景：使用工厂方法模式创建卡片工厂制作卡片。<br><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法例子1.png"><br><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法例子2.png"></p>
-<h2 id="Product类"><a href="#Product类" class="headerlink" title="Product类"></a>Product类</h2><p>用来表示工厂生产的产品，是一个抽象类。</p>
-<pre><code class="java">public abstract class Product{
-    public abstract void use();
+        <h1 id="原型模式定义"><a href="#原型模式定义" class="headerlink" title="原型模式定义"></a>原型模式定义</h1><p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</p>
+<h1 id="使用原型模式的情况"><a href="#使用原型模式的情况" class="headerlink" title="使用原型模式的情况"></a>使用原型模式的情况</h1><ul>
+<li>1.对象种类繁多，无法将它们整合到一个类中。<br>第一种情况是需要处理的对象太多，如果将它们分别作为一个类，就必须要编写很多个类文件。</li>
+<li>2.难以根据类生成实例时。<br>第二种情况是生成实例的过程太过复杂，很难根据类来生成实例。例如一个类有N多个属性，new出来一个空对象，一个一个setter方法为这些属性赋值，真的太麻烦了。<br>通常在想生成一个和之前用户通过操作创建出的实例完全一样的实例时，我们会事先将用户通过操作生成的实例保存起来，然后再需要时通过复制来生成新的实例。</li>
+<li>3.想解耦框架与生成的实例时。<br>第三种情况是想要让生成实例的框架不依赖于具体的类。这时，不能指定类名来生成实例，而要事先”注册”一个”原型”实例，然后通过复制该实例来生成新的实例。<h1 id="原型模式例子"><a href="#原型模式例子" class="headerlink" title="原型模式例子"></a>原型模式例子</h1><img src="/2019/05/23/原型模式（Prototype）/原型模式例子1.png">
+<img src="/2019/05/23/原型模式（Prototype）/原型模式例子2.png">
+<h2 id="Product接口"><a href="#Product接口" class="headerlink" title="Product接口"></a>Product接口</h2>Product是提供复制功能的接口。该接口继承了java.lang.Cloneable接口。<pre><code class="java">public interface Product extends CloneAble{
+  public abstract void use(String s);
+  public abstract Product createClone();
 }
 </code></pre>
-<h2 id="Factory类"><a href="#Factory类" class="headerlink" title="Factory类"></a>Factory类</h2><p>工厂类中使用了模板模式，该类还声明了用于”生产商品”的createProduct()抽象方法和用于”注册产品”的registerProduct抽象方法。两个抽象方法交给Factory的子类负责实现。<br>抽象方法具体的实现内容根据工厂方法模式适用的场景不同而不同，只要是工厂方法模式，在生成实例时就一定会用到模板模式。</p>
-<pre><code class="java">public abstract class Factory{
-    public final Product create(String owner){
-        Product p = createProduct(owner);
-    }
-    public abstract Product createProduct(String owner);
-    public abstract void registerProduct(Product product);
+<h2 id="Manager类"><a href="#Manager类" class="headerlink" title="Manager类"></a>Manager类</h2>Manager类使用Product接口来复制实例。<pre><code class="java">public class Manager{
+  private HashMap showcase = new HashMap();
+  public void register(String name,Product p){
+      showcase.put(name,p);
+  }
+  public Product create(String protoname){
+      Product p = (Product) showcase.get(protoname);
+      return p.createClone();
+  }
 }
 </code></pre>
-<h2 id="IDCard类"><a href="#IDCard类" class="headerlink" title="IDCard类"></a>IDCard类</h2><pre><code class="java">public class IDCard extends Product{
-    private String owner;
-    public IDCard(String owner){
-        this.owner = owner;
-    }
-    // 实现Product抽象方法
-    public void use(){
-        System.out.println(&quot;use......&quot;);
-    }
-    public String getOwner(){
-        return owner;
-    }
+Manager类中并没有出现Product实现类的名字(MessageBox和UnderLinePen)，这意味着我们可以独立修改Manager和Product，不受Product实现类的影响。这是非常重要的，因为一旦在类中使用到了别的类名，就意味着该类和其他类紧密耦合在一起。在这个例子中，Product成了Manager类和其他类连接的桥梁。<h2 id="MessageBox类和UnderLinePen类"><a href="#MessageBox类和UnderLinePen类" class="headerlink" title="MessageBox类和UnderLinePen类"></a>MessageBox类和UnderLinePen类</h2>都是Product接口的实现类。decochar字段中保存的是装饰框字符，use方法是用decochar字段中保存的字符将要显示的文本装饰起来。createClone方法用于复制自己，内部调用clone方法，我们之所以可以调用clone方法进行复制是因为实现了java.lang.Cloneable接口。<br>需要注意的是，java.lang.Cloneable接口只是起到告诉程序可以调用clone方法的作用，它自身并没有定义任何方法。clone方法是继承于Obejct的。<img src="/2019/05/23/原型模式（Prototype）/MessageBox.png">
+<img src="/2019/05/23/原型模式（Prototype）/UnderLinePen.png">
+<h2 id="Main方法"><a href="#Main方法" class="headerlink" title="Main方法"></a>Main方法</h2><pre><code class="java">public static void main(String[] args){
+  Manager manager = new Manager();
+  Product upen = new UnderLinePen(&quot;~&quot;);
+  Product mbox = new MessageBox(&quot;*&quot;);
+  manager.register(&quot;upen&quot;,upen);
+  manager.register(&quot;mbox&quot;,mbox);
+  // 生成Product
+  Product uProduct = manager.create(&quot;upen&quot;);
+  uProduct.user(&quot;Hello&quot;);
+  Product mProduct = manager.create(&quot;mbox&quot;);
+  mProduct.user(&quot;Hello&quot;);
 }
 </code></pre>
-<h2 id="IDCardFactory类"><a href="#IDCardFactory类" class="headerlink" title="IDCardFactory类"></a>IDCardFactory类</h2><pre><code class="java">public class IDCardFactory extends Factory{
-    private list owners = new ArrayList();
-    // 实现Factory的抽象方法
-    public Product createProduct(String owner){
-        return new IDCard(owner);
-    }
-    // 实现Factory的抽象方法
-    public void registerProduct(Product product){
-        owners.add(((IDCard) prodcut).getOwner());
-    }
-    public List getOwners(){
-        return owners;
-    }
-}
-</code></pre>
-<h2 id="Main调用"><a href="#Main调用" class="headerlink" title="Main调用"></a>Main调用</h2><pre><code class="java">public static void main(String[] args){
-    Factory factory = new IDCardFactory();
-    Product card1 = factory.crete(&quot;小明&quot;);
-    Product card2 = factory.crete(&quot;小红&quot;);
-}
-</code></pre>
-<h1 id="工厂方法模式的实现"><a href="#工厂方法模式的实现" class="headerlink" title="工厂方法模式的实现"></a>工厂方法模式的实现</h1><img src="/2019/05/22/工厂方法模式（Factory%20Method）/工厂方法实现.png">
-<h2 id="Product（产品）"><a href="#Product（产品）" class="headerlink" title="Product（产品）"></a>Product（产品）</h2><p>Product角色属于框架一方，是一个抽象类。它定义了在工厂方法模式中生成的那些实例所持有的接口(API)，但具体的实现由子类ConcreteProduct角色决定。</p>
-<h2 id="Creator（创建者）"><a href="#Creator（创建者）" class="headerlink" title="Creator（创建者）"></a>Creator（创建者）</h2><p>Creator角色属于框架一方，它负责生成Product角色的抽象类，但具体的实现逻辑由其子类ConcreteCreator类来实现。<br>Creator角色对于其子类ConcreteCreator如何生成Product是一无所知的，它只需要调用factoryMethod来生成Product即可。</p>
-<h2 id="ConcreteProduct（具体的产品）"><a href="#ConcreteProduct（具体的产品）" class="headerlink" title="ConcreteProduct（具体的产品）"></a>ConcreteProduct（具体的产品）</h2><p>ConcreteProduct角色属于具体加工的一方，它决定了具体的产品。</p>
-<h2 id="ConcreteCreator（具体的创建者）"><a href="#ConcreteCreator（具体的创建者）" class="headerlink" title="ConcreteCreator（具体的创建者）"></a>ConcreteCreator（具体的创建者）</h2><p>ConcreteCreator橘色属于具体加工的一方，它负责生成具体的产品。</p>
+<h1 id="原型模式实现"><a href="#原型模式实现" class="headerlink" title="原型模式实现"></a>原型模式实现</h1><img src="/2019/05/23/原型模式（Prototype）/原型模式实现.png">
+<h2 id="Prototype（原型）"><a href="#Prototype（原型）" class="headerlink" title="Prototype（原型）"></a>Prototype（原型）</h2>Prototype角色负责定义用于复制现有实例来生成新实例的方法。在上例中，Product接口负责扮演此角色。<h2 id="ConcretePrototype（具体的原型）"><a href="#ConcretePrototype（具体的原型）" class="headerlink" title="ConcretePrototype（具体的原型）"></a>ConcretePrototype（具体的原型）</h2>ConcretePrototype角色负责实现复制现有实例并生成新的实例的方法。在上例中，MessageBox和UnderLinePen负责扮演此角色。<h2 id="Client（使用者）"><a href="#Client（使用者）" class="headerlink" title="Client（使用者）"></a>Client（使用者）</h2>Client角色负责使用复制实例的方法生成新的实例。在上例中，Manager类扮演此角色。</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
