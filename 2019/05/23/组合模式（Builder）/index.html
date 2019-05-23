@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   <title>组合模式（Builder） | Durp&#39;s Blog</title>
@@ -20,8 +22,8 @@
 <meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/HTMLBuilder.png">
 <meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/main.png">
 <meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/组合模式的实现.png">
-<meta property="og:image" content="en-resource://database/1583:1">
-<meta property="og:updated_time" content="2019-05-23T13:53:19.416Z">
+<meta property="og:image" content="http://www.durongpeng.top/2019/05/23/组合模式（Builder）/组合模式的实现2.png">
+<meta property="og:updated_time" content="2019-05-23T15:14:20.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组合模式（Builder）">
 <meta name="twitter:description" content="组合模式定义将对象组合成树形结构以表示”部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具体一致性。 组合模式例子场景：用组合模式编写”文档”程序。 Builder类Builder类声明了编写文档的方法的抽象类。 public abstract class Builder{     public abstract void makeTitle(String t);     pub">
@@ -314,7 +316,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-05-23 21:53:19">2019-05-23 21:46</time>
+        创建时间:<time class="date" title="更新时间: 2019-05-23 23:14:20">2019-05-23 21:46</time>
         
     </div>
     <div class="article-meta">
@@ -395,7 +397,7 @@
 <h2 id="Builder（建造者）"><a href="#Builder（建造者）" class="headerlink" title="Builder（建造者）"></a>Builder（建造者）</h2><p>Builder角色负责定义用于生成实例的接口(API)。Builder角色中准备了用于生成实例的方法。</p>
 <h2 id="ConcreteBuilder（具体的建造者）"><a href="#ConcreteBuilder（具体的建造者）" class="headerlink" title="ConcreteBuilder（具体的建造者）"></a>ConcreteBuilder（具体的建造者）</h2><p>ConcreteBuilder角色是负责实现Builder角色的接口的类。这里定义了在生成实例时实际被调用的方法。此外，在ConcreteBuilder角色中还定义了最终生成结果的方法。</p>
 <h2 id="Director（监工）"><a href="#Director（监工）" class="headerlink" title="Director（监工）"></a>Director（监工）</h2><p>Director角色负责使用Builder角色的接口(API)来生成实例。它并不依赖于Builder接口的实现类。为了确保不论ConcreteBuilder角色是如何被定义的，Director角色都能正常工作，它只调用再Builder角色中被定义的方法。</p>
-<h2 id="Client（使用者）"><a href="#Client（使用者）" class="headerlink" title="Client（使用者）"></a>Client（使用者）</h2><p><img src="en-resource://database/1583:1" alt="f2d9f5e3cb3a28f2f6319330bfce43ae.png"></p>
+<h2 id="Client（使用者）"><a href="#Client（使用者）" class="headerlink" title="Client（使用者）"></a>Client（使用者）</h2><img src="/2019/05/23/组合模式（Builder）/组合模式的实现2.png">
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
@@ -411,8 +413,8 @@
 <script type="text/javascript">
     $.getScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
-            clientID: '',
-            clientSecret: '',
+            clientID: '8aff3a7b641221adb1c8',
+            clientSecret: 'dcc18474e06a26cc25fd4fe3926aa181ea09eb5a',
             repo: 'durongpeng.github.io',
             owner: 'durongpeng',
             admin: ['durongpeng'],
