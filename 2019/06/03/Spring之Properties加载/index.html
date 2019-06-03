@@ -4,9 +4,9 @@
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>栈与队列 | Durp&#39;s Blog</title>
-  <meta name="keywords" content=" 数据结构 , 大话数据结构 ">
-  <meta name="description" content="栈与队列 | Durp&#39;s Blog">
+  <title>Spring之Properties加载 | Durp&#39;s Blog</title>
+  <meta name="keywords" content=" Java , Spring ">
+  <meta name="description" content="Spring之Properties加载 | Durp&#39;s Blog">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="参考博客：https://blog.csdn.net/haha_sir/article/details/79105951 通过context:property-placeholder标签实现配置文件加载使用XML方式：标签&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt; &amp;lt;beans xmlns=&amp;quot;ht">
 <meta name="keywords" content="Java,Spring">
@@ -295,32 +295,38 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-栈与队列" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Spring之Properties加载" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">栈与队列</h1>
+        <h1 class="article-title">Spring之Properties加载</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            
+            <a href="javascript:" data-rel="Java">Java</a>
+            
+        </span>
+        
         
         <span class="tag">
             
-            <a href="javascript:" class="color5">数据结构</a>
+            <a href="javascript:" class="color5">Java</a>
             
-            <a href="javascript:" class="color2">大话数据结构</a>
+            <a href="javascript:" class="color2">Spring</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title="更新时间: 2019-05-09 23:24:31">2019-04-19 22:19</time>
+        创建时间:<time class="date" title="更新时间: 2019-06-03 21:35:23">2019-06-03 21:34</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.9k</span>
+        <span>字数:1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -350,7 +356,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#栈"><span class="toc-text">栈</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#栈的顺序存储结构"><span class="toc-text">栈的顺序存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#栈的结构定义"><span class="toc-text">栈的结构定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进栈"><span class="toc-text">进栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出栈"><span class="toc-text">出栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两栈共享空间"><span class="toc-text">两栈共享空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#栈的链式存储结构"><span class="toc-text">栈的链式存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进栈-1"><span class="toc-text">进栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#出栈-1"><span class="toc-text">出栈</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#队列"><span class="toc-text">队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#循环队列"><span class="toc-text">循环队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#队列顺序存储的不足"><span class="toc-text">队列顺序存储的不足</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环队列的定义"><span class="toc-text">循环队列的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环队列的代码"><span class="toc-text">循环队列的代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#队列的链式存储"><span class="toc-text">队列的链式存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链式存储结构队列的入队操作"><span class="toc-text">链式存储结构队列的入队操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链式存储结构队列的出队操作"><span class="toc-text">链式存储结构队列的出队操作</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#通过context-property-placeholder标签实现配置文件加载"><span class="toc-text">通过context:property-placeholder标签实现配置文件加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用XML方式：标签"><span class="toc-text">使用XML方式：标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用注解方式：-Value"><span class="toc-text">使用注解方式：@Value</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过util-properties标签实现配置文件加载"><span class="toc-text">通过util:properties标签实现配置文件加载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用XML方式：标签-1"><span class="toc-text">使用XML方式：标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用注解方式：-Value-1"><span class="toc-text">使用注解方式：@Value</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过-PropertySource注解实现配置文件加载"><span class="toc-text">通过@PropertySource注解实现配置文件加载</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过配置PropertyPlaceholderConfigurer类实现配置文件加载"><span class="toc-text">通过配置PropertyPlaceholderConfigurer类实现配置文件加载</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -365,168 +371,134 @@
 </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><p>栈(Stack)是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶，另一端称为栈底。栈又称为后进先出的线性表，简称LIFO结构。</p>
-<h2 id="栈的顺序存储结构"><a href="#栈的顺序存储结构" class="headerlink" title="栈的顺序存储结构"></a>栈的顺序存储结构</h2><p>栈是线性表的特例，栈的顺序存储其实就是线性表顺序存储的简化，简称顺序栈。用下标为0的一端作为栈底比较好，因为首元素都存在栈底，变化最小，所以让它作为栈底。</p>
-<h3 id="栈的结构定义"><a href="#栈的结构定义" class="headerlink" title="栈的结构定义"></a>栈的结构定义</h3><pre><code>typedef int ItemType   
-typedef strut 
-{
-    ItemType data[MAXSIZE];
-    int top；
-}MyStack
-</code></pre><p>定义一个int类型的top变量来指示栈顶元素在数组中的位置，若栈的长度为StackSize，则top必须要小于StackSize，当栈中存在一个元素时，top等于0，空栈的top值为-1。<br><img src="/2019/04/19/栈与队列/栈结构的定义.png"><br>顺序栈的存取操作都没有循环，因此其时间复杂度为O[1]。</p>
-<h3 id="进栈"><a href="#进栈" class="headerlink" title="进栈"></a>进栈</h3><pre><code>Status Push(MyStack *S,ItemType e){
-    if(S-&gt;top == MAXSIZE-1) {
-        return ERROR;                                 //栈满了
+        <p>参考博客：<br><a href="https://blog.csdn.net/haha_sir/article/details/79105951" target="_blank" rel="noopener">https://blog.csdn.net/haha_sir/article/details/79105951</a></p>
+<h1 id="通过context-property-placeholder标签实现配置文件加载"><a href="#通过context-property-placeholder标签实现配置文件加载" class="headerlink" title="通过context:property-placeholder标签实现配置文件加载"></a>通过context:property-placeholder标签实现配置文件加载</h1><h2 id="使用XML方式：标签"><a href="#使用XML方式：标签" class="headerlink" title="使用XML方式：标签"></a>使用XML方式：<property>标签</property></h2><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+    &lt;context:property-placeholder ignore-unresolvable=&quot;true&quot; location=&quot;classpath:xx.properties&quot;/&gt;
+    &lt;bean id=&quot;user&quot; class=&quot;com.pojo.SysUser&quot;&gt;
+            &lt;property name=&quot;id&quot; value=&quot;${user_id}&quot;&gt;&lt;/property&gt;
+            &lt;property name=&quot;name&quot; value=&quot;${user_Name}&quot;&gt;&lt;/property&gt;
+            &lt;property name=&quot;pwd&quot; value=&quot;${user_PassWord}&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>SysUser对象类</p>
+<pre><code class="java">public class SysUser {
+    private String id;
+    private String name;
+    private String pwd;
+    // getter和setter方法省略，一定要自己加上！！！&lt;property&gt;标签是根据setter方法进行属性注入的
+    @Override
+    public String toString() {
+        return this.id+&quot;-&quot;+this.name+&quot;-&quot;+this.pwd;
     }
-    S-&gt;top++;                               //top值加1
-    S-&gt;data[S-&gt;top] = e;                //新元素赋值给栈顶空间
-    return ok;
 }
-</code></pre><h3 id="出栈"><a href="#出栈" class="headerlink" title="出栈"></a>出栈</h3><pre><code>Status Pop(MyStack *S,ItemType *e){
-    if(S-&gt;top == -1) {
-        return ERROR;                                 //空栈
+</code></pre>
+<h2 id="使用注解方式：-Value"><a href="#使用注解方式：-Value" class="headerlink" title="使用注解方式：@Value"></a>使用注解方式：@Value</h2><p>使用注解方式要先开起组件扫描，否则注解不生效！！！</p>
+<pre><code class="xml">&lt;!-- 使用注解时，需要开启注解扫描 --&gt;
+    &lt;context:component-scan base-package=&quot;com.*&quot;&gt;&lt;/context:component-scan&gt;
+&lt;!-- 注释掉上面xml中的&lt;property&gt;标签 通过@Values注入--&gt;   
+</code></pre>
+<p>@Value注解可以修饰属性，也可以修饰属性的setter方法，都可以将.properties文件中的内容注入进来。但是需要注意的是：类的属性和方法不能是static修饰的，否则@Value注解不会生效，属性值为null。<br>修改使用注解后的SysUser类</p>
+<pre><code class="java">public class SysUser {
+    @Value(&quot;${user_id}&quot;)
+    private String id;
+    @Value(&quot;${user_Name}&quot;)
+    private String name;
+    @Value(&quot;${user_PassWord}&quot;)
+    private String pwd;
+    // getter和setter方法省略，一定要自己加上！！！&lt;property&gt;标签是根据setter方法进行属性注入的
+    @Override
+    public String toString() {
+        return this.id+&quot;-&quot;+this.name+&quot;-&quot;+this.pwd;
     }
-    return ok;
-    *e = S-&gt;data[S-&gt;top] ;                //出栈的元素赋值给e
-    S-&gt;top--                              //top值减1
-    return ok；
 }
-</code></pre><h3 id="两栈共享空间"><a href="#两栈共享空间" class="headerlink" title="两栈共享空间"></a>两栈共享空间</h3><p>两个栈有两个栈底，让一个栈的栈底为数组的始端，即下表为0处，另一个栈的栈底为数组的末端，即下表为数组长度的n-1处。<br><img src="/2019/04/19/栈与队列/两栈共享空间.png"><br>栈1为空时，top1等于-1；栈2为空时，top2=n。栈2是空栈，那么top1为n-1时就说明栈1满了；若栈1是空栈，top2为0时说明栈2满了。当top1+1=top2时，说明两个栈都满了。</p>
-<pre><code>typedef struct
-{
-    ItemType data[MAXSIZE];
-    int top1;
-    int top2;
-}MyDoubleStack;
+</code></pre>
+<p>test方法</p>
+<pre><code class="java">public static void main(String[] args){
+        ApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);
+        SysUser u = (SysUser) context.getBean(&quot;user&quot;);
+        System.out.println(u);
+    }
+</code></pre>
+<h1 id="通过util-properties标签实现配置文件加载"><a href="#通过util-properties标签实现配置文件加载" class="headerlink" title="通过util:properties标签实现配置文件加载"></a>通过util:properties标签实现配置文件加载</h1><h2 id="使用XML方式：标签-1"><a href="#使用XML方式：标签-1" class="headerlink" title="使用XML方式：标签"></a>使用XML方式：<property>标签</property></h2><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:util=&quot;http://www.springframework.org/schema/util&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd&quot;&gt;
+    &lt;util:properties id=&quot;util_Spring&quot;  local-override=&quot;true&quot; location=&quot;classpath:xx.properties&quot;/&gt;
+    &lt;bean id=&quot;user&quot; class=&quot;com.pojo.SysUser&quot;&gt;
+        &lt;property name=&quot;id&quot; value=&quot;#{util_Spring[&#39;user_id&#39;]}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;name&quot; value=&quot;#{util_Spring[&#39;user_Name&#39;]}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;pwd&quot; value=&quot;#{util_Spring[&#39;user_PassWord&#39;]}&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<h2 id="使用注解方式：-Value-1"><a href="#使用注解方式：-Value-1" class="headerlink" title="使用注解方式：@Value"></a>使用注解方式：@Value</h2><pre><code class="java">public class SysUser {
+    @Value(&quot;#{util_Spring[&#39;user_id&#39;]}&quot;)
+    private String id;
+    @Value(&quot;#{util_Spring[&#39;user_Name&#39;]}&quot;)
+    private String name;
+    @Value(&quot;#{util_Spring[&#39;user_PassWord&#39;]}&quot;)
+    private String pwd;
+    // getter和setter方法省略，一定要自己加上！！！&lt;property&gt;标签是根据setter方法进行属性注入的
+    @Override
+    public String toString() {
+        return this.id+&quot;-&quot;+this.name+&quot;-&quot;+this.pwd;
+    }
+}
+</code></pre>
+<p>test方法</p>
+<pre><code class="java">public static void main(String[] args){
+        ApplicationContext context = new ClassPathXmlApplicationContext(&quot;spring.xml&quot;);
+        SysUser u = (SysUser) context.getBean(&quot;user&quot;);
+        System.out.println(u);
+    }
+</code></pre>
+<h1 id="通过-PropertySource注解实现配置文件加载"><a href="#通过-PropertySource注解实现配置文件加载" class="headerlink" title="通过@PropertySource注解实现配置文件加载"></a>通过@PropertySource注解实现配置文件加载</h1><pre><code class="java">@Configuration
+@PropertySource(value={&quot;classpath:xx.properties&quot;})
+public class MyConfig {
+    @Bean(&quot;user&quot;)
+    public SysUser getUser(){
+        return new SysUser();
+    }
+}
+</code></pre>
+<p>test代码</p>
+<pre><code class="java">public static void main(String[] args){
+        ApplicationContext context = new AnnotationConfigApplicationContext(MyConfig.class);
+        SysUser u = (SysUser) context.getBean(&quot;user&quot;);
+        System.out.println(u);
+    }
+</code></pre>
+<h1 id="通过配置PropertyPlaceholderConfigurer类实现配置文件加载"><a href="#通过配置PropertyPlaceholderConfigurer类实现配置文件加载" class="headerlink" title="通过配置PropertyPlaceholderConfigurer类实现配置文件加载"></a>通过配置PropertyPlaceholderConfigurer类实现配置文件加载</h1><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
 
-Status Push (MyDoubleStack *S,ItemType e,int stackNum) {
-    if(S-&gt;top1+1==S-&gt;top2) {
-        return ERROR;                       //栈满
-    }
-    if (stackNum == 1) {
-        S-&gt;data[++S-&gt;top1] = e;
-    } else if (stackNum == 2) {
-        S-&gt;data[--S-&gt;top2] = e;
-    }
-    return ok;
-}
-
-Status Pop (MyDoubleStack *S,ItemType *e,int stackNum) {
-    if (stackNum == 1) {
-        if(S-&gt;top1 == -1)  return ERROR;
-        *e = S-&gt;data[S-&gt;top1--];
-    } else if (stackNum == 2) {
-        if(S-&gt;top1 == MAXSIZE)  return ERROR;
-        *e = S-&gt;data[S-&gt;top2++];
-    }
-    return ok;
-}
-</code></pre><h2 id="栈的链式存储结构"><a href="#栈的链式存储结构" class="headerlink" title="栈的链式存储结构"></a>栈的链式存储结构</h2><p>单链表有头指针，而栈顶指针也是必须的，因此将二者合二为一，将栈顶放在单链表的头部。有了栈顶指针，也就不需要链表的头结点了。<br><img src="/2019/04/19/栈与队列/链栈.png"><br>对于空栈来说，链表原定义的头指针为空，那么链栈的空其实就是top=null。</p>
-<pre><code>typedef Struct StackNode
-{
-    ItemType data；
-    struct StackNode *next；
-}StackNode,*LinkStackPtr;
-typedef struct LinkStack
-{
-    LinkStackPptr top;
-    int count;
-}LinkStack;
-</code></pre><h3 id="进栈-1"><a href="#进栈-1" class="headerlink" title="进栈"></a>进栈</h3><pre><code>Status Push (LinkStack *S, ItemType e) {
-    LinkStackPtr s =  (LinkStackPtr) malloc (Sizeof(StackNode));
-    s-&gt;data = e;
-    s-&gt;next=S-&gt;top;                      //当前栈顶元素赋值给新节点的直接后继
-    S-&gt;top = s;                            //将新节点的s赋值给栈顶指针
-    S-&gt;count++；
-    return ok;
- }
-</code></pre><h3 id="出栈-1"><a href="#出栈-1" class="headerlink" title="出栈"></a>出栈</h3><pre><code> Status Pop (LinkStack *S, ItemType *e) {
-    LinkStackPtr p;
-    if (StackEmpty(%S)) return ERROR;
-    *e = top-&gt;data;             
-    p = S-&gt;top;                     //将当前的栈顶元素赋值给p
-    S-&gt;top = S-&gt;top-&gt;next      //将栈顶指针指向栈顶的后一个节点
-    free(p);
-    S-&gt;count--;
-    return ok;
- }
-</code></pre><p>链栈的存取操作没有涉及到循环，因此时间复杂度为O[1]。</p>
-<h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><p>只允许在一端进行插入操作，在另一端进行删除操作的线性表。<br>队列是一种先进先出的线性表，简称FIFO。允许插入的一端称为队尾，允许删除的一端称为队头。</p>
-<h2 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h2><h3 id="队列顺序存储的不足"><a href="#队列顺序存储的不足" class="headerlink" title="队列顺序存储的不足"></a>队列顺序存储的不足</h3><p>假设有一个n个元素的队列，需要建立一个大于n的数组，把队列的所有元素存储在数组的前n个单元，数组下标为0的一端即是队头。<br>所有的入队操作就是在队尾追加一个元素，不需要移动任何元素的位置。因此时间复杂度为O[1]。<br><img src="/2019/04/19/栈与队列/队列插入.png"><br>由于队列的出列位置是在队头，下标为0的位置，也就意味着每取一个元素，后面所有的元素都要向前位移一个位置，因此时间复杂度为0[n]。<br><img src="/2019/04/19/栈与队列/队列取出.png"><br>如果考虑并不是每次从队列中取出元素都要移动其他元素，那么从队列中取出数据效率还是蛮高的。队列取出数据必须是从队头取，那么不从0下标的地方取，哪里是队头呢？我们定义一个front指针指向队列中的第一个元素，定义一个rear指针指向队尾元素的下一个位置，这样当front=rear时，即表示是一个空队列。<br><img src="/2019/04/19/栈与队列/定义指针表示队列头尾.png"><br>上面的设计解决了队列取出数据要频繁移动元素的问题，但会引入新的问题：频繁的存入和取出元素，队列前面空余的位置越来越多，后面的位置原来越少，最终导致队列是有空间的，但存入数据却会数组越界。<br><img src="/2019/04/19/栈与队列/越界.png"></p>
-<h3 id="循环队列的定义"><a href="#循环队列的定义" class="headerlink" title="循环队列的定义"></a>循环队列的定义</h3><p>头尾相接的顺序存储结构的队列被称为循环队列。<br>接着上面的front指针和rear指针说事儿，头尾相接后终于用上了前面空出来的位置，但是当front=rear时，这个队列到底是空的还是满的呢？<br><img src="/2019/04/19/栈与队列/循环队列.png"><br>对于这个问题，我们修改队列满的条件，保留一个元素空间，也就是说一个队列最大尺寸是maxSize，当存储maxSize-1个元素时，就对外声称队列已经满了。此时判断队列是否满的条件是(rear+1)%maxSize == front。可能你会觉得用rear+1 == front不就行了，为啥还要那么费事儿，循环队列中头尾相接，谁也不知道rear那时候比front大还是小。</p>
-<h3 id="循环队列的代码"><a href="#循环队列的代码" class="headerlink" title="循环队列的代码"></a>循环队列的代码</h3><pre><code>// 定义队列
-typedef int QElemType;
-typedef struct
-{
-    QElemType data[MAXSIZE];
-    int front;
-    int rear;
-}MyQueue；
-// 初始化一个空队列
-Status initQueue （MyQueue *q） 
-{
-    q-&gt;front =0;
-    q-&gt;rear=0;
-    return ok;
-}
-// 获取当前队列元素个数
-int queueLength （MyQueue Q） 
-{
-    return (Q.rear-Q.front+MAXSIZE)%MAXSIZE;
-}
-// 插入元素
-Status add(MyQueue *q, QElemType e)
-{
-    if((q-&gt;rear+1)%MAXSIZE == q-&gt;front) return ERROR; //对列已满
-    q-&gt;data[q-&gt;rear] = e;
-    q-&gt;rear=(q-&gt;rear+1)%MAXSIZE;
-    reutnr ok;
-}
-// 取出元素
-Status del(MyQueue *q, QElemType *e)
-{
-    if(q-&gt;rear == q-&gt;front) return ERROR; //空队列
-    *e = q-&gt;data[q-&gt;front];
-    q-&gt;front=(q-&gt;front+1)%MAXSIZE;
-    reutnr ok;
-}
-</code></pre><h2 id="队列的链式存储"><a href="#队列的链式存储" class="headerlink" title="队列的链式存储"></a>队列的链式存储</h2><p>队列的链式存储结构其实就是线性表的单链表，只不过它只能尾进头出。将队头指针指向链表的头结点，队尾指针指向终端结点。空队列时，front和rear指针都指向头结点。</p>
-<pre><code>typedef int QElemType;
-typedef struct QNode
-{
-    QElemType data;
-    struct QNode *next;
-}QNode,*QueuePtr;
-typedef struct
-{
-    QueuePtr front,rear;
-}LinkQueue;
-</code></pre><h3 id="链式存储结构队列的入队操作"><a href="#链式存储结构队列的入队操作" class="headerlink" title="链式存储结构队列的入队操作"></a>链式存储结构队列的入队操作</h3>
-<p>入队操作其实就是在链表尾部插入节点。</p>
-<pre><code>Status EnQueue (LinkQueue *Q,QelemType e)
-{
-    QueuePtr s = (QueuePtr) malloc (sizeof(Qnode));
-    if (!s) exit(OVERFLOW);                     //分配内存失败
-    s-&gt;ddata = e;
-    s-&gt;next = NULL;
-    Q-&gt;rear-&gt;next = s;
-    return ok;
-}
-</code></pre><p>链式队列的入队操作并没有涉及到循环，因此时间复杂度为O[1]。</p>
-<h3 id="链式存储结构队列的出队操作"><a href="#链式存储结构队列的出队操作" class="headerlink" title="链式存储结构队列的出队操作"></a>链式存储结构队列的出队操作</h3><p>出队操作就是头结点的后继节点出队，将头结点的后继改为出队节点后面的节点。若链表除头结点外只剩下一个元素时，则需将rear指向头结点。<br></p>
-<pre><code>Status DeQueue (LinkQueue *Q, QelemType *e) 
-{
-    QueuePtr p;
-    if(Q-&gt;front == Q-&gt;rear) return ERROR;  
-    p = Q-&gt;front-&gt;next;
-    * e = p-&gt;data;           
-    Q-&gt;front-&gt;next=p-&gt;next
-    if (Q-&gt;rear==p)
-        Q-&gt;rear=Q-&gt;front;
-   free(p);
-   return ok;
-}
-</code></pre><p>链式队列的出队操作并没有涉及到循环，因此时间复杂度为O[1]。</p>
+    &lt;bean  class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;
+        &lt;property name=&quot;locations&quot;&gt;
+            &lt;list&gt;
+                &lt;value&gt;classpath:xx.properties&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+    &lt;bean id=&quot;user&quot; class=&quot;com.pojo.SysUser&quot;&gt;
+        &lt;property name=&quot;id&quot; value=&quot;${user_id}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;name&quot; value=&quot;${user_Name}&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;pwd&quot; value=&quot;${user_PassWord}&quot;&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 durongpeng@aliyun.com </span>
